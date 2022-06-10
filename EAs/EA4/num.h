@@ -1,10 +1,10 @@
-#ifndef NUM_H
-#define NUM_H
+#ifndef _NUM_H
+#define _NUM_H
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include <string.h>
-#include <math.h>
 
 /*
  * Aritmética de alta precisão em número não negativo na base 10.
@@ -18,10 +18,10 @@ typedef struct Num Num;
  * Retorna um ponteiro nulo (0) se a string contiver quaisquer não dígitos.
  * Os zeros à esquerda estão OK: numCreate ("012") cria um NUM como 12.
  * String vazia é analisada como 0*/
-Num *numCreate();
+Num *numCreate(char *s);
 
 /* Libera todos os recursos usados por um número */
-void numDestroy(Num *numeros);
+void numDestroy(Num *n);
 
 /*Retorna o valor do i-ésimo dígito menos significativo de um Num.
  * Retorna 0 se i estiver fora do intervalo.
@@ -36,15 +36,15 @@ int numGetDigit(const Num *n, int i);
 
 /* Somar dois Nums, retornando um novo Num */
 /* não destrói suas entradas, o caller que deve destruir a saída */
-Num *numAdd(Num *numero1, Num *numero2);
+Num *numAdd(const Num *x, const Num *y);
 
 /* Multiplicar dois Nums, retornando um novo Num */
 /* não destrói suas entradas, o caller que deve destruir a saída */
-Num *numMultiply(Num *numero1, Num *numero2);
+Num *numMultiply(const Num *x, const Num *y);
 
 /* Exponenciar  x elevado a y, retornando um novo Num */
 /* não destrói suas entradas, o caller que deve destruir a saída */
-Num *numExp(Num *numero1, Num *numero2);
+Num *numExp(const Num *x, const Num *y);
 
 /* Imprime os dígitos de um número para arquivo.
   * Não imprima nenhum zeros à esquerda, a menos que n seja zero.
@@ -54,10 +54,14 @@ Num *numExp(Num *numero1, Num *numero2);
 
     A função será feita para imprimir em um arquivo mas os testes serão feitos imprimindo em na saída padrão STDOUT como no exemplo acima (ver exemplos com  fputc )
   */
-void numPrint(Num *numero, FILE *arquivo);
+void numPrint(const Num *n, FILE *f);
 
-Num *InvertePalavra(Num *numero);
+Num *CriaNum();
 
-Num *InicializaNumero();
+void ImprimeNumeros(Num *numero1, Num *numero2);
 
-#endif /* NUM_H */
+void ImprimeString(char *s);
+
+void numSetDigit(const Num *n, int i, int d);
+
+#endif /* _NUM_H */

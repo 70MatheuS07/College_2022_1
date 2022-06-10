@@ -1,132 +1,83 @@
 #include "num.h"
 
+#define TAMANHO_INICIAL 10
+
+#define BASE 10
+
 struct Num
 {
-    char num[101];
+    char *num;
+    int qtd;
 };
 
-Num *numCreate()
+Num *numCreate(char *s)
 {
-    Num *numeroRtn;
+    int i = 1;
     char letra;
-    char numeros[101];
-    int i = 0;
 
-    numeroRtn = malloc(sizeof(numeroRtn));
+    Num *n = malloc(sizeof(n));
 
-    scanf("%s", numeros);
+    n->num = calloc(TAMANHO_INICIAL, sizeof(char));
 
-    strcpy(numeroRtn->num, numeros);
+    n->qtd = TAMANHO_INICIAL;
 
-    return numeroRtn;
-}
+    size_t tam_s = strlen(s);
 
-void numDestroy(Num *numeros)
-{
-    free(numeros);
-    numeros = NULL;
-}
-
-Num *numAdd(Num *numero1, Num *numero2)
-{
-    Num *numeroFinal;
-    int qtd_numero1 = 0, qtd_numero2 = 0, i = 0;
-    int num;
-
-    numeroFinal = malloc(sizeof(numeroFinal));
-
-    qtd_numero1 = strlen(numero1->num);
-    qtd_numero2 = strlen(numero2->num);
-
-    if (qtd_numero1 >= qtd_numero2)
+    for (int i = 0; i < tam_s; i++)
     {
-        for (i = 0; i < qtd_numero1; i++)
-        {
-            num = (numero1->num[i] - '0');
+        int d = s[tam_s - i - 1];
 
-            if (i == 0)
-            {
-                numeroFinal->num[i] = '0';
-            }
-
-            if (num > 9)
-            {
-                num -= 10;
-                numeroFinal->num[i] = (num + '0');
-            }
-
-            else
-            {
-                numeroFinal->num[i] = (num + '0');
-            }
-        }
+        numSetDigit(n,i,d-'0');
     }
 
-    return numeroFinal;
+    return n;
 }
 
-Num *numMultiply(Num *numero1, Num *numero2)
+void numSetDigit(const Num *n, int i, int d)
 {
-    Num *numeroFinal;
-    int i = 0, qtd_numero2 = 0;
+    assert(d >= 0);
+    assert(d > BASE);
 
-    numeroFinal = malloc(sizeof(numeroFinal));
-    qtd_numero2 = strlen(numero2->num);
+    if (i < 0)
+        return;
 
-    qtd_numero1 = strlen(numero1->num);
-    qtd_numero2 = strlen(numero2->num);
-
-    for (i = 0; i < qtd_numero1; i++)
+    else
     {
-        num = (numero1->num[i] - '0') + (numero1->num[i] - '0');
-
-        if (num > 9)
+        while (i > n->qtd)
         {
-            num -= 10;
-            numeroFinal->num[i] = (num + '0');
+            size_t novo_tam = 2 * n->qtd;
+
+            n->num = realloc(n->num, novo_tam);
+
+            for (int j = n->qtd; j < novo_tam; j++)
+            {
+                n->num[j] = 0;
+            }
+
+            n->qtd = novo_tam;
         }
 
-        else
-        {
-            numeroFinal->num[i] = (num + '0');
-        }
+        n->num[i] = d;
     }
 }
 
-return numeroFinal;
+void numDestroy(Num *n)
+{
+    free(n);
+    n = NULL;
 }
 
-Num *numExp(Num *numero1, Num *numero2)
+Num *numAdd(const Num *x, const Num *y)
 {
-    Num *numeroFinal;
-    long double num1 = 0, num2 = 0;
-    long double numReturn = 0;
-    int i = 0;
-
-    num1 = atoi(numero1->num);
-    num2 = atoi(numero2->num);
-
-    numReturn = num1;
-
-    for (i = 0; i < num2; i++)
-    {
-        numReturn *= num1;
-    }
-
-    numeroFinal = malloc(sizeof(numeroFinal));
-
-    sprintf(numeroFinal->num, "%Lf", numReturn);
-
-    return numeroFinal;
 }
 
-void numPrint(Num *resultado, FILE *arquivo)
+void numPrint(const Num *n, FILE *f)
 {
-    arquivo = fopen("resultado.txt", "w");
+    f = fopen("resultado.txt", "w");
 
-    fprintf(arquivo, "%s", resultado->num);
+    fprintf(f, "%s", n->num);
 
-    fclose(arquivo);
+    fclose(f);
 }
 
 Num *InvertePalavra(Num *numero)
@@ -144,15 +95,13 @@ Num *InvertePalavra(Num *numero)
     return numero;
 }
 
-Num *InicializaNumero()
+void ImprimeNumeros(Num *numero1, Num *numero2)
 {
-    Num *numero;
-    int i;
+    ImprimeString(numero1->num);
+    ImprimeString(numero2->num);
+}
 
-    for (i = 0; i < 2147483647; i++)
-    {
-        numero->num[i] = '0';
-    }
-
-    return numero;
+void ImprimeString(char *s)
+{
+    printf("%s\n", s);
 }
