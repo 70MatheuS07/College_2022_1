@@ -4,6 +4,8 @@
 
 #define BASE 10
 
+#define INT_MAX 2147483647
+
 struct Num
 {
     char *num;
@@ -27,13 +29,13 @@ Num *numCreate(char *s)
     {
         int d = s[tam_s - i - 1];
 
-        numSetDigit(n,i,d-'0');
+        numSetDigit(n, i, d - '0');
     }
 
     return n;
 }
 
-void numSetDigit(const Num *n, int i, int d)
+void numSetDigit(Num *n, int i, int d)
 {
     assert(d >= 0);
     assert(d > BASE);
@@ -57,7 +59,7 @@ void numSetDigit(const Num *n, int i, int d)
             n->qtd = novo_tam;
         }
 
-        n->num[i] = d;
+        n->num[i] = d + '0';
     }
 }
 
@@ -69,6 +71,66 @@ void numDestroy(Num *n)
 
 Num *numAdd(const Num *x, const Num *y)
 {
+    int i = 0, soma = 0, proxSoma = 0;
+    Num *numeroResult;
+    char numero[INT_MAX];
+
+    numeroResult = numCreate(numero);
+
+    printf("*\n");
+
+    if (x->qtd < y->qtd)
+    {
+        for (i = 0; i < y->qtd; i++)
+        {
+            soma += (x->num[i] - '0') + (y->num[i] - '0') + proxSoma;
+
+            if (soma > 9)
+            {
+                soma -= 10;
+                proxSoma += 1;
+
+                numero[i] = soma + '0';
+            }
+
+            else
+            {
+                numero[i] = soma + '0';
+            }
+
+            proxSoma = 0;
+            soma = 0;
+        }
+
+        numeroResult->qtd = strlen(numero);
+        strcpy(numeroResult->num, numero);
+
+        return numeroResult;
+    }
+
+    else
+    {
+        for (i = 0; i < x->qtd; i++)
+        {
+            soma += (x->num[i] - '0') + (y->num[i] - '0') + proxSoma;
+
+            if (soma > 9)
+            {
+                soma -= 10;
+                proxSoma += 1;
+
+                numero[i] = soma + '0';
+            }
+
+            else
+            {
+                numero[i] = soma + '0';
+            }
+
+            proxSoma = 0;
+            soma = 0;
+        }
+    }
 }
 
 void numPrint(const Num *n, FILE *f)
@@ -80,28 +142,22 @@ void numPrint(const Num *n, FILE *f)
     fclose(f);
 }
 
-Num *InvertePalavra(Num *numero)
-{
-    int num = strlen(numero->num);
-    int aux, i, j;
-
-    for (i = 0, j = num - 1; i < j; i++, j--)
-    {
-        aux = numero->num[i];
-        numero->num[i] = numero->num[j];
-        numero->num[j] = aux;
-    }
-
-    return numero;
-}
-
-void ImprimeNumeros(Num *numero1, Num *numero2)
+void ImprimeNumeros(Num *numero1, Num *numero2, Num *numeroFinal)
 {
     ImprimeString(numero1->num);
     ImprimeString(numero2->num);
+    ImprimeString(numeroFinal->num);
 }
 
 void ImprimeString(char *s)
 {
     printf("%s\n", s);
+}
+
+void LehNumeros(Num *x, Num *y)
+{
+    int i = 0;
+    char numero;
+
+    scanf("%s %s", x->num, y->num);
 }

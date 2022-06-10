@@ -58,10 +58,12 @@ void numPrint(const Num *n, FILE *f);
 
 Num *CriaNum();
 
-void ImprimeNumeros(Num *numero1, Num *numero2);
+void ImprimeNumeros(Num *numero1, Num *numero2, Num *numeroFinal);
 
 void ImprimeString(char *s);
 
-void numSetDigit(const Num *n, int i, int d);
+void numSetDigit(Num *n, int i, int d);
+
+void LehNumeros(Num *x, Num *y);
 
 #endif /* _NUM_H */
