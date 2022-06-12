@@ -23,6 +23,16 @@ void LehJogador(tJogador *jogador)
     strcpy(jogador->nome, nome);
 }
 
+void LimpaBuffer()
+{
+    int ch;
+    do
+    {
+        ch = fgetc(stdin);
+
+    } while (ch != EOF && ch != '\n');
+}
+
 void ImprimeJogador(tJogador *jogador)
 {
     printf("%s\n", jogador->nome);

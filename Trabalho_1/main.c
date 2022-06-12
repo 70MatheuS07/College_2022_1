@@ -4,15 +4,17 @@
 #include <time.h>
 #include "tJogador.h"
 #include "tPalavra.h"
-
-// Dando core dumped.
+#include "tArquivo.h"
+#include "tTempo.h"
 
 int main()
 {
     int modoJogo = 0;
     char lixo;
+
     tJogador *jogador;
     tPalavra *palavra;
+    char **palavras;
 
     jogador = CriaJogador();
 
@@ -20,9 +22,11 @@ int main()
 
     LehJogador(jogador);
 
-    LehPalavra(palavra);
+    LimpaBuffer();
 
     ImprimeJogador(jogador);
+
+    palavras = ColetaPalavrasArquivo();
 
     return 0;
 }

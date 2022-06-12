@@ -18,8 +18,6 @@ int PegaTempo();
 
 void SorteioPalavra(tPalavra *palavra);
 
-void PegaPalavraArquivo(tPalavra *palavra, int escolhida);
-
 void ImprimePalavra(tPalavra *palavra);
 
 tPalavra **CriaTodasPalavras();

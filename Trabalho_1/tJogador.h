@@ -11,6 +11,8 @@ tJogador *CriaJogador();
 
 void LehJogador(tJogador *jogador);
 
+void LimpaBuffer();
+
 void ImprimeJogador(tJogador *jogador);
 
 #endif
