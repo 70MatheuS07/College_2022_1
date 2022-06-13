@@ -20,4 +20,6 @@ void ImprimeSaldo(tConta *conta);
 
 void ImprimeDadosConta(tConta *conta);
 
+void LiberaConta(tConta *conta);
+
 #endif

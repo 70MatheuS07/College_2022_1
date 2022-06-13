@@ -75,3 +75,12 @@ void ImprimeDadosConta(tConta *conta)
 
     printf("Agencia: %d\n\n", conta->agencia);
 }
+
+void LiberaConta(tConta *conta)
+{
+    LiberaUsuario(conta->usuario);
+
+    free(conta);
+    
+    conta = NULL;
+}

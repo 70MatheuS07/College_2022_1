@@ -36,5 +36,7 @@ int main()
         }
     }
 
+    LiberaConta(conta);
+
     return 0;
 }

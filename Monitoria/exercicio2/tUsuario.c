@@ -27,3 +27,9 @@ void ImprimeUsuario(tUsuario *usuario)
 {
     printf("Usuario: %s\n", usuario->nome);
 }
+
+void LiberaUsuario(tUsuario *usuario)
+{
+    free(usuario);
+    usuario = NULL;
+}
