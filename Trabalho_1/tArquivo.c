@@ -43,7 +43,7 @@ char **ArmazenaPalavrasArquivo()
     fclose(arquivo);
 
     // Corrigi a ultima palavra que está duplicando o ultimo char.
-    matriz[QTD_PALAVRAS-1][5] = '\0';
+    matriz[QTD_PALAVRAS - 1][5] = '\0';
 
     return matriz;
 }
@@ -58,6 +58,7 @@ void LiberaMatrizArquivo(char **matriz)
     }
 
     free(matriz);
+    matriz = NULL;
 }
 
 void ImprimeMatriz(char **matriz)

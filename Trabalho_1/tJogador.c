@@ -37,3 +37,9 @@ void ImprimeJogador(tJogador *jogador)
 {
     printf("%s\n", jogador->nome);
 }
+
+void LiberaJogador(tJogador *jogador)
+{
+    free(jogador);
+    jogador = NULL;
+}

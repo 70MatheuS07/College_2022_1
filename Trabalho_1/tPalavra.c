@@ -57,3 +57,9 @@ void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras)
 
     printf("\n%s\n", palavra->palavra);
 }
+
+void LiberaPalavra(tPalavra *palavra)
+{
+    free(palavra);
+    palavra = NULL;
+}
