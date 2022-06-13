@@ -6,6 +6,10 @@
 #include <string.h>
 #include <time.h>
 
-char **ColetaPalavrasArquivo();
+char **ArmazenaPalavrasArquivo();
+
+void LiberaMatrizArquivo(char **matriz);
+
+void ImprimeMatriz(char **matriz);
 
 #endif
