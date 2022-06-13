@@ -13,6 +13,7 @@ void LehJogador(tJogador *jogador);
 
 void LimpaBuffer();
 
-void ImprimeJogador(tJogador *jogador);
+
+void ImprimeNomeJogadorCabecalho(tJogador *jogador);
 
 #endif

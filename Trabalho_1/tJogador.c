@@ -18,14 +18,17 @@ void LehJogador(tJogador *jogador)
 {
     char nome[21];
 
-    scanf("%[^\n]", nome);
+    scanf("%[A-z]", nome);
 
     strcpy(jogador->nome, nome);
+
+    LimpaBuffer();
 }
 
 void LimpaBuffer()
 {
     int ch;
+
     do
     {
         ch = fgetc(stdin);
@@ -33,13 +36,13 @@ void LimpaBuffer()
     } while (ch != EOF && ch != '\n');
 }
 
-void ImprimeJogador(tJogador *jogador)
-{
-    printf("%s\n", jogador->nome);
-}
-
 void LiberaJogador(tJogador *jogador)
 {
     free(jogador);
     jogador = NULL;
+}
+
+void ImprimeNomeJogadorCabecalho(tJogador *jogador)
+{
+    printf(" Jogador %s digite uma palavra a sua escolha: ", jogador->nome);
 }

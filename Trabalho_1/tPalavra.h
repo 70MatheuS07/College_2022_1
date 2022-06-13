@@ -17,4 +17,8 @@ void ImprimePalavra(tPalavra *palavra);
 
 void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras);
 
+int InicioDoJogo(tPalavra *palavra);
+
+void InicializaPalavraAtual(tPalavra *palavra);
+
 #endif

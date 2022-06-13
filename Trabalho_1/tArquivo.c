@@ -4,15 +4,15 @@
 
 char **ArmazenaPalavrasArquivo()
 {
-    char **matriz;
+    char **palavras;
     int i = 0, j = 0;
     char caracter;
 
-    matriz = malloc(QTD_PALAVRAS * sizeof(char *));
+    palavras = malloc(QTD_PALAVRAS * sizeof(char *));
 
     for (i = 0; i < QTD_PALAVRAS; i++)
     {
-        matriz[i] = malloc(6 * sizeof(char));
+        palavras[i] = malloc(6 * sizeof(char));
     }
 
     FILE *arquivo;
@@ -27,14 +27,14 @@ char **ArmazenaPalavrasArquivo()
 
         if (caracter == '\n')
         {
-            matriz[i][j] = '\0';
+            palavras[i][j] = '\0';
             i++;
             j = 0;
         }
 
         else
         {
-            matriz[i][j] = caracter;
+            palavras[i][j] = caracter;
             j++;
         }
 
@@ -43,35 +43,20 @@ char **ArmazenaPalavrasArquivo()
     fclose(arquivo);
 
     // Corrigi a ultima palavra que está duplicando o ultimo char.
-    matriz[QTD_PALAVRAS - 1][5] = '\0';
+    palavras[QTD_PALAVRAS - 1][5] = '\0';
 
-    return matriz;
+    return palavras;
 }
 
-void LiberaMatrizArquivo(char **matriz)
+void LiberaPalavrasArquivo(char **palavras)
 {
     int i = 0;
 
     for (i = 0; i < QTD_PALAVRAS; i++)
     {
-        free(matriz[i]);
+        free(palavras[i]);
     }
 
-    free(matriz);
-    matriz = NULL;
-}
-
-void ImprimeMatriz(char **matriz)
-{
-    int i = 0, j = 0;
-
-    for (i = 0; i < QTD_PALAVRAS; i++)
-    {
-        for (j = 0; j < 6; j++)
-        {
-            printf("%c", matriz[i][j]);
-        }
-
-        printf("\n");
-    }
+    free(palavras);
+    palavras = NULL;
 }

@@ -5,6 +5,8 @@
 struct tPalavra
 {
     char palavra[6];
+    char palavraAtual[6];
+    char palavraDigitada[6];
     int escolhida;
 };
 
@@ -62,4 +64,33 @@ void LiberaPalavra(tPalavra *palavra)
 {
     free(palavra);
     palavra = NULL;
+}
+
+void InicializaPalavraAtual(tPalavra *palavra)
+{
+    int i = 0;
+
+    for (i = 0; i < 5; i++)
+    {
+        palavra->palavraAtual[i] = '*';
+    }
+
+    palavra->palavraAtual[5] = '\0';
+}
+
+int InicioDoJogo(tPalavra *palavra)
+{
+    int i = 0;
+    int cont = 0;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (palavra->palavraAtual[i] != '*')
+        {
+            printf("\nEntrou\n");
+            return 0;
+        }
+    }
+
+    return 1;
 }

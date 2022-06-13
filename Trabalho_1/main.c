@@ -6,6 +6,7 @@
 #include "tPalavra.h"
 #include "tArquivo.h"
 #include "tTempo.h"
+#include "tJogo.h"
 
 int main()
 {
@@ -22,15 +23,15 @@ int main()
 
     LehJogador(jogador);
 
-    LimpaBuffer();
-
-    ImprimeJogador(jogador);
-
     SorteiaPalavra(palavra);
+
+    InicializaPalavraAtual(palavra);
 
     palavras = ArmazenaPalavrasArquivo();
 
     ColetaPalavraDoArquivo(palavra, palavras);
+
+    ComecaJogo(jogador, palavra);
 
     return 0;
 }
