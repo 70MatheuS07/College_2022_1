@@ -5,13 +5,15 @@
 #include <stdio.h>
 #include <string.h>
 
+#define ARQUIVO "pontos.bin"
+
 typedef struct tPonto tPonto;
 
 tPonto *CriarPonto(DESTE_TIPO_ x, DESTE_TIPO_ y);
 
 void ImprimirPonto(tPonto *p);
 
-void LiberaPonto(tPonto *p, FILE *f);
+void LiberaPonto(tPonto *p);
 
 void SalvarPonto(tPonto *p, FILE *f);
 

@@ -22,13 +22,10 @@ tPonto *CriarPonto(DESTE_TIPO_ x, DESTE_TIPO_ y)
     p->y = y;
 }
 
-void LiberaPonto(tPonto *p, FILE *f)
+void LiberaPonto(tPonto *p)
 {
     free(p);
     p = NULL;
-
-    free(f);
-    f = NULL;
 }
 
 void ImprimirPonto(tPonto *p)
@@ -46,10 +43,34 @@ void ImprimirPonto(tPonto *p)
 
 void SalvarPonto(tPonto *p, FILE *f)
 {
+    f = fopen(ARQUIVO, "ab");
 
+    if (f == NULL)
+    {
+        printf("Erro abertura do arquivo!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    fwrite(p, sizeof(tPonto *), 1, f);
+
+    fclose(f);
 }
 
-tPonto *CarregarArquivo(FILE *f)
+tPonto *CarregarArquivo(FILE *fp)
 {
-    
+    fp = fopen(ARQUIVO, "rb");
+
+    if (fp == NULL)
+    {
+        printf("Erro abertura do arquivo!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    tPonto *p;
+
+    fread(p, sizeof(tPonto *), 1, fp);
+
+    fclose(fp);
+
+    return p;
 }

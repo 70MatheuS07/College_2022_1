@@ -11,7 +11,14 @@ int main()
 
     ImprimirPonto(p);
 
+    FILE *fp;
+    SalvarPonto(p, fp);
+    LiberaPonto(p);
 
+    tPonto *p2 = CarregarArquivo(fp);
+
+    ImprimirPonto(p2);
+    LiberaPonto(p2);
 
     return 0;
 }
