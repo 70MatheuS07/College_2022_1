@@ -9,6 +9,13 @@ struct tPonto
     DESTE_TIPO_ y;
 };
 
+struct tPonto_array
+{
+    tPonto *pontos;
+    size_t qtd;
+    size_t tamArray;
+};
+
 tPonto *CriarPonto(DESTE_TIPO_ x, DESTE_TIPO_ y)
 {
     tPonto *p = malloc(sizeof(tPonto));

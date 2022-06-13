@@ -9,6 +9,8 @@
 
 typedef struct tPonto tPonto;
 
+typedef struct tPonto_array tPonto_array;
+
 tPonto *CriarPonto(DESTE_TIPO_ x, DESTE_TIPO_ y);
 
 void ImprimirPonto(tPonto *p);
