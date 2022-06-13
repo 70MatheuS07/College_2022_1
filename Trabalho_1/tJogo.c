@@ -27,6 +27,6 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra)
 
         ImprimeNomeJogadorCabecalho(jogador);
 
-        scanf("%[A-z]", palavra);
+        LehPalavraEscolhidaPeloJogador(palavra);
     }
 }

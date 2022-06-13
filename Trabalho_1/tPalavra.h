@@ -6,6 +6,7 @@
 #include <time.h>
 #include <string.h>
 #include "tTempo.h"
+#include "tJogador.h"
 
 typedef struct tPalavra tPalavra;
 
@@ -20,5 +21,7 @@ void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras);
 int InicioDoJogo(tPalavra *palavra);
 
 void InicializaPalavraAtual(tPalavra *palavra);
+
+void LehPalavraEscolhidaPeloJogador(tPalavra *palavra);
 
 #endif

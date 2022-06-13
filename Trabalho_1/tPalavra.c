@@ -94,3 +94,33 @@ int InicioDoJogo(tPalavra *palavra)
 
     return 1;
 }
+
+void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
+{
+    char string[6];
+    char lixo, caracter;
+    int i = 0;
+
+    while (1)
+    {
+        for (i = 0; i < 5; i++)
+        {
+            scanf("%c", &caracter);
+
+            string[i] = caracter;
+        }
+
+        if (i == 5)
+        {
+            string[i] = '\0';
+            i = 0;
+        }
+
+        break;
+    }
+
+    for (i = 0; i < 6; i++)
+    {
+        palavra->palavraDigitada[i] = string[i];
+    }
+}
