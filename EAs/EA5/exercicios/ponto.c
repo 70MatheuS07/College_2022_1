@@ -66,7 +66,7 @@ tPonto *CarregarArquivo(FILE *fp)
         exit(EXIT_FAILURE);
     }
 
-    tPonto *p;
+    tPonto *p = malloc(sizeof(tPonto *));
 
     fread(p, sizeof(tPonto *), 1, fp);
 
