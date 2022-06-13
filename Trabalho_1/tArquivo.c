@@ -5,7 +5,8 @@
 char **ColetaPalavrasArquivo()
 {
     char **matriz;
-    int i = 0;
+    int i = 0, j = 0;
+    char caracter;
 
     matriz = malloc(QTD_PALAVRAS * sizeof(char *));
 
@@ -18,10 +19,26 @@ char **ColetaPalavrasArquivo()
 
     arquivo = fopen("cincoPalavras.txt", "r");
 
-    for (i = 0; i < QTD_PALAVRAS || !feof(arquivo); i++)
+    do
     {
-        fscanf(arquivo, "%[^\n]", matriz[i]);
-    }
+        fscanf(arquivo, "%c", &caracter);
+
+        if (caracter == '\n')
+        {
+            matriz[i][j] = '\0';
+            i++;
+            j = 0;
+        }
+
+        else
+        {
+            matriz[i][j] = caracter;
+            j++;
+        }
+
+    } while (!feof(arquivo));
 
     fclose(arquivo);
+
+    return matriz;
 }
