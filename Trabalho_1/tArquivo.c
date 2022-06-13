@@ -2,7 +2,7 @@
 
 #define QTD_PALAVRAS 5
 
-char **ColetaPalavrasArquivo()
+char **ArmazenaPalavrasArquivo()
 {
     char **matriz;
     int i = 0, j = 0;
@@ -10,7 +10,7 @@ char **ColetaPalavrasArquivo()
 
     matriz = malloc(QTD_PALAVRAS * sizeof(char *));
 
-    for (i = 0; i < QTD_PALAVRAS; i++)
+    for (i = 0; i < QTD_PALAVRAS + 1; i++)
     {
         matriz[i] = malloc(6 * sizeof(char));
     }
@@ -18,6 +18,8 @@ char **ColetaPalavrasArquivo()
     FILE *arquivo;
 
     arquivo = fopen("cincoPalavras.txt", "r");
+
+    i = 0;
 
     do
     {
@@ -40,5 +42,22 @@ char **ColetaPalavrasArquivo()
 
     fclose(arquivo);
 
+    for (i = 0; i < QTD_PALAVRAS + 1; i++)
+    {
+        printf("\n%s", matriz[i]);
+    }
+
     return matriz;
+}
+
+void LiberaMatrizArquivo(char **matriz)
+{
+    int i = 0;
+
+    for (i = 0; i < QTD_PALAVRAS + 1; i++)
+    {
+        free(matriz[i]);
+    }
+
+    free(matriz);
 }

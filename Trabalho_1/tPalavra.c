@@ -5,6 +5,7 @@
 struct tPalavra
 {
     char *palavra;
+    int escolhida;
 };
 
 tPalavra *CriaPalavra()
@@ -16,7 +17,7 @@ tPalavra *CriaPalavra()
     return palavra;
 }
 
-void LehPalavra(tPalavra *palavra)
+void SorteiaPalavra(tPalavra *palavra)
 {
     int tempo = 0;
     int escolhida = 0;
@@ -26,6 +27,8 @@ void LehPalavra(tPalavra *palavra)
     srand(tempo);
 
     escolhida = rand() % QTD_PALAVRAS;
+
+    palavra->escolhida = escolhida;
 }
 
 void ImprimePalavra(tPalavra *palavra)

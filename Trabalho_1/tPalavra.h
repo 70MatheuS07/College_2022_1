@@ -10,16 +10,8 @@ typedef struct tPalavra tPalavra;
 
 tPalavra *CriaPalavra();
 
-char *CriaPalavraChar();
-
-void LehPalavra(tPalavra *palavra);
-
-int PegaTempo();
-
-void SorteioPalavra(tPalavra *palavra);
+void SorteiaPalavra(tPalavra *palavra);
 
 void ImprimePalavra(tPalavra *palavra);
-
-tPalavra **CriaTodasPalavras();
 
 #endif

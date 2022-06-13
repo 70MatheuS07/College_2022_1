@@ -26,7 +26,11 @@ int main()
 
     ImprimeJogador(jogador);
 
-    palavras = ColetaPalavrasArquivo();
+    SorteiaPalavra(palavra);
+
+    palavras = ArmazenaPalavrasArquivo();
+
+    ColetaPalavraDoArquivo(palavra, palavras);
 
     return 0;
 }
