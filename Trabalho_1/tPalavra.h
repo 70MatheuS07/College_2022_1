@@ -34,4 +34,8 @@ void ImprimePalavraClassificada(tPalavra *palavra);
 
 void InicializaPalavraClassificada(tPalavra *palavra);
 
+void PadronizaPalavra(tPalavra *palavra);
+
+int AcertouPalavra(tPalavra *palavra);
+
 #endif

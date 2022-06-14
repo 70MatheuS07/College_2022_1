@@ -18,4 +18,12 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogadas);
 
 tJogo *InicializaJogadas();
 
+void ImprimeTentativasRestantes(tJogo *jogadas);
+
+void ReduzTentativasRestantes(tJogo *jogadas);
+
+int TentativasZeradas(tJogo *jogadas);
+
+void CabecalhoJogoFinal(tPalavra *palavra, tJogo *jogadas);
+
 #endif
