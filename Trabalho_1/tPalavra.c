@@ -70,28 +70,10 @@ void InicializaPalavraAtual(tPalavra *palavra)
 {
     int i = 0;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < 6; i++)
     {
-        palavra->palavraAtual[i] = '*';
+        palavra->palavraAtual[i] = '\0';
     }
-
-    palavra->palavraAtual[5] = '\0';
-}
-
-int InicioDoJogo(tPalavra *palavra)
-{
-    int i = 0;
-    int cont = 0;
-
-    for (i = 0; i < 5; i++)
-    {
-        if (palavra->palavraAtual[i] != '*')
-        {
-            return 0;
-        }
-    }
-
-    return 1;
 }
 
 void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
@@ -104,6 +86,7 @@ void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 void ClassificaPalavra(tPalavra *palavra)
 {
     int i = 0, j = 0, cont = 0;
+    char caracter;
 
     palavra->palavraClassificada[cont] = '|';
 
@@ -158,22 +141,27 @@ void ClassificaPalavra(tPalavra *palavra)
 void PadronizaPalavra(tPalavra *palavra)
 {
     int i = 0;
+    char caracter;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < 6; i++)
     {
         if (palavra->palavra[i] >= 'a' && palavra->palavra[i] <= 'z')
         {
-            palavra->palavra[i] -= 32;
+            caracter = palavra->palavra[i];
+            caracter -= 32;
+            palavra->palavra[i] = caracter;
         }
     }
 
     i = 0;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < 6; i++)
     {
         if (palavra->palavraAtual[i] >= 'a' && palavra->palavraAtual[i] <= 'z')
         {
-            palavra->palavraAtual[i] -= 32;
+            caracter = palavra->palavraAtual[i];
+            caracter -= 32;
+            palavra->palavraAtual[i] = caracter;
         }
     }
 }
@@ -249,7 +237,16 @@ int AcertouPalavra(tPalavra *palavra)
     return 1;
 }
 
-void ImprimeTecladoJogo(tPalavra *palavra)
+char ColetaLetraPalavra(tPalavra *palavra, int i)
 {
-    
+    char caracter;
+
+    caracter = palavra->palavraAtual[i];
+
+    if (caracter >= 'a' && caracter <= 'z')
+    {
+        caracter -= 32;
+    }
+
+    return caracter;
 }

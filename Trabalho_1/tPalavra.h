@@ -38,4 +38,6 @@ void PadronizaPalavra(tPalavra *palavra);
 
 int AcertouPalavra(tPalavra *palavra);
 
+char ColetaLetraPalavra(tPalavra *palavra, int i);
+
 #endif

@@ -26,4 +26,10 @@ int TentativasZeradas(tJogo *jogadas);
 
 void CabecalhoJogoFinal(tPalavra *palavra, tJogo *jogadas);
 
+void InicializaTeclado(tJogo *jogo);
+
+void AlteraTeclado(tJogo *jogo, tPalavra *palavra);
+
+void ImprimeTecladoJogo(tJogo *jogo);
+
 #endif
