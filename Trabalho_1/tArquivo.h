@@ -12,4 +12,6 @@ void LiberaMatrizArquivo(char **matriz);
 
 void ImprimeMatriz(char **matriz);
 
+void LiberaPalavrasArquivo(char **palavras);
+
 #endif

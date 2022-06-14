@@ -24,4 +24,6 @@ void InicializaPalavraAtual(tPalavra *palavra);
 
 void LehPalavraEscolhidaPeloJogador(tPalavra *palavra);
 
+void LiberaPalavra(tPalavra *palavra);
+
 #endif

@@ -33,5 +33,11 @@ int main()
 
     ComecaJogo(jogador, palavra);
 
+    
+
+    LiberaJogador(jogador);
+    LiberaPalavra(palavra);
+    LiberaPalavrasArquivo(palavras);
+
     return 0;
 }

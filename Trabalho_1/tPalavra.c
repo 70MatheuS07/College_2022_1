@@ -87,7 +87,6 @@ int InicioDoJogo(tPalavra *palavra)
     {
         if (palavra->palavraAtual[i] != '*')
         {
-            printf("\nEntrou\n");
             return 0;
         }
     }

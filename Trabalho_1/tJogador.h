@@ -1,5 +1,5 @@
-#ifndef TJOGADOR_H
-#define TJOGADOR_H
+#ifndef JOGADOR_H
+#define JOGADOR_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -13,6 +13,7 @@ void LehJogador(tJogador *jogador);
 
 void LimpaBuffer();
 
+void LiberaJogador(tJogador *jogador);
 
 void ImprimeNomeJogadorCabecalho(tJogador *jogador);
 
