@@ -31,7 +31,7 @@ int main()
 
     ColetaPalavraDoArquivo(palavra, palavras);
 
-    ComecaJogo(jogador, palavra);
+    JogaJogo(jogador, palavra);
 
     
 

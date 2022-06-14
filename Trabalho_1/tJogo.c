@@ -1,32 +1,61 @@
 #include "tJogo.h"
 
-void ComecaJogo(tJogador *jogador, tPalavra *palavra)
+struct tJogo
 {
-    CabecalhoJogo(jogador, palavra);
+    int tentativas;
+};
+
+void JogaJogo(tJogador *jogador, tPalavra *palavra)
+{
+    tJogo *jogadas;
+    int i = 0;
+
+    jogadas = InicializaJogadas();
+
+    InicializaPalavraClassificada(palavra);
+
+    // DEBUG THIS!
+
+    for (i = 0; i < 6; i++)
+    {
+        CabecalhoJogo(jogador, palavra, jogadas);
+
+        ClassificaPalavra(palavra);
+    }
 }
 
-void CabecalhoJogo(tJogador *jogador, tPalavra *palavra)
+tJogo *InicializaJogadas()
 {
-    system("clear");
+    tJogo *jogadas;
+
+    jogadas = malloc(sizeof(jogadas));
+
+    jogadas->tentativas = 6;
+
+    return jogadas;
+}
+
+void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogadas)
+{
     printf("+-----------------------------------------------------------+\n");
     printf("| ######################### TERMO ######################### |\n");
     printf("|                                                           |\n");
     printf("|                                                           |\n");
 
-    if (InicioDoJogo(palavra) == 1)
-    {
-        printf("|                   |   |   |   |   |   |                   |\n");
-        printf("|                                                           |\n");
-        printf("|                                                           |\n");
-        printf("| Tentativas restantes: 6                                   |\n");
-        printf("|                                                           |\n");
-        printf("|                    Q W E R T Y U I O P                    |\n");
-        printf("|                     A S D F G H J K L                     |\n");
-        printf("|                       Z X C V B N M                       |\n");
-        printf("+-----------------------------------------------------------+\n\n");
+    printf("|                     ");
+    ImprimePalavraClassificada(palavra);
+    printf("                  |\n");
 
-        ImprimeNomeJogadorCabecalho(jogador);
+    printf("|                                                           |\n");
+    printf("|                                                           |\n");
+    printf("| Tentativas restantes: 6                                   |\n");
+    printf("|                                                           |\n");
+    printf("|                    Q W E R T Y U I O P                    |\n");
+    printf("|                     A S D F G H J K L                     |\n");
+    printf("|                       Z X C V B N M                       |\n");
+    printf("+-----------------------------------------------------------+\n\n");
 
-        LehPalavraEscolhidaPeloJogador(palavra);
-    }
+    ImprimeNomeJogadorCabecalho(jogador);
+
+    LehPalavraEscolhidaPeloJogador(palavra);
 }

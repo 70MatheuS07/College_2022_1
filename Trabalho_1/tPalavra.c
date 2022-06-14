@@ -6,7 +6,7 @@ struct tPalavra
 {
     char palavra[6];
     char palavraAtual[6];
-    char palavraDigitada[6];
+    char palavraClassificada[21];
     int escolhida;
 };
 
@@ -120,6 +120,141 @@ void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 
     for (i = 0; i < 6; i++)
     {
-        palavra->palavraDigitada[i] = string[i];
+        palavra->palavraAtual[i] = string[i];
     }
+}
+
+void ClassificaPalavra(tPalavra *palavra)
+{
+    int i = 0, j = 0, cont = 0;
+
+    palavra->palavraClassificada[0] = '|';
+
+    for (i = 0; i < 5; i++)
+    {
+        if (palavra->palavraAtual[i] == palavra->palavra[i])
+        {
+            cont++;
+            palavra->palavraClassificada[cont] = '*';
+            cont++;
+            palavra->palavraClassificada[cont] = palavra->palavra[i];
+            cont++;
+            palavra->palavraClassificada[cont] = '*';
+            cont++;
+            palavra->palavraClassificada[cont] = '|';
+        }
+
+        else if (NaoTemEssaLetraNaPalavra(palavra, i) == 0)
+        {
+            cont++;
+            palavra->palavraClassificada[cont] = '!';
+            cont++;
+            palavra->palavraClassificada[cont] = palavra->palavra[i];
+            cont++;
+            palavra->palavraClassificada[cont] = '*';
+            cont++;
+            palavra->palavraClassificada[cont] = '|';
+        }
+
+        else
+        {
+            for (j = i; j < 5; j++)
+            {
+                if (palavra->palavraAtual[i] == palavra->palavra[j])
+                {
+                    cont++;
+                    palavra->palavraClassificada[cont] = '(';
+                    cont++;
+                    palavra->palavraClassificada[cont] = palavra->palavra[i];
+                    cont++;
+                    palavra->palavraClassificada[cont] = ')';
+                    cont++;
+                    palavra->palavraClassificada[cont] = '|';
+                }
+            }
+        }
+    }
+
+    palavra->palavraClassificada[0] = '\0';
+}
+
+int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
+{
+    int j = 0;
+
+    for (j = 0; j < 5; j++)
+    {
+        if (palavra->palavraAtual[i] == palavra->palavra[j])
+        {
+            return 0;
+        }
+    }
+}
+
+void ImprimePalavraClassificada(tPalavra *palavra)
+{
+    int i;
+
+    for (i = 0; i < 20; i++)
+    {
+        if (palavra->palavraClassificada[i] == '*')
+        {
+            printf(" ");
+        }
+
+        else
+        {
+            printf("%c", palavra->palavraClassificada[i]);
+        }
+    }
+}
+
+void InicializaPalavraClassificada(tPalavra *palavra)
+{
+    int cont = 0;
+    palavra->palavraClassificada[cont] = '|';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = '|';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = '|';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = '|';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = '|';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = ' ';
+    cont++;
+    palavra->palavraClassificada[cont] = '|';
+    cont++;
+    palavra->palavraClassificada[cont] = '\0';
+
+    printf("\n\n%d\n\n", cont);
 }

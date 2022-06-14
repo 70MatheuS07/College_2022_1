@@ -10,10 +10,12 @@
 #include "tArquivo.h"
 #include "tTempo.h"
 
-void ComecaJogo(tJogador *jogador, tPalavra *palavra);
+typedef struct tJogo tJogo;
 
-void CabecalhoJogo(tJogador *jogador, tPalavra *palavra);
+void JogaJogo(tJogador *jogador, tPalavra *palavra);
 
+void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogadas);
 
+tJogo *InicializaJogadas();
 
 #endif

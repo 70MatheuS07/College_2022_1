@@ -3,6 +3,7 @@
 struct tJogador
 {
     char nome[21];
+    int tentativas;
 };
 
 tJogador *CriaJogador()

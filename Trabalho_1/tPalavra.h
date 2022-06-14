@@ -26,4 +26,12 @@ void LehPalavraEscolhidaPeloJogador(tPalavra *palavra);
 
 void LiberaPalavra(tPalavra *palavra);
 
+void ClassificaPalavra(tPalavra *palavra);
+
+int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i);
+
+void ImprimePalavraClassificada(tPalavra *palavra);
+
+void InicializaPalavraClassificada(tPalavra *palavra);
+
 #endif
