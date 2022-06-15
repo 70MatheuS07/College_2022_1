@@ -7,8 +7,8 @@ struct tPalavra
     char palavra[6];
     char palavraCopia[6];
     char palavraAtual[6];
-    char palavraClassificada[22];
     int escolhida;
+    char palavraClassificada[22];
 };
 
 tPalavra *CriaPalavra()
@@ -79,9 +79,16 @@ void InicializaPalavraAtual(tPalavra *palavra)
 
 void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 {
-    scanf("%[A-z]", palavra->palavraAtual);
+    int i = 0;
+    char caracter;
 
-    LimpaBuffer();
+    for (i = 0; i < 5; i++)
+    {
+        scanf("%c", &caracter);
+        palavra->palavraAtual[i] = caracter;
+    }
+
+    palavra->palavraAtual[5] = '\0';
 }
 
 void ClassificaPalavra(tPalavra *palavra)
@@ -191,8 +198,6 @@ int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
 
 void ImprimePalavraClassificada(tPalavra *palavra)
 {
-    int i;
-
     printf("|                   ");
 
     printf("%s", palavra->palavraClassificada);
@@ -202,7 +207,6 @@ void ImprimePalavraClassificada(tPalavra *palavra)
 
 void InicializaPalavraClassificada(tPalavra *palavra)
 {
-    int cont = 0;
     palavra->palavraClassificada[0] = '|';
     palavra->palavraClassificada[1] = ' ';
     palavra->palavraClassificada[2] = ' ';
@@ -226,7 +230,6 @@ void InicializaPalavraClassificada(tPalavra *palavra)
     palavra->palavraClassificada[20] = '|';
     palavra->palavraClassificada[21] = '\0';
 
-    printf("\n\n%d\n\n", cont);
     printf("\n\n%s\n\n", palavra->palavraClassificada);
 }
 

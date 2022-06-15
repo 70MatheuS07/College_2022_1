@@ -4,6 +4,7 @@ struct tJogo
 {
     char teclado[27];
     int tentativas;
+    // adicionar palavraClassificada aqui.
 };
 
 void JogaJogo(tJogador *jogador, tPalavra *palavra)
