@@ -1,5 +1,7 @@
 #include "tTempo.h"
 
+// Tá errado, mas no momento é válido.
+
 int PegaTempo()
 {
     int result = 0;
