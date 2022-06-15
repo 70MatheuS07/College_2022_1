@@ -4,7 +4,6 @@ struct tJogo
 {
     char teclado[27];
     int tentativas;
-    // adicionar palavraClassificada aqui.
 };
 
 void JogaJogo(tJogador *jogador, tPalavra *palavra)
@@ -14,15 +13,17 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
 
     jogo = InicializaJogadas();
 
-    InicializaPalavraClassificada(palavra);
-
     InicializaTeclado(jogo);
 
     CopiaPalavra(palavra);
 
+    InicializaPalavraClassificada(palavra);
+
     for (i = 0; i < 6; i++)
     {
         CabecalhoJogo(jogador, palavra, jogo);
+
+        InicializaPalavraAtual(palavra);
 
         ClassificaPalavra(palavra);
 
@@ -70,6 +71,8 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
     ImprimeNomeJogadorCabecalho(jogador);
 
     LehPalavraEscolhidaPeloJogador(palavra);
+
+    InicializaPalavraClassificada(palavra);
 
     PadronizaPalavra(palavra);
 

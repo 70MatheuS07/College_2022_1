@@ -30,10 +30,11 @@ void ClassificaPalavra(tPalavra *palavra);
 
 int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i);
 
-
 void ImprimePalavraClassificada(tPalavra *palavra);
 
 void InicializaPalavraClassificada(tPalavra *palavra);
+
+void InicializaPalavraAtual(tPalavra *palavra);
 
 void PadronizaPalavra(tPalavra *palavra);
 

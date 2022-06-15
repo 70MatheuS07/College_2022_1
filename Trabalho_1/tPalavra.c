@@ -4,10 +4,10 @@
 
 struct tPalavra
 {
+    int escolhida;
     char palavra[6];
     char palavraCopia[6];
     char palavraAtual[6];
-    int escolhida;
     char palavraClassificada[22];
 };
 
@@ -111,7 +111,7 @@ void ClassificaPalavra(tPalavra *palavra)
             cont++;
             palavra->palavraClassificada[cont] = '|';
 
-            palavra->palavraCopia[i] = '*';
+            palavra->palavraCopia[i] = ' ';
         }
 
         else if (NaoTemEssaLetraNaPalavra(palavra, i) == 1)
