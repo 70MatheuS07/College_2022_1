@@ -5,6 +5,7 @@
 struct tPalavra
 {
     char palavra[6];
+    char palavraCopia[6];
     char palavraAtual[6];
     char palavraClassificada[22];
     int escolhida;
@@ -102,6 +103,8 @@ void ClassificaPalavra(tPalavra *palavra)
             palavra->palavraClassificada[cont] = ' ';
             cont++;
             palavra->palavraClassificada[cont] = '|';
+
+            palavra->palavraCopia[i] = '*';
         }
 
         else if (NaoTemEssaLetraNaPalavra(palavra, i) == 1)
@@ -168,14 +171,19 @@ void PadronizaPalavra(tPalavra *palavra)
 
 int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
 {
-    int j = 0;
+    int j = 0, cont = 0;
 
     for (j = 0; j < 5; j++)
     {
-        if (palavra->palavraAtual[i] == palavra->palavra[j])
+        if (palavra->palavraCopia[i] == palavra->palavraAtual[j])
         {
-            return 0;
+            cont++;
         }
+    }
+
+    if (cont == 1)
+    {
+        return 0;
     }
 
     return 1;
@@ -249,4 +257,32 @@ char ColetaLetraPalavra(tPalavra *palavra, int i)
     }
 
     return caracter;
+}
+
+void CopiaPalavra(tPalavra *palavra)
+{
+    int i;
+    char caracter;
+    for (i = 0; i < 6; i++)
+    {
+        palavra->palavraCopia[i] = palavra->palavra[i];
+
+        caracter = palavra->palavraCopia[i];
+
+        if (caracter >= 'a' && caracter <= 'z')
+        {
+            caracter -= 32;
+            palavra->palavraCopia[i] = caracter;
+        }
+    }
+}
+
+int NaoSaoLetrasIguais(tPalavra *palavra, int i)
+{
+    if (palavra->palavraAtual[i] == palavra->palavra[i])
+    {
+        return 0;
+    }
+
+    return 1;
 }

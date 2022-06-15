@@ -17,7 +17,7 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
 
     InicializaTeclado(jogo);
 
-    // DEBUG THIS!
+    CopiaPalavra(palavra);
 
     for (i = 0; i < 6; i++)
     {
@@ -37,10 +37,11 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
 tJogo *InicializaJogadas()
 {
     tJogo *jogadas;
+    int numero = 6;
 
     jogadas = malloc(sizeof(tJogo *));
 
-    jogadas->tentativas = 6;
+    jogadas->tentativas = numero;
 
     return jogadas;
 }
@@ -108,6 +109,7 @@ void CabecalhoJogoFinal(tPalavra *palavra, tJogo *jogo)
     printf("|                                                           |\n");
 
     ImprimePalavraClassificada(palavra);
+
     printf("|                                                           |\n");
     printf("|                                                           |\n");
 
@@ -195,14 +197,17 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
     {
         if (NaoTemEssaLetraNaPalavra(palavra, i) == 1)
         {
-            letra = ColetaLetraPalavra(palavra, i);
-
-            for (j = 0; j < 26; j++)
+            if (NaoSaoLetrasIguais(palavra, i) == 1)
             {
-                if (letra == jogo->teclado[j])
+                letra = ColetaLetraPalavra(palavra, i);
+
+                for (j = 0; j < 26; j++)
                 {
-                    jogo->teclado[j] = '_';
-                    break;
+                    if (letra == jogo->teclado[j])
+                    {
+                        jogo->teclado[j] = '_';
+                        break;
+                    }
                 }
             }
         }

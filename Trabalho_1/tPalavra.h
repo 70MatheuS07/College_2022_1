@@ -30,6 +30,7 @@ void ClassificaPalavra(tPalavra *palavra);
 
 int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i);
 
+
 void ImprimePalavraClassificada(tPalavra *palavra);
 
 void InicializaPalavraClassificada(tPalavra *palavra);
@@ -39,5 +40,9 @@ void PadronizaPalavra(tPalavra *palavra);
 int AcertouPalavra(tPalavra *palavra);
 
 char ColetaLetraPalavra(tPalavra *palavra, int i);
+
+void CopiaPalavra(tPalavra *palavra);
+
+int NaoSaoLetrasIguais(tPalavra *palavra, int i);
 
 #endif
