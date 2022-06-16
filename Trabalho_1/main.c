@@ -19,7 +19,7 @@ int main()
 
     jogador = CriaJogador();
 
-    palavra = CriaPalavra();
+   palavra = CriaPalavra();
 
     LehJogador(jogador);
 
@@ -31,9 +31,7 @@ int main()
 
     ColetaPalavraDoArquivo(palavra, palavras);
 
-    JogaJogo(jogador, palavra);
-
-    
+    // JogaJogo(jogador, palavra);
 
     LiberaJogador(jogador);
     LiberaPalavra(palavra);

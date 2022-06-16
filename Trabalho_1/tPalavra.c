@@ -4,18 +4,25 @@
 
 struct tPalavra
 {
-    int escolhida;
-    char palavra[6];
-    char palavraCopia[6];
-    char palavraAtual[6];
-    char palavraClassificada[22];
+    char *palavra;
+    char *palavraCopia;
+    char *palavraAtual;
+    char *palavraClassificada;
+    int *escolhida;
 };
 
 tPalavra *CriaPalavra()
 {
+    int i;
     tPalavra *palavra;
 
-    palavra = malloc(sizeof(palavra));
+    palavra = malloc(sizeof(tPalavra *));
+
+    palavra->palavra = malloc(sizeof(char) * 6);
+    palavra->palavraCopia = malloc(sizeof(char) * 6);
+    palavra->palavraAtual = malloc(sizeof(char) * 6);
+    palavra->palavraClassificada = malloc(sizeof(char) * 22);
+    palavra->escolhida = malloc(sizeof(int));
 
     return palavra;
 }
@@ -33,7 +40,7 @@ void SorteiaPalavra(tPalavra *palavra)
 
     palavra->escolhida = escolhida;
 
-    printf("\n%d\n", palavra->escolhida);
+    printf("\n%d\n", escolhida);
 }
 
 void ImprimePalavra(tPalavra *palavra)
@@ -63,6 +70,36 @@ void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras)
 
 void LiberaPalavra(tPalavra *palavra)
 {
+    if (palavra->palavra != NULL)
+    {
+        free(palavra->palavra);
+        palavra->palavra = NULL;
+    }
+
+    if (palavra->palavraCopia != NULL)
+    {
+        free(palavra->palavraCopia);
+        palavra->palavraCopia = NULL;
+    }
+
+    if (palavra->palavraAtual != NULL)
+    {
+        free(palavra->palavraAtual);
+        palavra->palavraAtual = NULL;
+    }
+
+    if (palavra->palavraClassificada != NULL)
+    {
+        free(palavra->palavraClassificada);
+        palavra->palavraClassificada = NULL;
+    }
+
+    if (palavra->escolhida != NULL)
+    {
+        free(palavra->escolhida);
+        palavra->escolhida = NULL;
+    }
+
     free(palavra);
     palavra = NULL;
 }

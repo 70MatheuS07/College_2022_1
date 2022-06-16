@@ -8,11 +8,11 @@ char **ArmazenaPalavrasArquivo()
     int i = 0, j = 0;
     char caracter;
 
-    palavras = malloc(QTD_PALAVRAS * sizeof(char *));
+    palavras = malloc(sizeof(char *) * QTD_PALAVRAS);
 
     for (i = 0; i < QTD_PALAVRAS; i++)
     {
-        palavras[i] = malloc(6 * sizeof(char));
+        palavras[i] = malloc(sizeof(char) * 6);
     }
 
     FILE *arquivo;
@@ -55,6 +55,7 @@ void LiberaPalavrasArquivo(char **palavras)
     for (i = 0; i < QTD_PALAVRAS; i++)
     {
         free(palavras[i]);
+        palavras[i] = NULL;
     }
 
     free(palavras);
