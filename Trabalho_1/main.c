@@ -19,19 +19,17 @@ int main()
 
     jogador = CriaJogador();
 
-   palavra = CriaPalavra();
+    palavra = CriaPalavra();
 
     LehJogador(jogador);
 
     SorteiaPalavra(palavra);
 
-    InicializaPalavraAtual(palavra);
-
     palavras = ArmazenaPalavrasArquivo();
 
     ColetaPalavraDoArquivo(palavra, palavras);
 
-    // JogaJogo(jogador, palavra);
+    JogaJogo(jogador, palavra);
 
     LiberaJogador(jogador);
     LiberaPalavra(palavra);

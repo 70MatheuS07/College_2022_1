@@ -2,7 +2,7 @@
 
 struct tJogo
 {
-    char teclado[27];
+    char *teclado; // 27
     int tentativas;
 };
 
@@ -13,6 +13,8 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
 
     jogo = InicializaJogadas();
 
+    InicializaPalavraAtual(palavra);
+
     InicializaTeclado(jogo);
 
     CopiaPalavra(palavra);
@@ -22,8 +24,6 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
     for (i = 0; i < 6; i++)
     {
         CabecalhoJogo(jogador, palavra, jogo);
-
-        InicializaPalavraAtual(palavra);
 
         ClassificaPalavra(palavra);
 
@@ -38,14 +38,16 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
 
 tJogo *InicializaJogadas()
 {
-    tJogo *jogadas;
+    tJogo *jogo;
     int numero = 6;
 
-    jogadas = malloc(sizeof(tJogo *));
+    jogo = malloc(sizeof(tJogo));
 
-    jogadas->tentativas = numero;
+    jogo->teclado = malloc(sizeof(char) * 27);
 
-    return jogadas;
+    jogo->tentativas = numero;
+
+    return jogo;
 }
 
 void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)

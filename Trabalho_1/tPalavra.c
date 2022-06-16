@@ -4,11 +4,11 @@
 
 struct tPalavra
 {
-    char *palavra;
+    char *palavraColetada;
     char *palavraCopia;
     char *palavraAtual;
     char *palavraClassificada;
-    int *escolhida;
+    int escolhida;
 };
 
 tPalavra *CriaPalavra()
@@ -18,11 +18,10 @@ tPalavra *CriaPalavra()
 
     palavra = malloc(sizeof(tPalavra *));
 
-    palavra->palavra = malloc(sizeof(char) * 6);
+    palavra->palavraColetada = malloc(sizeof(char) * 6);
     palavra->palavraCopia = malloc(sizeof(char) * 6);
     palavra->palavraAtual = malloc(sizeof(char) * 6);
     palavra->palavraClassificada = malloc(sizeof(char) * 22);
-    palavra->escolhida = malloc(sizeof(int));
 
     return palavra;
 }
@@ -45,7 +44,7 @@ void SorteiaPalavra(tPalavra *palavra)
 
 void ImprimePalavra(tPalavra *palavra)
 {
-    printf("%s\n", palavra->palavra);
+    printf("%s\n", palavra->palavraColetada);
 }
 
 void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras)
@@ -62,43 +61,26 @@ void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras)
 
     for (i = 0; i < 6; i++)
     {
-        palavra->palavra[i] = string[i];
+        palavra->palavraColetada[i] = string[i];
     }
 
-    printf("\n%s\n", palavra->palavra);
+    printf("\n%s\n", palavra->palavraColetada);
 }
 
 void LiberaPalavra(tPalavra *palavra)
 {
-    if (palavra->palavra != NULL)
-    {
-        free(palavra->palavra);
-        palavra->palavra = NULL;
-    }
+    // Esse free da double free or corruption (out)!
+    /*free(palavra->palavraColetada);
+    palavra->palavraColetada = NULL;*/
 
-    if (palavra->palavraCopia != NULL)
-    {
-        free(palavra->palavraCopia);
-        palavra->palavraCopia = NULL;
-    }
+    free(palavra->palavraCopia);
+    palavra->palavraCopia = NULL;
 
-    if (palavra->palavraAtual != NULL)
-    {
-        free(palavra->palavraAtual);
-        palavra->palavraAtual = NULL;
-    }
+    free(palavra->palavraAtual);
+    palavra->palavraAtual = NULL;
 
-    if (palavra->palavraClassificada != NULL)
-    {
-        free(palavra->palavraClassificada);
-        palavra->palavraClassificada = NULL;
-    }
-
-    if (palavra->escolhida != NULL)
-    {
-        free(palavra->escolhida);
-        palavra->escolhida = NULL;
-    }
+    free(palavra->palavraClassificada);
+    palavra->palavraClassificada = NULL;
 
     free(palavra);
     palavra = NULL;
@@ -117,15 +99,11 @@ void InicializaPalavraAtual(tPalavra *palavra)
 void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 {
     int i = 0;
-    char caracter;
+    char string[6];
 
-    for (i = 0; i < 5; i++)
-    {
-        scanf("%c", &caracter);
-        palavra->palavraAtual[i] = caracter;
-    }
+    scanf("%s", string);
 
-    palavra->palavraAtual[5] = '\0';
+    strcpy(palavra->palavraAtual, string);
 }
 
 void ClassificaPalavra(tPalavra *palavra)
@@ -137,7 +115,7 @@ void ClassificaPalavra(tPalavra *palavra)
 
     for (i = 0; i < 5; i++)
     {
-        if (palavra->palavraAtual[i] == palavra->palavra[i])
+        if (palavra->palavraAtual[i] == palavra->palavraColetada[i])
         {
             cont++;
             palavra->palavraClassificada[cont] = ' ';
@@ -148,7 +126,7 @@ void ClassificaPalavra(tPalavra *palavra)
             cont++;
             palavra->palavraClassificada[cont] = '|';
 
-            palavra->palavraCopia[i] = ' ';
+            palavra->palavraCopia[i] = '*';
         }
 
         else if (NaoTemEssaLetraNaPalavra(palavra, i) == 1)
@@ -167,7 +145,7 @@ void ClassificaPalavra(tPalavra *palavra)
         {
             for (j = 0; j < 5; j++)
             {
-                if (palavra->palavraAtual[i] == palavra->palavra[j])
+                if (palavra->palavraAtual[i] == palavra->palavraColetada[j])
                 {
                     cont++;
                     palavra->palavraClassificada[cont] = '(';
@@ -192,11 +170,11 @@ void PadronizaPalavra(tPalavra *palavra)
 
     for (i = 0; i < 6; i++)
     {
-        if (palavra->palavra[i] >= 'a' && palavra->palavra[i] <= 'z')
+        if (palavra->palavraColetada[i] >= 'a' && palavra->palavraColetada[i] <= 'z')
         {
-            caracter = palavra->palavra[i];
+            caracter = palavra->palavraColetada[i];
             caracter -= 32;
-            palavra->palavra[i] = caracter;
+            palavra->palavraColetada[i] = caracter;
         }
     }
 
@@ -219,7 +197,7 @@ int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
 
     for (j = 0; j < 5; j++)
     {
-        if (palavra->palavraCopia[i] == palavra->palavraAtual[j])
+        if (palavra->palavraCopia[j] == palavra->palavraAtual[i])
         {
             cont++;
         }
@@ -276,7 +254,7 @@ int AcertouPalavra(tPalavra *palavra)
 
     for (i = 0; i < 6; i++)
     {
-        if (palavra->palavraAtual[i] != palavra->palavra[i])
+        if (palavra->palavraAtual[i] != palavra->palavraColetada[i])
         {
             return 0;
         }
@@ -305,7 +283,7 @@ void CopiaPalavra(tPalavra *palavra)
     char caracter;
     for (i = 0; i < 6; i++)
     {
-        palavra->palavraCopia[i] = palavra->palavra[i];
+        palavra->palavraCopia[i] = palavra->palavraColetada[i];
 
         caracter = palavra->palavraCopia[i];
 
@@ -319,7 +297,7 @@ void CopiaPalavra(tPalavra *palavra)
 
 int NaoSaoLetrasIguais(tPalavra *palavra, int i)
 {
-    if (palavra->palavraAtual[i] == palavra->palavra[i])
+    if (palavra->palavraAtual[i] == palavra->palavraColetada[i])
     {
         return 0;
     }

@@ -3,7 +3,7 @@
 struct tJogador
 {
     char *nome;
-    int *tentativas;
+    int tentativas;
 };
 
 tJogador *CriaJogador()
@@ -14,50 +14,27 @@ tJogador *CriaJogador()
 
     jogador->nome = malloc(sizeof(char) * 21);
 
-    jogador->tentativas = malloc(sizeof(int));
-
     return jogador;
 }
 
 void LehJogador(tJogador *jogador)
 {
+    int i = 0;
+    char caracter;
     char nome[21];
 
-    scanf("%[A-z]", nome);
+    scanf("%s", nome);
 
     strcpy(jogador->nome, nome);
 }
 
-void LimpaBuffer()
-{
-    int ch;
-
-    do
-    {
-        ch = fgetc(stdin);
-
-    } while (ch != EOF && ch != '\n');
-}
-
 void LiberaJogador(tJogador *jogador)
 {
-    if (jogador->nome != NULL)
-    {
-        free(jogador->nome);
-        jogador->nome = NULL;
-    }
+    free(jogador->nome);
+    jogador->nome = NULL;
 
-    if (jogador->tentativas != NULL)
-    {
-        free(jogador->tentativas);
-        jogador->tentativas = NULL;
-    }
-
-    if (jogador != NULL)
-    {
-        free(jogador);
-        jogador = NULL;
-    }
+    free(jogador);
+    jogador = NULL;
 }
 
 void ImprimeNomeJogadorCabecalho(tJogador *jogador)
