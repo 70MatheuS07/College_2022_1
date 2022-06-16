@@ -16,8 +16,6 @@ void SorteiaPalavra(tPalavra *palavra);
 
 void ImprimePalavra(tPalavra *palavra);
 
-void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras);
-
 int InicioDoJogo(tPalavra *palavra);
 
 void InicializaPalavraAtual(tPalavra *palavra);
@@ -45,5 +43,11 @@ char ColetaLetraPalavra(tPalavra *palavra, int i);
 void CopiaPalavra(tPalavra *palavra);
 
 int NaoSaoLetrasIguais(tPalavra *palavra, int i);
+
+int ColetaPalavraEscolhida(tPalavra *palavra);
+
+void CopiaStringParaPalavra(tPalavra *palavra, char string[6]);
+
+char CharPalavraAtual(tPalavra *palavra, int j);
 
 #endif

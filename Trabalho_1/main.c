@@ -15,25 +15,24 @@ int main()
 
     tJogador *jogador;
     tPalavra *palavra;
-    char **palavras;
+    tArquivo *arquivo;
 
     jogador = CriaJogador();
-
     palavra = CriaPalavra();
 
     LehJogador(jogador);
 
     SorteiaPalavra(palavra);
 
-    palavras = ArmazenaPalavrasArquivo();
+    arquivo = CriaArmazenaPalavrasArquivo();
 
-    ColetaPalavraDoArquivo(palavra, palavras);
+    ColetaPalavraDoArquivo(palavra, arquivo);
 
-    JogaJogo(jogador, palavra);
+    JogaJogo(jogador, palavra, arquivo);
 
     LiberaJogador(jogador);
     LiberaPalavra(palavra);
-    LiberaPalavrasArquivo(palavras);
+    LiberaPalavrasArquivo(arquivo);
 
     return 0;
 }

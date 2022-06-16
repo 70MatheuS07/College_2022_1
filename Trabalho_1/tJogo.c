@@ -1,19 +1,24 @@
 #include "tJogo.h"
 
+#define QTD_PALAVRAS 18289
+
 struct tJogo
 {
-    char *teclado; // 27
+    char *teclado;
     int tentativas;
 };
 
-void JogaJogo(tJogador *jogador, tPalavra *palavra)
+void JogaJogo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 {
-    tJogo *jogo;
+    tJogo *jogo = NULL;
+    tEstatisticas *estatisticas = NULL;
     int i = 0;
 
     jogo = InicializaJogadas();
 
     InicializaPalavraAtual(palavra);
+
+    estatisticas = InicializaEstatisticas();
 
     InicializaTeclado(jogo);
 
@@ -23,13 +28,28 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra)
 
     for (i = 0; i < 6; i++)
     {
-        CabecalhoJogo(jogador, palavra, jogo);
+        CabecalhoJogo(jogador, palavra, jogo, arquivo);
 
         ClassificaPalavra(palavra);
 
-        if (TentativasZeradas(jogo) == 1 || AcertouPalavra(palavra) == 1)
+        if (AcertouPalavra(palavra) == 1)
         {
-            CabecalhoJogoFinal(palavra, jogo);
+            system("clear");
+
+            RegistraEstatisticas(estatisticas);
+
+            CabecalhoJogoVitoria(palavra, jogo);
+
+            break;
+        }
+
+        if (TentativasZeradas(jogo) == 1)
+        {
+            system("clear");
+
+            RegistraEstatisticas(estatisticas);
+
+            CabecalhoJogoDerrota(palavra, jogo);
 
             break;
         }
@@ -50,7 +70,7 @@ tJogo *InicializaJogadas()
     return jogo;
 }
 
-void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
+void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo)
 {
     printf("+-----------------------------------------------------------+\n");
     printf("| ######################### TERMO ######################### |\n");
@@ -72,15 +92,53 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 
     ImprimeNomeJogadorCabecalho(jogador);
 
-    LehPalavraEscolhidaPeloJogador(palavra);
+    while (1)
+    {
+        LehPalavraEscolhidaPeloJogador(palavra);
 
-    InicializaPalavraClassificada(palavra);
+        if (PalavraExiste(palavra, arquivo) == 1)
+        {
+            break;
+        }
+
+        else
+        {
+            printf("\nNão existe essa palavra, tente outra: ");
+        }
+    }
 
     PadronizaPalavra(palavra);
 
     ReduzTentativasRestantes(jogo);
 
     AlteraTeclado(jogo, palavra);
+}
+
+int PalavraExiste(tPalavra *palavra, tArquivo *arquivo)
+{
+    int i, j, cont = 0;
+
+    for (i = 0; i < QTD_PALAVRAS; i++)
+    {
+        for (j = 0; j < 5; j++)
+        {
+            if (CharPalavraAtual(palavra, j) == CharPalavraArquivo(arquivo, i, j))
+            {
+                cont++;
+            }
+        }
+
+        if (cont == 5)
+        {
+            return 1;
+        }
+        else
+        {
+            cont = 0;
+        }
+    }
+
+    return 0;
 }
 
 void ImprimeTentativasRestantes(tJogo *jogo)
@@ -107,10 +165,10 @@ int TentativasZeradas(tJogo *jogo)
     return 0;
 }
 
-void CabecalhoJogoFinal(tPalavra *palavra, tJogo *jogo)
+void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
-    printf("| ######################### TERMO ######################### |\n");
+    printf("| ########################## WIN ########################## |\n");
     printf("|                                                           |\n");
     printf("|                                                           |\n");
 
@@ -122,9 +180,30 @@ void CabecalhoJogoFinal(tPalavra *palavra, tJogo *jogo)
     ImprimeTentativasRestantes(jogo);
 
     printf("|                                                           |\n");
-    printf("|                    Q W E R T Y U I O P                    |\n");
-    printf("|                     A S D F G H J K L                     |\n");
-    printf("|                       Z X C V B N M                       |\n");
+
+    ImprimeTecladoJogo(jogo);
+
+    printf("+-----------------------------------------------------------+\n\n");
+}
+
+void CabecalhoJogoDerrota(tPalavra *palavra, tJogo *jogo)
+{
+    printf("+-----------------------------------------------------------+\n");
+    printf("| ######################### LOSER ######################### |\n");
+    printf("|                                                           |\n");
+    printf("|                                                           |\n");
+
+    ImprimePalavraClassificada(palavra);
+
+    printf("|                                                           |\n");
+    printf("|                                                           |\n");
+
+    ImprimeTentativasRestantes(jogo);
+
+    printf("|                                                           |\n");
+
+    ImprimeTecladoJogo(jogo);
+
     printf("+-----------------------------------------------------------+\n\n");
 }
 

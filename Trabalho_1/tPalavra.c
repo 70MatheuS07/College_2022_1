@@ -47,26 +47,6 @@ void ImprimePalavra(tPalavra *palavra)
     printf("%s\n", palavra->palavraColetada);
 }
 
-void ColetaPalavraDoArquivo(tPalavra *palavra, char **matrizPalavras)
-{
-    int i = 0, j = 0;
-    char string[6];
-
-    i = palavra->escolhida;
-
-    for (j = 0; j < 6; j++)
-    {
-        string[j] = matrizPalavras[i][j];
-    }
-
-    for (i = 0; i < 6; i++)
-    {
-        palavra->palavraColetada[i] = string[i];
-    }
-
-    printf("\n%s\n", palavra->palavraColetada);
-}
-
 void LiberaPalavra(tPalavra *palavra)
 {
     // Esse free da double free or corruption (out)!
@@ -303,4 +283,34 @@ int NaoSaoLetrasIguais(tPalavra *palavra, int i)
     }
 
     return 1;
+}
+
+int ColetaPalavraEscolhida(tPalavra *palavra)
+{
+    int result;
+
+    result = palavra->escolhida;
+
+    return result;
+}
+
+void CopiaStringParaPalavra(tPalavra *palavra, char string[6])
+{
+    int i;
+
+    for (i = 0; i < 6; i++)
+    {
+        palavra->palavraColetada[i] = string[i];
+    }
+
+    printf("\n%s\n", palavra->palavraColetada);
+}
+
+char CharPalavraAtual(tPalavra *palavra, int j)
+{
+    char caracter;
+
+    caracter = palavra->palavraAtual[j];
+
+    return caracter;
 }

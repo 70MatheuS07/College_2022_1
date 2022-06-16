@@ -9,12 +9,15 @@
 #include "tPalavra.h"
 #include "tArquivo.h"
 #include "tTempo.h"
+#include "tEstatisticas.h"
 
 typedef struct tJogo tJogo;
 
-void JogaJogo(tJogador *jogador, tPalavra *palavra);
+void JogaJogo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo);
 
-void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogadas);
+void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo);
+
+int PalavraExiste(tPalavra *palavra, tArquivo *arquivo);
 
 tJogo *InicializaJogadas();
 
@@ -24,7 +27,9 @@ void ReduzTentativasRestantes(tJogo *jogadas);
 
 int TentativasZeradas(tJogo *jogadas);
 
-void CabecalhoJogoFinal(tPalavra *palavra, tJogo *jogadas);
+void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo);
+
+void CabecalhoJogoDerrota(tPalavra *palavra, tJogo *jogo);
 
 void InicializaTeclado(tJogo *jogo);
 

@@ -5,13 +5,16 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include "tPalavra.h"
 
-char **ArmazenaPalavrasArquivo();
+typedef struct tArquivo tArquivo;
 
-void LiberaMatrizArquivo(char **matriz);
+tArquivo *CriaArmazenaPalavrasArquivo();
 
-void ImprimeMatriz(char **matriz);
+void ColetaPalavraDoArquivo(tPalavra *palavra, tArquivo *arquivo);
 
-void LiberaPalavrasArquivo(char **palavras);
+void LiberaPalavrasArquivo(tArquivo *arquivo);
+
+char CharPalavraArquivo(tArquivo *arquivo, int i, int j);
 
 #endif

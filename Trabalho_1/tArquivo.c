@@ -1,63 +1,97 @@
 #include "tArquivo.h"
 
-#define QTD_PALAVRAS 18289
-
-char **ArmazenaPalavrasArquivo()
+struct tArquivo
 {
     char **palavras;
+};
+
+#define QTD_PALAVRAS 18289
+
+tArquivo *CriaArmazenaPalavrasArquivo()
+{
+    tArquivo *arquivo;
     int i = 0, j = 0;
     char caracter;
 
-    palavras = malloc(sizeof(char *) * QTD_PALAVRAS);
+    arquivo = malloc(sizeof(tArquivo));
+
+    arquivo->palavras = malloc(sizeof(char *) * QTD_PALAVRAS);
 
     for (i = 0; i < QTD_PALAVRAS; i++)
     {
-        palavras[i] = malloc(sizeof(char) * 6);
+        arquivo->palavras[i] = malloc(sizeof(char) * 6);
     }
 
-    FILE *arquivo;
+    FILE *file;
 
-    arquivo = fopen("palavras.txt", "r");
+    file = fopen("palavras.txt", "r");
 
     i = 0;
 
     do
     {
-        fscanf(arquivo, "%c", &caracter);
+        fscanf(file, "%c", &caracter);
 
         if (caracter == '\n')
         {
-            palavras[i][j] = '\0';
+            arquivo->palavras[i][j] = '\0';
             i++;
             j = 0;
         }
 
         else
         {
-            palavras[i][j] = caracter;
+            arquivo->palavras[i][j] = caracter;
             j++;
         }
 
-    } while (!feof(arquivo));
+    } while (!feof(file));
 
-    fclose(arquivo);
+    fclose(file);
 
     // Corrigi a ultima palavra que está duplicando o ultimo char.
-    palavras[QTD_PALAVRAS - 1][5] = '\0';
+    arquivo->palavras[QTD_PALAVRAS - 1][5] = '\0';
 
-    return palavras;
+    return arquivo;
 }
 
-void LiberaPalavrasArquivo(char **palavras)
+void ColetaPalavraDoArquivo(tPalavra *palavra, tArquivo *arquivo)
+{
+    int i = 0, j = 0;
+    char string[6];
+
+    i = ColetaPalavraEscolhida(palavra);
+
+    for (j = 0; j < 6; j++)
+    {
+        string[j] = arquivo->palavras[i][j];
+    }
+
+    for (i = 0; i < 6; i++)
+    {
+        CopiaStringParaPalavra(palavra, string);
+    }
+}
+
+void LiberaPalavrasArquivo(tArquivo *arquivo)
 {
     int i = 0;
 
     for (i = 0; i < QTD_PALAVRAS; i++)
     {
-        free(palavras[i]);
-        palavras[i] = NULL;
+        free(arquivo->palavras[i]);
+        arquivo->palavras[i] = NULL;
     }
 
-    free(palavras);
-    palavras = NULL;
+    free(arquivo);
+    arquivo = NULL;
+}
+
+char CharPalavraArquivo(tArquivo *arquivo, int i, int j)
+{
+    char caracter;
+
+    caracter = arquivo->palavras[i][j];
+
+    return caracter;
 }
