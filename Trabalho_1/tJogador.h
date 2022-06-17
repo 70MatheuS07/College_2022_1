@@ -11,7 +11,7 @@ tJogador *CriaJogador();
 
 void LehJogador(tJogador *jogador);
 
-void LimpaBuffer();
+int EscolhaDeModo(tJogador *jogador);
 
 void LiberaJogador(tJogador *jogador);
 

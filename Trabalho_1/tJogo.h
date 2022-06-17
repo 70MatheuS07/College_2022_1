@@ -9,11 +9,10 @@
 #include "tPalavra.h"
 #include "tArquivo.h"
 #include "tTempo.h"
-#include "tEstatisticas.h"
 
 typedef struct tJogo tJogo;
 
-void JogaJogo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo);
+void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo);
 
 void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo);
 

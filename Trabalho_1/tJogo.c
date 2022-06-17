@@ -8,17 +8,14 @@ struct tJogo
     int tentativas;
 };
 
-void JogaJogo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
+void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 {
-    tJogo *jogo = NULL;
-    tEstatisticas *estatisticas = NULL;
+    tJogo *jogo;
     int i = 0;
 
     jogo = InicializaJogadas();
 
     InicializaPalavraAtual(palavra);
-
-    estatisticas = InicializaEstatisticas();
 
     InicializaTeclado(jogo);
 
@@ -36,8 +33,6 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
         {
             system("clear");
 
-            RegistraEstatisticas(estatisticas);
-
             CabecalhoJogoVitoria(palavra, jogo);
 
             break;
@@ -47,7 +42,46 @@ void JogaJogo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
         {
             system("clear");
 
-            RegistraEstatisticas(estatisticas);
+            CabecalhoJogoDerrota(palavra, jogo);
+
+            break;
+        }
+    }
+}
+
+void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
+{
+    tJogo *jogo;
+    int i = 0;
+
+    jogo = InicializaJogadas();
+
+    InicializaPalavraAtual(palavra);
+
+    InicializaTeclado(jogo);
+
+    CopiaPalavra(palavra);
+
+    InicializaPalavraClassificada(palavra);
+
+    for (i = 0; i < 6; i++)
+    {
+        CabecalhoJogo(jogador, palavra, jogo, arquivo);
+
+        ClassificaPalavra(palavra);
+
+        if (AcertouPalavra(palavra) == 1)
+        {
+            system("clear");
+
+            CabecalhoJogoVitoria(palavra, jogo);
+
+            break;
+        }
+
+        if (TentativasZeradas(jogo) == 1)
+        {
+            system("clear");
 
             CabecalhoJogoDerrota(palavra, jogo);
 

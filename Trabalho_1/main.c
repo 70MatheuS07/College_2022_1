@@ -10,26 +10,79 @@
 
 int main()
 {
-    int modoJogo = 0;
+    int modoJogo = 0, jogou = 0, num = 0;
     char lixo;
 
-    tJogador *jogador;
+    tJogador *jogador_1;
     tPalavra *palavra;
     tArquivo *arquivo;
 
-    jogador = CriaJogador();
+    jogador_1 = CriaJogador();
     palavra = CriaPalavra();
-
-    LehJogador(jogador);
-
+    LehJogador(jogador_1);
     SorteiaPalavra(palavra);
-
     arquivo = CriaArmazenaPalavrasArquivo();
-
     ColetaPalavraDoArquivo(palavra, arquivo);
 
-    JogaJogo(jogador, palavra, arquivo);
+    while (1)
+    {
+        modoJogo = EscolhaDeModo(jogador_1);
 
+        if (modoJogo == 1)
+        {
+            JogaJogoSolo(jogador_1, palavra, arquivo);
+            jogou++;
+        }
+
+        else if (modoJogo == 2)
+        {
+            JogaJogoDupla(jogador_1, palavra, arquivo);
+            jogou++;
+        }
+
+        else if (modoJogo == 8)
+        {
+            // Ranking.
+        }
+
+        else if (modoJogo == 9)
+        {
+            // Estatisticas.
+        }
+
+        else if (modoJogo == 0)
+        {
+            if (jogou == 0)
+            {
+                printf("Voce ainda nao jogou nenhum modo, se sair agora tera seu current_steak zerado,\n");
+                printf("deseja continuar?\n\n");
+
+                printf("1- Continuar\n");
+                printf("2- Sair do Jogo\n\n");
+
+                scanf("%d", &num);
+
+                printf("\n");
+
+                if (num != 1 && num != 2)
+                {
+                    printf("Opcao invalida, tente outra dentro das opcoes: ");
+
+                    scanf("%d", &num);
+                }
+            }
+
+            if (num == 2)
+            {
+                break;
+            }
+
+            else
+            {
+                system("clear");
+            }
+        }
+    }
     LiberaJogador(jogador);
     LiberaPalavra(palavra);
     LiberaPalavrasArquivo(arquivo);
