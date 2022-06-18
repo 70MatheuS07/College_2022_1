@@ -23,7 +23,7 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
     InicializaPalavraClassificada(palavra);
 
-    for (i = 0; i < 6; i++)
+    while (1)
     {
         CabecalhoJogo(jogador, palavra, jogo, arquivo);
 
@@ -49,7 +49,7 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
     }
 }
 
-void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
+/*void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
     int i = 0;
@@ -88,7 +88,7 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
             break;
         }
     }
-}
+} */
 
 tJogo *InicializaJogadas()
 {

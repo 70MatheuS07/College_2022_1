@@ -9,6 +9,7 @@ struct tPalavra
     char *palavraAtual;
     char *palavraClassificada;
     int escolhida;
+    char *palavraAtualCopia;
 };
 
 tPalavra *CriaPalavra()
@@ -22,6 +23,7 @@ tPalavra *CriaPalavra()
     palavra->palavraCopia = malloc(sizeof(char) * 6);
     palavra->palavraAtual = malloc(sizeof(char) * 6);
     palavra->palavraClassificada = malloc(sizeof(char) * 22);
+    palavra->palavraAtualCopia = malloc(sizeof(char) * 6);
 
     return palavra;
 }
@@ -59,6 +61,9 @@ void LiberaPalavra(tPalavra *palavra)
     free(palavra->palavraAtual);
     palavra->palavraAtual = NULL;
 
+    free(palavra->palavraAtualCopia);
+    palavra->palavraAtualCopia = NULL;
+
     free(palavra->palavraClassificada);
     palavra->palavraClassificada = NULL;
 
@@ -79,9 +84,23 @@ void InicializaPalavraAtual(tPalavra *palavra)
 void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 {
     int i = 0;
-    char string[6];
+    char string[6], stringVerifica[10000];
 
-    scanf("%s", string);
+    while (1)
+    {
+        scanf("%s", stringVerifica);
+
+        if (strlen(stringVerifica) > 6)
+        {
+            printf("Palavra invalida, tente outra de tamanho cinco: ");
+        }
+
+        else
+        {
+            strcpy(string, stringVerifica);
+            break;
+        }
+    }
 
     strcpy(palavra->palavraAtual, string);
 }
@@ -89,52 +108,62 @@ void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 void ClassificaPalavra(tPalavra *palavra)
 {
     int i = 0, j = 0, cont = 0;
+
     char caracter;
+
+    CopiaPalavra(palavra);
 
     palavra->palavraClassificada[cont] = '|';
 
     for (i = 0; i < 5; i++)
     {
-        if (palavra->palavraAtual[i] == palavra->palavraColetada[i])
-        {
-            cont++;
-            palavra->palavraClassificada[cont] = ' ';
-            cont++;
-            palavra->palavraClassificada[cont] = palavra->palavraAtual[i];
-            cont++;
-            palavra->palavraClassificada[cont] = ' ';
-            cont++;
-            palavra->palavraClassificada[cont] = '|';
-
-            palavra->palavraCopia[i] = '*';
-        }
-
-        else if (NaoTemEssaLetraNaPalavra(palavra, i) == 1)
+        if (NaoTemEssaLetraNaPalavra(palavra, i) == 1)
         {
             cont++;
             palavra->palavraClassificada[cont] = '!';
             cont++;
-            palavra->palavraClassificada[cont] = palavra->palavraAtual[i];
+            palavra->palavraClassificada[cont] = palavra->palavraAtualCopia[i];
             cont++;
             palavra->palavraClassificada[cont] = ' ';
             cont++;
             palavra->palavraClassificada[cont] = '|';
+
+            palavra->palavraAtualCopia[i] = '0';
+        }
+
+        else if (palavra->palavraAtualCopia[i] == palavra->palavraCopia[i])
+        {
+            cont++;
+            palavra->palavraClassificada[cont] = ' ';
+            cont++;
+            palavra->palavraClassificada[cont] = palavra->palavraAtualCopia[i];
+            cont++;
+            palavra->palavraClassificada[cont] = ' ';
+            cont++;
+            palavra->palavraClassificada[cont] = '|';
+
+            palavra->palavraAtualCopia[i] = '0';
+            palavra->palavraCopia[i] = '0';
         }
 
         else
         {
             for (j = 0; j < 5; j++)
             {
-                if (palavra->palavraAtual[i] == palavra->palavraColetada[j])
+                if (palavra->palavraAtualCopia[i] == palavra->palavraCopia[j])
                 {
                     cont++;
                     palavra->palavraClassificada[cont] = '(';
                     cont++;
-                    palavra->palavraClassificada[cont] = palavra->palavraAtual[i];
+                    palavra->palavraClassificada[cont] = palavra->palavraAtualCopia[i];
                     cont++;
                     palavra->palavraClassificada[cont] = ')';
                     cont++;
                     palavra->palavraClassificada[cont] = '|';
+
+                    palavra->palavraCopia[j] = '0';
+
+                    break;
                 }
             }
         }
@@ -264,6 +293,7 @@ void CopiaPalavra(tPalavra *palavra)
     for (i = 0; i < 6; i++)
     {
         palavra->palavraCopia[i] = palavra->palavraColetada[i];
+        palavra->palavraAtualCopia[i] = palavra->palavraAtual[i];
 
         caracter = palavra->palavraCopia[i];
 

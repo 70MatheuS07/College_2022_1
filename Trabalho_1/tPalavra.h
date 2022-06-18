@@ -50,4 +50,8 @@ void CopiaStringParaPalavra(tPalavra *palavra, char string[6]);
 
 char CharPalavraAtual(tPalavra *palavra, int j);
 
+void DiminuiQuantidadeLetra(tPalavra *palavra, char caracter);
+
+void ContaQuantidadeLetra(tPalavra *palavra);
+
 #endif

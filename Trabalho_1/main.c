@@ -36,7 +36,7 @@ int main()
 
         else if (modoJogo == 2)
         {
-            JogaJogoDupla(jogador_1, palavra, arquivo);
+            // JogaJogoDupla(jogador_1, palavra, arquivo);
             jogou++;
         }
 
@@ -83,7 +83,7 @@ int main()
             }
         }
     }
-    LiberaJogador(jogador);
+    LiberaJogador(jogador_1);
     LiberaPalavra(palavra);
     LiberaPalavrasArquivo(arquivo);
 
