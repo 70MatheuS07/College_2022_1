@@ -31,8 +31,6 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
         if (AcertouPalavra(palavra) == 1)
         {
-            system("clear");
-
             CabecalhoJogoVitoria(palavra, jogo);
 
             break;
@@ -40,8 +38,6 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
         if (TentativasZeradas(jogo) == 1)
         {
-            system("clear");
-
             CabecalhoJogoDerrota(palavra, jogo);
 
             break;

@@ -72,17 +72,13 @@ int main()
                 }
             }
 
-            if (num == 2)
+            if (num == 2 || jogou > 0)
             {
                 break;
             }
-
-            else
-            {
-                system("clear");
-            }
         }
     }
+
     LiberaJogador(jogador_1);
     LiberaPalavra(palavra);
     LiberaPalavrasArquivo(arquivo);
