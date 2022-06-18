@@ -46,4 +46,8 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo);
 
 void ProximoJogador(tJogo *jogo);
 
+void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo);
+
+void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo);
+
 #endif

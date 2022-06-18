@@ -214,3 +214,96 @@ void ImprimeEspacosJogador2(tJogador *jogador_2)
         printf(" ");
     }
 }
+
+void ImprimeNomeJogador(tJogador *jogador)
+{
+    printf("%s", jogador->nome);
+}
+
+void RegistraQtdJogos(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->qtdJogos;
+
+    num += 1;
+
+    jogador->qtdJogos = num;
+}
+
+void RegistraGanhouUmaTentativa(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->ganhouUmaTentativa;
+
+    num += 1;
+
+    jogador->ganhouUmaTentativa = num;
+}
+
+void RegistraGanhouDuasTentativas(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->ganhouDuasTentativas;
+
+    num += 1;
+
+    jogador->ganhouDuasTentativas = num;
+}
+
+void RegistraGanhouTresTentativas(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->ganhouTresTentativas;
+
+    num += 1;
+
+    jogador->ganhouTresTentativas = num;
+}
+
+void RegistraGanhouQuatroTentativas(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->ganhouQuatroTentativas;
+
+    num += 1;
+
+    jogador->ganhouQuatroTentativas = num;
+}
+
+void RegistraGanhouCincoTentativas(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->ganhouCincoTentativas;
+
+    num += 1;
+
+    jogador->ganhouCincoTentativas = num;
+}
+
+void RegistraGanhouSeisTentativas(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->ganhouSeisTentativas;
+
+    num += 1;
+
+    jogador->ganhouSeisTentativas = num;
+}
+
+void RegistraQtdDerrotas(tJogador *jogador)
+{
+    int num = 0;
+
+    num = jogador->qtdDerrotas;
+
+    num += 1;
+
+    jogador->qtdDerrotas = num;
+}
