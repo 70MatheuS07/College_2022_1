@@ -83,6 +83,9 @@ void LiberaPalavrasArquivo(tArquivo *arquivo)
         arquivo->palavras[i] = NULL;
     }
 
+    free(arquivo->palavras);
+    arquivo->palavras = NULL;
+
     free(arquivo);
     arquivo = NULL;
 }

@@ -36,4 +36,6 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra);
 
 void ImprimeTecladoJogo(tJogo *jogo);
 
+void LiberaJogoSolo(tJogo *jogo);
+
 #endif

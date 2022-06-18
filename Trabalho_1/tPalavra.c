@@ -17,7 +17,7 @@ tPalavra *CriaPalavra()
     int i;
     tPalavra *palavra;
 
-    palavra = malloc(sizeof(tPalavra *));
+    palavra = malloc(sizeof(tPalavra));
 
     palavra->palavraColetada = malloc(sizeof(char) * 6);
     palavra->palavraCopia = malloc(sizeof(char) * 6);
@@ -254,7 +254,7 @@ void InicializaPalavraClassificada(tPalavra *palavra)
     palavra->palavraClassificada[20] = '|';
     palavra->palavraClassificada[21] = '\0';
 
-    printf("\n\n%s\n\n", palavra->palavraClassificada);
+    printf("\n%s\n", palavra->palavraClassificada);
 }
 
 int AcertouPalavra(tPalavra *palavra)

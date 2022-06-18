@@ -43,6 +43,8 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
             break;
         }
     }
+
+    LiberaJogoSolo(jogo);
 }
 
 /*void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
@@ -327,4 +329,13 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
             }
         }
     }
+}
+
+void LiberaJogoSolo(tJogo *jogo)
+{
+    free(jogo->teclado);
+    jogo->teclado = NULL;
+
+    free(jogo);
+    jogo = NULL;
 }
