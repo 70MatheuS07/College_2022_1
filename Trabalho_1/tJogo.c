@@ -202,7 +202,7 @@ int TentativasZeradas(tJogo *jogo)
 void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
-    printf("| ########################## WIN ########################## |\n");
+    printf("| ######################### W I N ######################### |\n");
     printf("|                                                           |\n");
     printf("|                                                           |\n");
 
@@ -223,7 +223,7 @@ void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo)
 void CabecalhoJogoDerrota(tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
-    printf("| ######################### LOSER ######################### |\n");
+    printf("| ######################## L O S E ######################## |\n");
     printf("|                                                           |\n");
     printf("|                                                           |\n");
 
