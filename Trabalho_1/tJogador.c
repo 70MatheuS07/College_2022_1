@@ -308,50 +308,40 @@ void RegistraQtdDerrotas(tJogador *jogador)
     jogador->qtdDerrotas = num;
 }
 
+// Problema com o arquivo binario!
 void EscreveLehEstatistica(tJogador *jogador)
 {
     int cont = 0, i = 0;
     tJogador *lido;
     lido = CriaJogador();
 
-    FILE *estatistica;
+    FILE *estatistica = NULL;
 
-    estatistica = fopen("jogadores.bin", "rb");
+    estatistica = fopen("jogadores.bin", "ab");
 
-    if (estatistica)
+    while (!feof(estatistica))
     {
-        do
+        fread(lido, sizeof(tJogador), 1, estatistica);
+
+        if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
         {
-            fread(lido, sizeof(tJogador), 1, estatistica);
-
-            if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
-            {
-                ModificaJogadorEstatistica(jogador, lido);
-                cont++;
-                break;
-            }
-
-            i++;
-
-        } while (!feof(estatistica));
-
-        if (cont == 0)
-        {
-            EscreveJogadorEstatistica(jogador, estatistica);
+            ModificaJogadorEstatistica(jogador, lido);
+            cont++;
+            break;
         }
 
-        else
-        {
-            fseek(estatistica, i * sizeof(tJogador), SEEK_SET);
-            fwrite(lido, sizeof(tJogador), 1, estatistica);
-        }
+        i++;
+    }
+
+    if (cont == 0)
+    {
+        EscreveJogadorEstatistica(jogador, estatistica);
     }
 
     else
     {
-        estatistica = fopen("jogadores.bin", "ab");
-
-        EscreveJogadorEstatistica(jogador, estatistica);
+        fseek(estatistica, i * sizeof(tJogador), SEEK_SET);
+        fwrite(lido, sizeof(tJogador), 1, estatistica);
     }
 
     fclose(estatistica);
