@@ -19,7 +19,7 @@ int main()
 
     jogador_1 = CriaJogador();
     palavra = CriaPalavra();
-    LehJogador(jogador_1);
+    LehJogador_1(jogador_1);
     SorteiaPalavra(palavra);
     arquivo = CriaArmazenaPalavrasArquivo();
     ColetaPalavraDoArquivo(palavra, arquivo);
@@ -36,7 +36,7 @@ int main()
 
         else if (modoJogo == 2)
         {
-            // JogaJogoDupla(jogador_1, palavra, arquivo);
+            JogaJogoDupla(jogador_1, palavra, arquivo);
             jogou++;
         }
 

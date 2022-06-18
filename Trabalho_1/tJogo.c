@@ -6,12 +6,12 @@ struct tJogo
 {
     char *teclado;
     int tentativas;
+    int quemJoga;
 };
 
 void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
-    int i = 0;
 
     jogo = InicializaJogadas();
 
@@ -47,10 +47,13 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
     LiberaJogoSolo(jogo);
 }
 
-/*void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
+void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
-    int i = 0;
+    tJogador *jogador_2;
+
+    jogador_2 = CriaJogador();
+    LehJogador_2(jogador_1, jogador_2);
 
     jogo = InicializaJogadas();
 
@@ -62,9 +65,11 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
     InicializaPalavraClassificada(palavra);
 
-    for (i = 0; i < 6; i++)
+    RandomizaQuemComeca(jogo);
+
+    while (1)
     {
-        CabecalhoJogo(jogador, palavra, jogo, arquivo);
+        CabecalhoJogoDupla(jogador_1, jogador_2, palavra, jogo, arquivo);
 
         ClassificaPalavra(palavra);
 
@@ -86,7 +91,7 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
             break;
         }
     }
-} */
+}
 
 tJogo *InicializaJogadas()
 {
@@ -144,6 +149,78 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *
     ReduzTentativasRestantes(jogo);
 
     AlteraTeclado(jogo, palavra);
+}
+
+void CabecalhoJogoDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo)
+{
+    printf("+-----------------------------------------------------------+\n");
+    printf("| ###################### TERMO DUPLA ###################### |\n");
+    printf("|                                                           |\n");
+
+    ImprimeAmbosJogadores(jogador_1, jogador_2);
+
+    printf("|                                                           |\n");
+
+    ImprimePalavraClassificada(palavra);
+
+    printf("|                                                           |\n");
+    printf("|                                                           |\n");
+
+    ImprimeTentativasRestantes(jogo);
+
+    printf("|                                                           |\n");
+
+    ImprimeTecladoJogo(jogo);
+
+    printf("+-----------------------------------------------------------+\n\n");
+
+    if (jogo->quemJoga == 1)
+    {
+        ImprimeNomeJogadorCabecalho(jogador_1);
+    }
+
+    else
+    {
+        ImprimeNomeJogadorCabecalho(jogador_2);
+    }
+
+    while (1)
+    {
+        LehPalavraEscolhidaPeloJogador(palavra);
+
+        if (PalavraExiste(palavra, arquivo) == 1)
+        {
+            break;
+        }
+
+        else
+        {
+            printf("\nNão existe essa palavra, tente outra: ");
+        }
+    }
+
+    PadronizaPalavra(palavra);
+
+    ReduzTentativasRestantes(jogo);
+
+    AlteraTeclado(jogo, palavra);
+
+    ProximoJogador(jogo);
+}
+
+void ProximoJogador(tJogo *jogo)
+{
+    int um = 1, dois = 2;
+
+    if (jogo->quemJoga == 1)
+    {
+        jogo->quemJoga = dois;
+    }
+
+    else
+    {
+        jogo->quemJoga = um;
+    }
 }
 
 int PalavraExiste(tPalavra *palavra, tArquivo *arquivo)
@@ -338,4 +415,17 @@ void LiberaJogoSolo(tJogo *jogo)
 
     free(jogo);
     jogo = NULL;
+}
+
+void RandomizaQuemComeca(tJogo *jogo)
+{
+    int num = 0;
+
+    srand((unsigned)time(NULL));
+
+    num = 1 + (rand() % 2);
+
+    jogo->quemJoga = num;
+
+    printf("\n\nQuem comeca: %d\n\n", jogo->quemJoga);
 }

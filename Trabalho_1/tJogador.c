@@ -27,7 +27,7 @@ tJogador *CriaJogador()
     return jogador;
 }
 
-void LehJogador(tJogador *jogador)
+void LehJogador_1(tJogador *jogador_1)
 {
     int i = 0, cont = 0;
     char caracter;
@@ -55,7 +55,87 @@ void LehJogador(tJogador *jogador)
 
     printf("%s", nome);
 
-    strcpy(jogador->nome, nome);
+    strcpy(jogador_1->nome, nome);
+
+    jogador_1->qtdJogos = 0;
+    jogador_1->porcentagemVitorias = 0;
+    jogador_1->sequenciaVitorias = 0;
+    jogador_1->maiorSequenciaVitorias = 0;
+    jogador_1->ganhouUmaTentativa = 0;
+    jogador_1->ganhouDuasTentativas = 0;
+    jogador_1->ganhouTresTentativas = 0;
+    jogador_1->ganhouQuatroTentativas = 0;
+    jogador_1->ganhouCincoTentativas = 0;
+    jogador_1->ganhouSeisTentativas = 0;
+    jogador_1->qtdDerrotas = 0;
+}
+
+void LehJogador_2(tJogador *jogador_1, tJogador *jogador_2)
+{
+    int i = 0, cont = 0;
+    char caracter;
+    char nome[21], nomeVerifica[10000];
+
+    for (i = 0; i < 21; i++)
+    {
+        nome[i] = '\0';
+    }
+
+    for (i = 0; i < 10000; i++)
+    {
+        nomeVerifica[i] = '\0';
+    }
+
+    printf("Informe o nome do jogador 2\n\n");
+
+    printf("Nome: ");
+
+    while (1)
+    {
+        scanf("%s", nomeVerifica);
+
+        if (strlen(nomeVerifica) > 21)
+        {
+            printf("Nome invalido, tente outro menor: ");
+        }
+
+        else if (NomesIguais(jogador_1, nomeVerifica) == 0)
+        {
+            printf("Nomes iguais, escolha outro nickname: ");
+        }
+
+        else
+        {
+            strcpy(nome, nomeVerifica);
+            break;
+        }
+    }
+
+    printf("%s", nome);
+
+    strcpy(jogador_2->nome, nome);
+
+    jogador_2->qtdJogos = 0;
+    jogador_2->porcentagemVitorias = 0;
+    jogador_2->sequenciaVitorias = 0;
+    jogador_2->maiorSequenciaVitorias = 0;
+    jogador_2->ganhouUmaTentativa = 0;
+    jogador_2->ganhouDuasTentativas = 0;
+    jogador_2->ganhouTresTentativas = 0;
+    jogador_2->ganhouQuatroTentativas = 0;
+    jogador_2->ganhouCincoTentativas = 0;
+    jogador_2->ganhouSeisTentativas = 0;
+    jogador_2->qtdDerrotas = 0;
+}
+
+int NomesIguais(tJogador *jogador_1, char nomeVerifica[10000])
+{
+    if (strcmp(jogador_1->nome, nomeVerifica) == 0)
+    {
+        return 0;
+    }
+
+    return 1;
 }
 
 int EscolhaDeModo(tJogador *jogador)
@@ -96,4 +176,41 @@ void LiberaJogador(tJogador *jogador)
 void ImprimeNomeJogadorCabecalho(tJogador *jogador)
 {
     printf(" Jogador %s digite uma palavra a sua escolha: ", jogador->nome);
+}
+
+void ImprimeAmbosJogadores(tJogador *jogador_1, tJogador *jogador_2)
+{
+    printf("|");
+
+    ImprimeEspacosJogador1(jogador_1);
+
+    printf("%s x %s", jogador_1->nome, jogador_2->nome);
+
+    ImprimeEspacosJogador2(jogador_2);
+
+    printf("|\n");
+}
+
+void ImprimeEspacosJogador1(tJogador *jogador_1)
+{
+    int num = 0, i = 0;
+
+    num = strlen(jogador_1->nome);
+
+    for (i = 0; i < 28 - num; i++)
+    {
+        printf(" ");
+    }
+}
+
+void ImprimeEspacosJogador2(tJogador *jogador_2)
+{
+    int num = 0, i = 0;
+
+    num = strlen(jogador_2->nome);
+
+    for (i = 0; i < 28 - num; i++)
+    {
+        printf(" ");
+    }
 }

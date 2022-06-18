@@ -38,4 +38,12 @@ void ImprimeTecladoJogo(tJogo *jogo);
 
 void LiberaJogoSolo(tJogo *jogo);
 
+void RandomizaQuemComeca(tJogo *jogo);
+
+void CabecalhoJogoDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo);
+
+void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo);
+
+void ProximoJogador(tJogo *jogo);
+
 #endif
