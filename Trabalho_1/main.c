@@ -12,6 +12,7 @@ int main()
 {
     int modoJogo = 0, jogou = 0, num = 0;
     char lixo;
+    char nomeSalvo[21];
 
     tJogador *jogador_1;
     tPalavra *palavra;
@@ -26,6 +27,10 @@ int main()
 
     while (1)
     {
+        SalvaNome(jogador_1, nomeSalvo, jogou);
+
+        InicializaJogador(jogador_1);
+
         modoJogo = EscolhaDeModo(jogador_1);
 
         if (modoJogo == 1)

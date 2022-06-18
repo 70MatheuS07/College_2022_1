@@ -26,9 +26,11 @@ void ReduzTentativasRestantes(tJogo *jogadas);
 
 int TentativasZeradas(tJogo *jogadas);
 
-void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo);
+void CabecalhoJogoVitoriaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo);
 
-void CabecalhoJogoDerrota(tPalavra *palavra, tJogo *jogo);
+void CabecalhoJogoDerrotaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo);
+
+void CabecalhoJogoDerrotaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo);
 
 void InicializaTeclado(tJogo *jogo);
 
@@ -36,7 +38,7 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra);
 
 void ImprimeTecladoJogo(tJogo *jogo);
 
-void LiberaJogoSolo(tJogo *jogo);
+void LiberaJogo(tJogo *jogo);
 
 void RandomizaQuemComeca(tJogo *jogo);
 
@@ -49,5 +51,7 @@ void ProximoJogador(tJogo *jogo);
 void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo);
 
 void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo);
+
+void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *jogo);
 
 #endif

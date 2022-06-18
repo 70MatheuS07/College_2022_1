@@ -45,4 +45,18 @@ void RegistraGanhouSeisTentativas(tJogador *jogador);
 
 void RegistraQtdDerrotas(tJogador *jogador);
 
+void EscreveLehEstatistica(tJogador *jogador);
+
+int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *lido);
+
+void EscreveJogadorEstatistica(tJogador *jogador, FILE *estatistica);
+
+void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido);
+
+void ImprimeEstatisticaJogador(tJogador *jogador);
+
+void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou);
+
+void InicializaJogador(tJogador *jogador);
+
 #endif

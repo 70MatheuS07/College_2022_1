@@ -307,3 +307,228 @@ void RegistraQtdDerrotas(tJogador *jogador)
 
     jogador->qtdDerrotas = num;
 }
+
+void EscreveLehEstatistica(tJogador *jogador)
+{
+    int cont = 0, i = 0;
+    tJogador *lido;
+    lido = CriaJogador();
+
+    FILE *estatistica;
+
+    estatistica = fopen("jogadores.bin", "rb");
+
+    if (estatistica)
+    {
+        do
+        {
+            fread(lido, sizeof(tJogador), 1, estatistica);
+
+            if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
+            {
+                ModificaJogadorEstatistica(jogador, lido);
+                cont++;
+                break;
+            }
+
+            i++;
+
+        } while (!feof(estatistica));
+
+        if (cont == 0)
+        {
+            EscreveJogadorEstatistica(jogador, estatistica);
+        }
+
+        else
+        {
+            fseek(estatistica, i * sizeof(tJogador), SEEK_SET);
+            fwrite(lido, sizeof(tJogador), 1, estatistica);
+        }
+    }
+
+    else
+    {
+        estatistica = fopen("jogadores.bin", "ab");
+
+        EscreveJogadorEstatistica(jogador, estatistica);
+    }
+
+    fclose(estatistica);
+
+    LiberaJogador(lido);
+}
+
+int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *lido)
+{
+    if (strcmp(jogador->nome, lido->nome) == 0)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+void EscreveJogadorEstatistica(tJogador *jogador, FILE *estatistica)
+{
+    float porcentagemVitorias = 0;
+    int sequenciaVitorias = 0;
+    int maiorSequenciaVitorias = 0;
+
+    if (jogador->qtdDerrotas == 0)
+    {
+        sequenciaVitorias++;
+        maiorSequenciaVitorias = sequenciaVitorias;
+        porcentagemVitorias = 100;
+
+        jogador->sequenciaVitorias = sequenciaVitorias;
+        jogador->maiorSequenciaVitorias = maiorSequenciaVitorias;
+        jogador->porcentagemVitorias = porcentagemVitorias;
+    }
+
+    fwrite(jogador, sizeof(tJogador), 1, estatistica);
+}
+
+void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
+{
+    int qtdJogos = 0;
+    float porcentagemVitorias = 0;
+    int sequenciaVitorias = 0;
+    int maiorSequenciaVitorias = 0;
+    int ganhouUmaTentativa = 0;
+    int ganhouDuasTentativas = 0;
+    int ganhouTresTentativas = 0;
+    int ganhouQuatroTentativas = 0;
+    int ganhouCincoTentativas = 0;
+    int ganhouSeisTentativas = 0;
+    int qtdDerrotas = 0;
+
+    float vitorias = 0;
+    float resultado = 0;
+
+    qtdJogos = lido->qtdJogos;
+    porcentagemVitorias = lido->porcentagemVitorias;
+    sequenciaVitorias = lido->maiorSequenciaVitorias;
+    maiorSequenciaVitorias = lido->maiorSequenciaVitorias;
+    ganhouUmaTentativa = lido->ganhouUmaTentativa;
+    ganhouDuasTentativas = lido->ganhouDuasTentativas;
+    ganhouTresTentativas = lido->ganhouTresTentativas;
+    ganhouQuatroTentativas = lido->ganhouQuatroTentativas;
+    ganhouCincoTentativas = lido->ganhouCincoTentativas;
+    ganhouSeisTentativas = lido->ganhouSeisTentativas;
+    qtdDerrotas = lido->qtdDerrotas;
+
+    qtdJogos += jogador->qtdJogos;
+
+    if (jogador->qtdDerrotas == 0)
+    {
+        sequenciaVitorias++;
+    }
+
+    else
+    {
+        sequenciaVitorias = 0;
+    }
+
+    ganhouUmaTentativa += jogador->ganhouUmaTentativa;
+    ganhouDuasTentativas += jogador->ganhouDuasTentativas;
+    ganhouTresTentativas += jogador->ganhouTresTentativas;
+    ganhouQuatroTentativas += jogador->ganhouQuatroTentativas;
+    ganhouCincoTentativas += jogador->ganhouCincoTentativas;
+    ganhouSeisTentativas += jogador->ganhouSeisTentativas;
+    qtdDerrotas += jogador->qtdDerrotas;
+
+    vitorias = (ganhouUmaTentativa + ganhouDuasTentativas + ganhouTresTentativas + ganhouQuatroTentativas + ganhouCincoTentativas + ganhouSeisTentativas);
+
+    porcentagemVitorias = (float)((vitorias / qtdJogos) * 100);
+
+    lido->qtdJogos = qtdJogos;
+    lido->porcentagemVitorias = porcentagemVitorias;
+    lido->maiorSequenciaVitorias = sequenciaVitorias;
+    lido->maiorSequenciaVitorias = maiorSequenciaVitorias;
+    lido->ganhouUmaTentativa = ganhouUmaTentativa;
+    lido->ganhouDuasTentativas = ganhouDuasTentativas;
+    lido->ganhouTresTentativas = ganhouTresTentativas;
+    lido->ganhouQuatroTentativas = ganhouQuatroTentativas;
+    lido->ganhouCincoTentativas = ganhouCincoTentativas;
+    lido->ganhouSeisTentativas = ganhouSeisTentativas;
+    lido->qtdDerrotas = qtdDerrotas;
+}
+
+void ImprimeEstatisticaJogador(tJogador *jogador)
+{
+    tJogador *lido;
+    lido = CriaJogador();
+
+    FILE *estatistica;
+
+    estatistica = fopen("jogadores.bin", "rb");
+
+    do
+    {
+        fread(lido, sizeof(tJogador), 1, estatistica);
+
+        if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
+        {
+            printf("%s, ", lido->nome);
+            printf("%d, ", lido->qtdJogos);
+            printf("%.2f, ", lido->porcentagemVitorias);
+            printf("%d, ", lido->sequenciaVitorias);
+            printf("%d\n", lido->maiorSequenciaVitorias);
+            printf("%d\n", lido->ganhouUmaTentativa);
+            printf("%d\n", lido->ganhouDuasTentativas);
+            printf("%d\n", lido->ganhouTresTentativas);
+            printf("%d\n", lido->ganhouQuatroTentativas);
+            printf("%d\n", lido->ganhouCincoTentativas);
+            printf("%d\n", lido->ganhouSeisTentativas);
+            printf("%d\n\n", lido->qtdDerrotas);
+
+            break;
+        }
+
+    } while (!feof(estatistica));
+
+    fclose(estatistica);
+
+    LiberaJogador(lido);
+}
+
+void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou)
+{
+    if (jogou == 0)
+    {
+        strcpy(nomeSalvo, jogador->nome);
+    }
+
+    else
+    {
+        strcpy(jogador->nome, nomeSalvo);
+    }
+}
+
+void InicializaJogador(tJogador *jogador)
+{
+    int qtdJogos = 0;
+    float porcentagemVitorias = 0;
+    int sequenciaVitorias = 0;
+    int maiorSequenciaVitorias = 0;
+    int ganhouUmaTentativa = 0;
+    int ganhouDuasTentativas = 0;
+    int ganhouTresTentativas = 0;
+    int ganhouQuatroTentativas = 0;
+    int ganhouCincoTentativas = 0;
+    int ganhouSeisTentativas = 0;
+    int qtdDerrotas = 0;
+
+    jogador->qtdJogos = qtdJogos;
+    jogador->porcentagemVitorias = porcentagemVitorias;
+    jogador->sequenciaVitorias = sequenciaVitorias;
+    jogador->maiorSequenciaVitorias = maiorSequenciaVitorias;
+    jogador->ganhouUmaTentativa = ganhouUmaTentativa;
+    jogador->ganhouDuasTentativas = ganhouDuasTentativas;
+    jogador->ganhouTresTentativas = ganhouTresTentativas;
+    jogador->ganhouQuatroTentativas = ganhouQuatroTentativas;
+    jogador->ganhouCincoTentativas = ganhouCincoTentativas;
+    jogador->ganhouSeisTentativas = ganhouSeisTentativas;
+    jogador->qtdDerrotas = qtdDerrotas;
+}

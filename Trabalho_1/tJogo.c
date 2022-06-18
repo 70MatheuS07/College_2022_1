@@ -32,7 +32,9 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
         if (AcertouPalavra(palavra) == 1)
         {
             RegistraEstatisticaSolo(jogador, jogo);
-            CabecalhoJogoVitoria(palavra, jogo);
+            CabecalhoJogoVitoriaSolo(jogador, palavra, jogo);
+            EscreveLehEstatistica(jogador);
+            ImprimeEstatisticaJogador(jogador);
 
             break;
         }
@@ -40,13 +42,15 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
         if (TentativasZeradas(jogo) == 1)
         {
             RegistraEstatisticaSolo(jogador, jogo);
-            CabecalhoJogoDerrota(palavra, jogo);
+            CabecalhoJogoDerrotaSolo(jogador, palavra, jogo);
+            EscreveLehEstatistica(jogador);
+            ImprimeEstatisticaJogador(jogador);
 
             break;
         }
     }
 
-    LiberaJogoSolo(jogo);
+    LiberaJogo(jogo);
 }
 
 void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
@@ -77,18 +81,31 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 
         if (AcertouPalavra(palavra) == 1)
         {
+            RegistraEstatisticaDupla(jogador_1, jogador_2, jogo);
             CabecalhoJogoVitoriaDupla(jogador_1, jogador_2, palavra, jogo);
+            EscreveLehEstatistica(jogador_1);
+            EscreveLehEstatistica(jogador_2);
+            ImprimeEstatisticaJogador(jogador_1);
+            ImprimeEstatisticaJogador(jogador_2);
 
             break;
         }
 
         if (TentativasZeradas(jogo) == 1)
         {
-            CabecalhoJogoDerrota(palavra, jogo);
+            RegistraEstatisticaDupla(jogador_1, jogador_2, jogo);
+            CabecalhoJogoDerrotaDupla(jogador_1, jogador_2, palavra, jogo);
+            EscreveLehEstatistica(jogador_1);
+            EscreveLehEstatistica(jogador_2);
+            ImprimeEstatisticaJogador(jogador_1);
+            ImprimeEstatisticaJogador(jogador_2);
 
             break;
         }
     }
+
+    LiberaJogador(jogador_2);
+    LiberaJogo(jogo);
 }
 
 tJogo *InicializaJogadas()
@@ -272,7 +289,7 @@ int TentativasZeradas(tJogo *jogo)
     return 0;
 }
 
-void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo)
+void CabecalhoJogoVitoriaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
     printf("| ######################### W I N ######################### |\n");
@@ -291,6 +308,9 @@ void CabecalhoJogoVitoria(tPalavra *palavra, tJogo *jogo)
     ImprimeTecladoJogo(jogo);
 
     printf("+-----------------------------------------------------------+\n\n");
+
+    ImprimeNomeJogador(jogador);
+    printf(" venceu!\n\n");
 }
 
 void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo)
@@ -326,7 +346,7 @@ void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavr
     }
 }
 
-void CabecalhoJogoDerrota(tPalavra *palavra, tJogo *jogo)
+void CabecalhoJogoDerrotaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
     printf("| ######################## L O S E ######################## |\n");
@@ -345,6 +365,38 @@ void CabecalhoJogoDerrota(tPalavra *palavra, tJogo *jogo)
     ImprimeTecladoJogo(jogo);
 
     printf("+-----------------------------------------------------------+\n\n");
+
+    ImprimeNomeJogador(jogador);
+    printf(" perdeu!\n\n");
+}
+
+void CabecalhoJogoDerrotaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo)
+{
+    printf("+-----------------------------------------------------------+\n");
+    printf("| ######################## L O S E ######################## |\n");
+    printf("|                                                           |\n");
+
+    ImprimeAmbosJogadores(jogador_1, jogador_2);
+
+    printf("|                                                           |\n");
+
+    ImprimePalavraClassificada(palavra);
+
+    printf("|                                                           |\n");
+    printf("|                                                           |\n");
+
+    ImprimeTentativasRestantes(jogo);
+
+    printf("|                                                           |\n");
+
+    ImprimeTecladoJogo(jogo);
+
+    printf("+-----------------------------------------------------------+\n\n");
+
+    ImprimeNomeJogador(jogador_1);
+    printf(" e ");
+    ImprimeNomeJogador(jogador_2);
+    printf(" perderam!\n\n");
 }
 
 void ImprimeTecladoJogo(tJogo *jogo)
@@ -439,7 +491,7 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
     }
 }
 
-void LiberaJogoSolo(tJogo *jogo)
+void LiberaJogo(tJogo *jogo)
 {
     free(jogo->teclado);
     jogo->teclado = NULL;
@@ -459,15 +511,6 @@ void RandomizaQuemComeca(tJogo *jogo)
     jogo->quemJoga = num;
 
     printf("\n\nQuem comeca: %d\n\n", jogo->quemJoga);
-}
-
-int PegaTentaivasJogo(tJogo *jogo)
-{
-    int num;
-
-    num = jogo->tentativas;
-
-    return num;
 }
 
 void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo)
@@ -507,5 +550,89 @@ void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo)
     else
     {
         RegistraQtdDerrotas(jogador);
+    }
+}
+
+void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *jogo)
+{
+    RegistraQtdJogos(jogador_1);
+    RegistraQtdJogos(jogador_2);
+
+    if (jogo->quemJoga == 1)
+    {
+        if (6 - jogo->tentativas == 1)
+        {
+            RegistraGanhouUmaTentativa(jogador_2);
+        }
+
+        else if (6 - jogo->tentativas == 2)
+        {
+            RegistraGanhouDuasTentativas(jogador_2);
+        }
+
+        else if (6 - jogo->tentativas == 3)
+        {
+            RegistraGanhouTresTentativas(jogador_2);
+        }
+
+        else if (6 - jogo->tentativas == 3)
+        {
+            RegistraGanhouQuatroTentativas(jogador_2);
+        }
+
+        else if (6 - jogo->tentativas == 4)
+        {
+            RegistraGanhouCincoTentativas(jogador_2);
+        }
+
+        else if (6 - jogo->tentativas == 5)
+        {
+            RegistraGanhouSeisTentativas(jogador_2);
+        }
+
+        else
+        {
+            RegistraQtdDerrotas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
+        }
+    }
+
+    else
+    {
+        if (6 - jogo->tentativas == 1)
+        {
+            RegistraGanhouUmaTentativa(jogador_1);
+        }
+
+        else if (6 - jogo->tentativas == 2)
+        {
+            RegistraGanhouDuasTentativas(jogador_1);
+        }
+
+        else if (6 - jogo->tentativas == 3)
+        {
+            RegistraGanhouTresTentativas(jogador_1);
+        }
+
+        else if (6 - jogo->tentativas == 3)
+        {
+            RegistraGanhouQuatroTentativas(jogador_1);
+        }
+
+        else if (6 - jogo->tentativas == 4)
+        {
+            RegistraGanhouCincoTentativas(jogador_1);
+        }
+
+        else if (6 - jogo->tentativas == 5)
+        {
+            RegistraGanhouSeisTentativas(jogador_1);
+        }
+
+        else
+        {
+            RegistraQtdDerrotas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
+        }
     }
 }
