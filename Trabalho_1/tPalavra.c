@@ -52,8 +52,8 @@ void ImprimePalavra(tPalavra *palavra)
 void LiberaPalavra(tPalavra *palavra)
 {
     // Esse free da double free or corruption (out)!
-    /*free(palavra->palavraColetada);
-    palavra->palavraColetada = NULL;*/
+    free(palavra->palavraColetada);
+    palavra->palavraColetada = NULL;
 
     free(palavra->palavraCopia);
     palavra->palavraCopia = NULL;
