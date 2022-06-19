@@ -211,7 +211,7 @@ int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
         }
     }
 
-    if (cont == 1)
+    if (cont >= 1)
     {
         return 0;
     }

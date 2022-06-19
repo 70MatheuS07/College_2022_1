@@ -311,13 +311,13 @@ void RegistraQtdDerrotas(tJogador *jogador)
 // Problema com o arquivo binario!
 void EscreveLehEstatistica(tJogador *jogador)
 {
-    int cont = 0, i = 0;
+    int cont = 0, i = 1;
     tJogador *lido;
     lido = CriaJogador();
 
     FILE *estatistica = NULL;
 
-    estatistica = fopen("jogadores.bin", "ab");
+    estatistica = fopen("jogadores.bin", "a+b");
 
     while (!feof(estatistica))
     {
@@ -340,8 +340,10 @@ void EscreveLehEstatistica(tJogador *jogador)
 
     else
     {
-        fseek(estatistica, i * sizeof(tJogador), SEEK_SET);
-        fwrite(lido, sizeof(tJogador), 1, estatistica);
+        if (fseek(estatistica, i * sizeof(tJogador), SEEK_SET) == 0)
+        {
+            fwrite(lido, sizeof(tJogador), 1, estatistica);
+        }
     }
 
     fclose(estatistica);
@@ -454,7 +456,7 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
 
     estatistica = fopen("jogadores.bin", "rb");
 
-    do
+    while (!feof(estatistica))
     {
         fread(lido, sizeof(tJogador), 1, estatistica);
 
@@ -475,8 +477,7 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
 
             break;
         }
-
-    } while (!feof(estatistica));
+    }
 
     fclose(estatistica);
 
