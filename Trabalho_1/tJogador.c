@@ -311,7 +311,7 @@ void RegistraQtdDerrotas(tJogador *jogador)
 // Problema com o arquivo binario!
 void EscreveLehEstatistica(tJogador *jogador)
 {
-    int cont = 0, i = 1;
+    int cont = 0, i = 0;
     tJogador *lido;
     lido = CriaJogador();
 
@@ -449,8 +449,8 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
 
 void ImprimeEstatisticaJogador(tJogador *jogador)
 {
-    tJogador *lido;
-    lido = CriaJogador();
+    tJogador *leitura;
+    leitura = CriaJogador();
 
     FILE *estatistica;
 
@@ -458,22 +458,22 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
 
     while (!feof(estatistica))
     {
-        fread(lido, sizeof(tJogador), 1, estatistica);
+        fread(leitura, sizeof(tJogador), 1, estatistica);
 
-        if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
+        if (ConfereNomeJogadorEstatistica(jogador, leitura) == 0)
         {
-            printf("%s, ", lido->nome);
-            printf("%d, ", lido->qtdJogos);
-            printf("%.2f, ", lido->porcentagemVitorias);
-            printf("%d, ", lido->sequenciaVitorias);
-            printf("%d\n", lido->maiorSequenciaVitorias);
-            printf("%d\n", lido->ganhouUmaTentativa);
-            printf("%d\n", lido->ganhouDuasTentativas);
-            printf("%d\n", lido->ganhouTresTentativas);
-            printf("%d\n", lido->ganhouQuatroTentativas);
-            printf("%d\n", lido->ganhouCincoTentativas);
-            printf("%d\n", lido->ganhouSeisTentativas);
-            printf("%d\n\n", lido->qtdDerrotas);
+            printf("%s, ", leitura->nome);
+            printf("%d, ", leitura->qtdJogos);
+            printf("%.2f, ", leitura->porcentagemVitorias);
+            printf("%d, ", leitura->sequenciaVitorias);
+            printf("%d\n", leitura->maiorSequenciaVitorias);
+            printf("%d\n", leitura->ganhouUmaTentativa);
+            printf("%d\n", leitura->ganhouDuasTentativas);
+            printf("%d\n", leitura->ganhouTresTentativas);
+            printf("%d\n", leitura->ganhouQuatroTentativas);
+            printf("%d\n", leitura->ganhouCincoTentativas);
+            printf("%d\n", leitura->ganhouSeisTentativas);
+            printf("%d\n\n", leitura->qtdDerrotas);
 
             break;
         }
@@ -481,7 +481,7 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
 
     fclose(estatistica);
 
-    LiberaJogador(lido);
+    LiberaJogador(leitura);
 }
 
 void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou)
