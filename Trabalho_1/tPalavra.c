@@ -28,14 +28,14 @@ tPalavra *CriaPalavra()
     return palavra;
 }
 
-void SorteiaPalavra(tPalavra *palavra, int jogou)
+void SorteiaPalavra(tPalavra *palavra, int i)
 {
     int tempo = 0;
     int escolhida = 0;
 
     tempo = PegaTempo();
 
-    srand(tempo + jogou);
+    srand(tempo + i);
 
     escolhida = rand() % QTD_PALAVRAS - 1;
 
@@ -346,4 +346,38 @@ char CharPalavraAtual(tPalavra *palavra, int j)
 
 int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
 {
+    tPalavra *palavraLida;
+
+    palavraLida = CriaPalavra();
+
+    FILE *registrador;
+
+    registrador = fopen("palavrasUsadas.txt", "ab+");
+
+    while (!feof(registrador))
+    {
+        fread(palavraLida->palavraColetada, sizeof(char) * 6, 1, registrador);
+
+        if (strcmp(palavraLida->palavraColetada, palavra->palavraColetada) == 0)
+        {
+            return 0;
+        }
+    }
+
+    fclose(registrador);
+
+    LiberaPalavra(palavraLida);
+
+    return 1;
+}
+
+void RegistraPalavraNoArquivo(tPalavra *palavra)
+{
+    FILE *registrador;
+
+    registrador = fopen("palavrasUsadas.txt", "ab+");
+
+    fwrite(palavra->palavraColetada, sizeof(char) * 6, 1, registrador);
+
+    fclose(registrador);
 }

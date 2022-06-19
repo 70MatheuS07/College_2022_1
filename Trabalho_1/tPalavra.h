@@ -12,7 +12,7 @@ typedef struct tPalavra tPalavra;
 
 tPalavra *CriaPalavra();
 
-void SorteiaPalavra(tPalavra *palavra, int jogou);
+void SorteiaPalavra(tPalavra *palavra, int i);
 
 void ImprimePalavra(tPalavra *palavra);
 
@@ -53,5 +53,9 @@ char CharPalavraAtual(tPalavra *palavra, int j);
 void DiminuiQuantidadeLetra(tPalavra *palavra, char caracter);
 
 void ContaQuantidadeLetra(tPalavra *palavra);
+
+int NaoFoiSorteadoEssaPalavra(tPalavra *palavra);
+
+void RegistraPalavraNoArquivo(tPalavra *palavra);
 
 #endif

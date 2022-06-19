@@ -10,7 +10,7 @@
 
 int main()
 {
-    int modoJogo = 0, jogou = 0, num = 0;
+    int modoJogo = 0, jogou = 0, num = 0, i = 0;
     char lixo;
     char nomeSalvo[21];
 
@@ -26,19 +26,22 @@ int main()
 
     while (1)
     {
-        /*while (1)
+        while (1)
         {
-            SorteiaPalavra(palavra);
+            SorteiaPalavra(palavra, i);
             ColetaPalavraDoArquivo(palavra, arquivo);
 
-            if(NaoFoiSorteadoEssaPalavra(palavra) == 1)
+            if (NaoFoiSorteadoEssaPalavra(palavra) == 1)
             {
+                RegistraPalavraNoArquivo(palavra);
                 break;
             }
-        }*/
 
-        SorteiaPalavra(palavra, jogou);
-        ColetaPalavraDoArquivo(palavra, arquivo);
+            else
+            {
+                i++;
+            }
+        }
 
         SalvaNome(jogador_1, nomeSalvo, jogou);
 
