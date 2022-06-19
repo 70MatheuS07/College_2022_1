@@ -21,12 +21,25 @@ int main()
     jogador_1 = CriaJogador();
     palavra = CriaPalavra();
     LehJogador_1(jogador_1);
-    SorteiaPalavra(palavra);
+
     arquivo = CriaArmazenaPalavrasArquivo();
-    ColetaPalavraDoArquivo(palavra, arquivo);
 
     while (1)
     {
+        /*while (1)
+        {
+            SorteiaPalavra(palavra);
+            ColetaPalavraDoArquivo(palavra, arquivo);
+
+            if(NaoFoiSorteadoEssaPalavra(palavra) == 1)
+            {
+                break;
+            }
+        }*/
+
+        SorteiaPalavra(palavra, jogou);
+        ColetaPalavraDoArquivo(palavra, arquivo);
+
         SalvaNome(jogador_1, nomeSalvo, jogou);
 
         InicializaJogador(jogador_1);

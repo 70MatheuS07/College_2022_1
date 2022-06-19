@@ -4,10 +4,16 @@
 
 int PegaTempo()
 {
-    int result = 0;
-    time_t mytime;
-    mytime = time(NULL);
-    struct tm tm = *localtime(&mytime);
+    long int result = 0, dia = 0, mes = 0, ano = 0;
+    long int mytime = 0;
 
-    return (tm.tm_mday + tm.tm_mon + 1 + tm.tm_year + 1900);
+    mytime = time(NULL);
+
+    printf("%ld\n", mytime);
+
+    mytime = mytime / 100000;
+
+    printf("%ld\n", mytime);
+
+    return mytime;
 }

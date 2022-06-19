@@ -12,7 +12,7 @@ typedef struct tPalavra tPalavra;
 
 tPalavra *CriaPalavra();
 
-void SorteiaPalavra(tPalavra *palavra);
+void SorteiaPalavra(tPalavra *palavra, int jogou);
 
 void ImprimePalavra(tPalavra *palavra);
 

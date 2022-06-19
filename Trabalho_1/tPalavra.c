@@ -28,14 +28,14 @@ tPalavra *CriaPalavra()
     return palavra;
 }
 
-void SorteiaPalavra(tPalavra *palavra)
+void SorteiaPalavra(tPalavra *palavra, int jogou)
 {
     int tempo = 0;
     int escolhida = 0;
 
     tempo = PegaTempo();
 
-    srand(tempo);
+    srand(tempo + jogou);
 
     escolhida = rand() % QTD_PALAVRAS - 1;
 
@@ -89,7 +89,7 @@ void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
     {
         scanf("%s", stringVerifica);
 
-        if (strlen(stringVerifica) > 6)
+        if (strlen(stringVerifica) > 6 || stringVerifica[5] != '\0')
         {
             printf("Palavra invalida, tente outra de tamanho cinco: ");
         }
@@ -342,4 +342,8 @@ char CharPalavraAtual(tPalavra *palavra, int j)
     caracter = palavra->palavraAtual[j];
 
     return caracter;
+}
+
+int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
+{
 }

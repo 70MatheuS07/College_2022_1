@@ -317,7 +317,7 @@ void EscreveLehEstatistica(tJogador *jogador)
 
     FILE *estatistica = NULL;
 
-    estatistica = fopen("jogadores.bin", "a+b");
+    estatistica = fopen("jogadores.bin", "ab+");
 
     while (!feof(estatistica))
     {
@@ -336,17 +336,22 @@ void EscreveLehEstatistica(tJogador *jogador)
     if (cont == 0)
     {
         EscreveJogadorEstatistica(jogador, estatistica);
+        fclose(estatistica);
     }
 
     else
     {
+        fclose(estatistica);
+
+        estatistica = fopen("jogadores.bin", "wb");
+
         if (fseek(estatistica, i * sizeof(tJogador), SEEK_SET) == 0)
         {
             fwrite(lido, sizeof(tJogador), 1, estatistica);
         }
-    }
 
-    fclose(estatistica);
+        fclose(estatistica);
+    }
 
     LiberaJogador(lido);
 }
@@ -400,7 +405,7 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
 
     qtdJogos = lido->qtdJogos;
     porcentagemVitorias = lido->porcentagemVitorias;
-    sequenciaVitorias = lido->maiorSequenciaVitorias;
+    sequenciaVitorias = lido->sequenciaVitorias;
     maiorSequenciaVitorias = lido->maiorSequenciaVitorias;
     ganhouUmaTentativa = lido->ganhouUmaTentativa;
     ganhouDuasTentativas = lido->ganhouDuasTentativas;
@@ -410,7 +415,7 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
     ganhouSeisTentativas = lido->ganhouSeisTentativas;
     qtdDerrotas = lido->qtdDerrotas;
 
-    qtdJogos += jogador->qtdJogos;
+    qtdJogos++;
 
     if (jogador->qtdDerrotas == 0)
     {
@@ -420,6 +425,11 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
     else
     {
         sequenciaVitorias = 0;
+    }
+
+    if (sequenciaVitorias > maiorSequenciaVitorias)
+    {
+        maiorSequenciaVitorias = sequenciaVitorias;
     }
 
     ganhouUmaTentativa += jogador->ganhouUmaTentativa;
@@ -436,7 +446,7 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
 
     lido->qtdJogos = qtdJogos;
     lido->porcentagemVitorias = porcentagemVitorias;
-    lido->maiorSequenciaVitorias = sequenciaVitorias;
+    lido->sequenciaVitorias = sequenciaVitorias;
     lido->maiorSequenciaVitorias = maiorSequenciaVitorias;
     lido->ganhouUmaTentativa = ganhouUmaTentativa;
     lido->ganhouDuasTentativas = ganhouDuasTentativas;
