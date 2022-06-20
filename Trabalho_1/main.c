@@ -31,6 +31,7 @@ int main()
         /* Confere se a palavra sorteada já foi usada
            E caso já tenham sido usadas todas as palavras
            do arquivo, recomeça a usar as palavras. */
+
         while (1)
         {
             SorteiaPalavra(palavra, i);
@@ -83,7 +84,7 @@ int main()
         else if (modoJogo == 9)
         {
             // Está dando segmentation fault. Quando faz na mão.
-            ImprimeTodasEstatisticas();
+            ImprimeEstatisticaJogador(jogador_1);
         }
 
         else if (modoJogo == 0)

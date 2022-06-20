@@ -6,6 +6,6 @@
 #include <string.h>
 #include <time.h>
 
-int PegaTempo();
+unsigned int PegaTempo();
 
 #endif

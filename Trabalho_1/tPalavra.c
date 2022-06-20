@@ -30,14 +30,16 @@ tPalavra *CriaPalavra()
 
 void SorteiaPalavra(tPalavra *palavra, int i)
 {
-    int tempo = 0;
+    unsigned int tempo = 0;
     int escolhida = 0;
 
-    tempo = PegaTempo();
+    if (i == 0)
+    {
+        tempo = PegaTempo();
+        srand(tempo);
+    }
 
-    srand(tempo + i);
-
-    escolhida = rand() % QTD_PALAVRAS - 1;
+    escolhida = rand() % (QTD_PALAVRAS - 1);
 
     palavra->escolhida = escolhida;
 
