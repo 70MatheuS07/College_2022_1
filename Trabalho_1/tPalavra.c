@@ -352,7 +352,7 @@ int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
 
     FILE *registrador;
 
-    registrador = fopen("palavrasUsadas.txt", "ab+");
+    registrador = fopen("palavrasUsadas.bin", "ab+");
 
     while (!feof(registrador))
     {
@@ -375,7 +375,7 @@ void RegistraPalavraNoArquivo(tPalavra *palavra)
 {
     FILE *registrador;
 
-    registrador = fopen("palavrasUsadas.txt", "ab+");
+    registrador = fopen("palavrasUsadas.bin", "ab+");
 
     fwrite(palavra->palavraColetada, sizeof(char) * 6, 1, registrador);
 

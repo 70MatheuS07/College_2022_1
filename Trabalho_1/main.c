@@ -28,6 +28,9 @@ int main()
 
     while (1)
     {
+        /* Confere se a palavra sorteada já foi usada
+           E caso já tenham sido usadas todas as palavras
+           do arquivo, recomeça a usar as palavras. */
         while (1)
         {
             SorteiaPalavra(palavra, i);
@@ -51,6 +54,9 @@ int main()
             }
         }
 
+        /* Por algum motivo quando eu guardo a pessoa dentro do arquivo "jogadores.bin"
+           seu nome sai da struct tJogador jogador_1, então eu faço um ponto que salva
+           o nome do participante para não perder. */
         SalvaNome(jogador_1, nomeSalvo, jogou);
 
         InicializaJogador(jogador_1);
@@ -76,6 +82,7 @@ int main()
 
         else if (modoJogo == 9)
         {
+            // Está dando segmentation fault. Quando faz na mão.
             ImprimeTodasEstatisticas();
         }
 

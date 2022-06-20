@@ -154,13 +154,14 @@ int EscolhaDeModo(tJogador *jogador)
 
     printf("\n");
 
-    if (num != 1 && num != 2 && num != 8 && num != 9 && num != 0)
+    // Garante acesso só desses numeros.
+    while (num != 1 && num != 2 && num != 8 && num != 9 && num != 0)
     {
         printf("Modo de jogo invalido, tente outro dentro das opcoes: ");
 
         scanf("%d", &num);
     }
-
+    
     return num;
 }
 
@@ -308,7 +309,6 @@ void RegistraQtdDerrotas(tJogador *jogador)
     jogador->qtdDerrotas = num;
 }
 
-// Problema com o arquivo binario!
 void EscreveLehEstatistica(tJogador *jogador)
 {
     int cont = 0, i = 0;
@@ -348,6 +348,11 @@ void EscreveLehEstatistica(tJogador *jogador)
         if (fseek(estatistica, i * sizeof(tJogador), SEEK_SET) == 0)
         {
             fwrite(lido, sizeof(tJogador), 1, estatistica);
+        }
+
+        else
+        {
+            printf("\n\nErro ao registrar jogador\n\n");
         }
 
         fclose(estatistica);
