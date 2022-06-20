@@ -533,3 +533,34 @@ void InicializaJogador(tJogador *jogador)
     jogador->ganhouSeisTentativas = ganhouSeisTentativas;
     jogador->qtdDerrotas = qtdDerrotas;
 }
+
+void ImprimeTodasEstatisticas()
+{
+    tJogador *impressao;
+
+    impressao = CriaJogador();
+
+    FILE *estatistica;
+
+    estatistica = fopen("jogadores.bin", "ab+");
+
+    while (fread(impressao, sizeof(tJogador), 1, estatistica))
+    {
+        printf("%s, ", impressao->nome);
+        printf("%d, ", impressao->qtdJogos);
+        printf("%.2f, ", impressao->porcentagemVitorias);
+        printf("%d, ", impressao->sequenciaVitorias);
+        printf("%d\n", impressao->maiorSequenciaVitorias);
+        printf("%d\n", impressao->ganhouUmaTentativa);
+        printf("%d\n", impressao->ganhouDuasTentativas);
+        printf("%d\n", impressao->ganhouTresTentativas);
+        printf("%d\n", impressao->ganhouQuatroTentativas);
+        printf("%d\n", impressao->ganhouCincoTentativas);
+        printf("%d\n", impressao->ganhouSeisTentativas);
+        printf("%d\n\n", impressao->qtdDerrotas);
+    }
+
+    fclose(estatistica);
+
+    LiberaJogador(impressao);
+}

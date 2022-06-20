@@ -8,6 +8,8 @@
 #include "tTempo.h"
 #include "tJogo.h"
 
+#define QTD_PALAVRAS 18289
+
 int main()
 {
     int modoJogo = 0, jogou = 0, num = 0, i = 0;
@@ -41,6 +43,12 @@ int main()
             {
                 i++;
             }
+
+            if (i == QTD_PALAVRAS - 1)
+            {
+                remove("palavrasUsadas.txt");
+                i = 0;
+            }
         }
 
         SalvaNome(jogador_1, nomeSalvo, jogou);
@@ -68,7 +76,7 @@ int main()
 
         else if (modoJogo == 9)
         {
-            // Estatisticas.
+            ImprimeTodasEstatisticas();
         }
 
         else if (modoJogo == 0)

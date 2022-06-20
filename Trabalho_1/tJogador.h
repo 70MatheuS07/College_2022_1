@@ -59,4 +59,6 @@ void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou);
 
 void InicializaJogador(tJogador *jogador);
 
+void ImprimeTodasEstatisticas();
+
 #endif
