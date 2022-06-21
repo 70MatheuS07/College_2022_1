@@ -58,4 +58,6 @@ int NaoFoiSorteadoEssaPalavra(tPalavra *palavra);
 
 void RegistraPalavraNoArquivo(tPalavra *palavra);
 
+void PassaTentativas(tPalavra *palavra, int tentativas);
+
 #endif

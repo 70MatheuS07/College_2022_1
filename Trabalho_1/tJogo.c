@@ -25,6 +25,8 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
     while (1)
     {
+        AtualizaTentativas(palavra, jogo);
+
         CabecalhoJogo(jogador, palavra, jogo, arquivo);
 
         ClassificaPalavra(palavra);
@@ -75,6 +77,8 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 
     while (1)
     {
+        AtualizaTentativas(palavra, jogo);
+        
         CabecalhoJogoDupla(jogador_1, jogador_2, palavra, jogo, arquivo);
 
         ClassificaPalavra(palavra);
