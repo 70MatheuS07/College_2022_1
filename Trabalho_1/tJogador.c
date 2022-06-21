@@ -317,9 +317,10 @@ void EscreveLehEstatistica(tJogador *jogador)
 
     FILE *estatistica = fopen("jogadores.bin", "ab+");
 
-    while (fread(lido, sizeof(tJogador), 1, estatistica))
+    while (1)
     {
-        //if(!feof(estatistica)) - dar uma olhada!
+        fread(lido, sizeof(tJogador), 1, estatistica);
+        // if(!feof(estatistica)) - dar uma olhada!
         if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
         {
             ModificaJogadorEstatistica(jogador, lido);

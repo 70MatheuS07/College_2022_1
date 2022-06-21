@@ -54,4 +54,6 @@ void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo);
 
 void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *jogo);
 
+void AtualizaTentativas(tPalavra *palavra, tJogo *jogo);
+
 #endif

@@ -55,6 +55,15 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
     LiberaJogo(jogo);
 }
 
+void AtualizaTentativas(tPalavra *palavra, tJogo *jogo)
+{
+    int aux = 0;
+
+    aux = jogo->tentativas;
+
+    PassaTentativas(palavra, aux);
+}
+
 void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
@@ -78,7 +87,7 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
     while (1)
     {
         AtualizaTentativas(palavra, jogo);
-        
+
         CabecalhoJogoDupla(jogador_1, jogador_2, palavra, jogo, arquivo);
 
         ClassificaPalavra(palavra);
