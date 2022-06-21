@@ -165,13 +165,13 @@ int EscolhaDeModo(tJogador *jogador)
     return num;
 }
 
-void LiberaJogador(tJogador *jogador)
+void LiberaJogador(tJogador *player)
 {
-    free(jogador->nome);
-    jogador->nome = NULL;
+    free(player->nome);
+    player->nome = NULL;
 
-    free(jogador);
-    jogador = NULL;
+    free(player);
+    player = NULL;
 }
 
 void ImprimeNomeJogadorCabecalho(tJogador *jogador)
@@ -317,7 +317,7 @@ void EscreveLehEstatistica(tJogador *jogador)
 
     FILE *estatistica = fopen("jogadores.bin", "ab+");
 
-    while (1)
+    while (!feof(estatistica))
     {
         fread(lido, sizeof(tJogador), 1, estatistica);
         // if(!feof(estatistica)) - dar uma olhada!
