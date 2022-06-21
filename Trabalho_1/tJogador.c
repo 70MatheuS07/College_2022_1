@@ -18,11 +18,18 @@ struct tJogador
 
 tJogador *CriaJogador()
 {
+    int i;
+
     tJogador *jogador;
 
     jogador = malloc(sizeof(tJogador));
 
     jogador->nome = malloc(sizeof(char) * 21);
+
+    for (i = 0; i < 21; i++)
+    {
+        jogador->nome[i] = '\0';
+    }
 
     return jogador;
 }
@@ -469,10 +476,12 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
 
     FILE *estatistica;
 
-    estatistica = fopen("jogadores.bin", "ab+");
+    estatistica = fopen("jogadores.bin", "rb");
 
-    while (fread(read, sizeof(tJogador), 1, estatistica))
+    while (1)
     {
+        fread(read, sizeof(tJogador), 1, estatistica);
+
         if (ConfereNomeJogadorEstatistica(jogador, read) == 0)
         {
             printf("%s, ", read->nome);
@@ -500,8 +509,6 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
     }
 
     fclose(estatistica);
-
-    LiberaJogador(read);
 }
 
 void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou)
