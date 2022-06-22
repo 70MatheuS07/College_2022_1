@@ -316,7 +316,7 @@ void RegistraQtdDerrotas(tJogador *jogador)
     jogador->qtdDerrotas = num;
 }
 
-void EscreveLehEstatistica(tJogador *jogador)
+void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
 {
     int cont = 0, i = 0;
     tJogador *lido;
@@ -331,6 +331,7 @@ void EscreveLehEstatistica(tJogador *jogador)
         if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
         {
             ModificaJogadorEstatistica(jogador, lido);
+            ClonaJogador(lido, jogadorLidoCopia);
             cont++;
             break;
         }
@@ -364,6 +365,48 @@ void EscreveLehEstatistica(tJogador *jogador)
     }
 
     LiberaJogador(lido);
+}
+
+void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia)
+{
+    char nome[21];
+    int qtdJogos;
+    float porcentagemVitorias;
+    int sequenciaVitorias;
+    int maiorSequenciaVitorias;
+    int ganhouUmaTentativa;
+    int ganhouDuasTentativas;
+    int ganhouTresTentativas;
+    int ganhouQuatroTentativas;
+    int ganhouCincoTentativas;
+    int ganhouSeisTentativas;
+    int qtdDerrotas;
+
+    strcpy(nome, lido->nome);
+    qtdJogos = lido->qtdJogos;
+    porcentagemVitorias = lido->porcentagemVitorias;
+    sequenciaVitorias = lido->sequenciaVitorias;
+    maiorSequenciaVitorias = lido->maiorSequenciaVitorias;
+    ganhouUmaTentativa = lido->ganhouUmaTentativa;
+    ganhouDuasTentativas = lido->ganhouDuasTentativas;
+    ganhouTresTentativas = lido->ganhouTresTentativas;
+    ganhouQuatroTentativas = lido->ganhouQuatroTentativas;
+    ganhouCincoTentativas = lido->ganhouCincoTentativas;
+    ganhouSeisTentativas = lido->ganhouSeisTentativas;
+    qtdDerrotas = lido->qtdDerrotas;
+
+    strcpy(jogadorLidoCopia->nome, nome);
+    jogadorLidoCopia->qtdJogos = qtdJogos;
+    jogadorLidoCopia->porcentagemVitorias = porcentagemVitorias;
+    jogadorLidoCopia->sequenciaVitorias = sequenciaVitorias;
+    jogadorLidoCopia->maiorSequenciaVitorias = maiorSequenciaVitorias;
+    jogadorLidoCopia->ganhouUmaTentativa = ganhouUmaTentativa;
+    jogadorLidoCopia->ganhouDuasTentativas = ganhouDuasTentativas;
+    jogadorLidoCopia->ganhouTresTentativas = ganhouTresTentativas;
+    jogadorLidoCopia->ganhouQuatroTentativas = ganhouQuatroTentativas;
+    jogadorLidoCopia->ganhouCincoTentativas = ganhouCincoTentativas;
+    jogadorLidoCopia->ganhouSeisTentativas = ganhouSeisTentativas;
+    jogadorLidoCopia->qtdDerrotas = qtdDerrotas;
 }
 
 int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *lido)
@@ -471,46 +514,18 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
 
 void ImprimeEstatisticaJogador(tJogador *jogador)
 {
-    int cont = 0;
-
-    tJogador *read;
-    read = CriaJogador();
-
-    FILE *estatistica;
-
-    estatistica = fopen("jogadores.bin", "rb");
-
-    while (1)
-    {
-        fread(read, sizeof(tJogador), 1, estatistica);
-
-        if (ConfereNomeJogadorEstatistica(jogador, read) == 0)
-        {
-            printf("%s, ", read->nome);
-            printf("%d, ", read->qtdJogos);
-            printf("%.2f, ", read->porcentagemVitorias);
-            printf("%d, ", read->sequenciaVitorias);
-            printf("%d\n", read->maiorSequenciaVitorias);
-            printf("%d\n", read->ganhouUmaTentativa);
-            printf("%d\n", read->ganhouDuasTentativas);
-            printf("%d\n", read->ganhouTresTentativas);
-            printf("%d\n", read->ganhouQuatroTentativas);
-            printf("%d\n", read->ganhouCincoTentativas);
-            printf("%d\n", read->ganhouSeisTentativas);
-            printf("%d\n\n", read->qtdDerrotas);
-
-            cont++;
-
-            break;
-        }
-    }
-
-    if (cont == 0)
-    {
-        printf("O jogador ainda não jogou, logo não tem estatistica\n");
-    }
-
-    fclose(estatistica);
+    printf("%s, ", jogador->nome);
+    printf("%d, ", jogador->qtdJogos);
+    printf("%.2f, ", jogador->porcentagemVitorias);
+    printf("%d, ", jogador->sequenciaVitorias);
+    printf("%d\n", jogador->maiorSequenciaVitorias);
+    printf("%d\n", jogador->ganhouUmaTentativa);
+    printf("%d\n", jogador->ganhouDuasTentativas);
+    printf("%d\n", jogador->ganhouTresTentativas);
+    printf("%d\n", jogador->ganhouQuatroTentativas);
+    printf("%d\n", jogador->ganhouCincoTentativas);
+    printf("%d\n", jogador->ganhouSeisTentativas);
+    printf("%d\n\n", jogador->qtdDerrotas);
 }
 
 void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou)
