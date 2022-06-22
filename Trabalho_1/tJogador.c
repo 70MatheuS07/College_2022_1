@@ -600,4 +600,6 @@ void ImprimeRanking()
     {
         matriz[i] = CriaJogador();
     }
+
+    
 }

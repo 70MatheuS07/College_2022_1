@@ -46,7 +46,7 @@ void SorteiaPalavra(tPalavra *palavra, int i)
         srand(tempo);
     }
 
-    escolhida = rand() % (QTD_PALAVRAS - 1);
+    escolhida = rand() % (QTD_PALAVRAS);
 
     palavra->escolhida = escolhida;
 
