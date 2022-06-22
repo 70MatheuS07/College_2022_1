@@ -14,6 +14,7 @@ struct tJogador
     int ganhouCincoTentativas;
     int ganhouSeisTentativas;
     int qtdDerrotas;
+    int temJogador;
 };
 
 tJogador *CriaJogador()
@@ -322,12 +323,14 @@ void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
     tJogador *lido;
     lido = CriaJogador();
 
-    FILE *estatistica = fopen("jogadores.bin", "ab+");
+    CriaArquivo();
+
+    FILE *estatistica = fopen("jogadores.bin", "ab");
 
     while (!feof(estatistica))
     {
         fread(lido, sizeof(tJogador), 1, estatistica);
-        // if(!feof(estatistica)) - dar uma olhada!
+
         if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
         {
             ModificaJogadorEstatistica(jogador, lido);
@@ -339,18 +342,18 @@ void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
         i++;
     }
 
+    fclose(estatistica);
+
+    estatistica = fopen("jogadores.bin", "rb+");
+
     if (cont == 0)
     {
         EscreveJogadorEstatistica(jogador, estatistica);
-        fclose(estatistica);
+        ClonaJogador(jogador, jogadorLidoCopia);
     }
 
     else
     {
-        fclose(estatistica);
-
-        estatistica = fopen("jogadores.bin", "wb");
-
         if (fseek(estatistica, i * sizeof(tJogador), SEEK_SET) == 0)
         {
             fwrite(lido, sizeof(tJogador), 1, estatistica);
@@ -360,11 +363,25 @@ void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
         {
             printf("\n\nErro ao registrar jogador\n\n");
         }
-
-        fclose(estatistica);
     }
 
+    fclose(estatistica);
+
     LiberaJogador(lido);
+}
+
+void CriaArquivo()
+{
+    FILE *arquivo;
+
+    arquivo = fopen("jogadores.bin", "ab");
+
+    if (!arquivo)
+    {
+        printf("Nao foi possivel cria o arquivo\n");
+    }
+
+    fclose(arquivo);
 }
 
 void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia)
@@ -600,6 +617,4 @@ void ImprimeRanking()
     {
         matriz[i] = CriaJogador();
     }
-
-    
 }

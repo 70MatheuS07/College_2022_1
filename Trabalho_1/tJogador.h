@@ -63,4 +63,6 @@ void ImprimeTodasEstatisticas();
 
 void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia);
 
+void CriaArquivo();
+
 #endif
