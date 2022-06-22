@@ -50,7 +50,7 @@ int main()
 
             if (i == QTD_PALAVRAS - 1)
             {
-                remove("palavrasUsadas.txt");
+                remove("palavrasUsadas.bin");
                 i = 0;
             }
         }
@@ -96,6 +96,8 @@ int main()
 
                 printf("1- Continuar\n");
                 printf("2- Sair do Jogo\n\n");
+
+                //Tenho que zerar o current_streak caso ele digite 1.
 
                 scanf("%d", &num);
 

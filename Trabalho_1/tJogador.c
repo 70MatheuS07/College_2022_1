@@ -385,6 +385,8 @@ void EscreveJogadorEstatistica(tJogador *jogador, FILE *estatistica)
     if (jogador->qtdDerrotas == 0)
     {
         sequenciaVitorias++;
+
+        // Caso sequencia for > maiorSequencia.
         maiorSequenciaVitorias = sequenciaVitorias;
         porcentagemVitorias = 100;
 
@@ -549,4 +551,38 @@ void InicializaJogador(tJogador *jogador)
     jogador->ganhouCincoTentativas = ganhouCincoTentativas;
     jogador->ganhouSeisTentativas = ganhouSeisTentativas;
     jogador->qtdDerrotas = qtdDerrotas;
+}
+
+void ImprimeRanking()
+{
+    int num = 0;
+
+    tJogador *ranking = CriaJogador();
+
+    FILE *arquivo = NULL;
+
+    arquivo = fopen("jogadores.bin", "rb");
+
+    while (1)
+    {
+        if (!feof(arquivo))
+        {
+            break;
+        }
+
+        fread(ranking, sizeof(tJogador), 1, arquivo);
+
+        num++;
+    }
+
+    fclose(arquivo);
+
+    tJogador **matriz = malloc(sizeof(tJogador *) * num);
+
+    int i = 0;
+
+    for (i = 0; i < num; i++)
+    {
+        matriz[i] = CriaJogador();
+    }
 }
