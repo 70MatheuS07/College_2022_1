@@ -38,7 +38,6 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
             RegistraEstatisticaSolo(jogador, jogo);
             CabecalhoJogoVitoriaSolo(jogador, palavra, jogo);
             EscreveLehEstatistica(jogador, jogadorLidoCopia);
-            ImprimeEstatisticaJogador(jogadorLidoCopia);
 
             break;
         }
@@ -48,7 +47,6 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
             RegistraEstatisticaSolo(jogador, jogo);
             CabecalhoJogoDerrotaSolo(jogador, palavra, jogo);
             EscreveLehEstatistica(jogador, jogadorLidoCopia);
-            ImprimeEstatisticaJogador(jogador);
 
             break;
         }
@@ -100,9 +98,7 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
             RegistraEstatisticaDupla(jogador_1, jogador_2, jogo);
             CabecalhoJogoVitoriaDupla(jogador_1, jogador_2, palavra, jogo);
             EscreveLehEstatistica(jogador_1, jogadorLidoCopia);
-            ImprimeEstatisticaJogador(jogador_1);
             EscreveLehEstatistica(jogador_2, jogadorLidoCopia);
-            ImprimeEstatisticaJogador(jogador_2);
 
             break;
         }
@@ -112,9 +108,7 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
             RegistraEstatisticaDupla(jogador_1, jogador_2, jogo);
             CabecalhoJogoDerrotaDupla(jogador_1, jogador_2, palavra, jogo);
             EscreveLehEstatistica(jogador_1, jogadorLidoCopia);
-            ImprimeEstatisticaJogador(jogador_1);
             EscreveLehEstatistica(jogador_2, jogadorLidoCopia);
-            ImprimeEstatisticaJogador(jogador_2);
 
             break;
         }

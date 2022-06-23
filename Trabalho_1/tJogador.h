@@ -7,6 +7,8 @@
 
 typedef struct tJogador tJogador;
 
+typedef struct tLeitura tLeitura;
+
 tJogador *CriaJogador();
 
 void LehJogador_1(tJogador *jogador_1);
@@ -47,9 +49,9 @@ void RegistraQtdDerrotas(tJogador *jogador);
 
 void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia);
 
-int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *lido);
+int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *jogadores);
 
-void EscreveJogadorEstatistica(tJogador *jogador, FILE *estatistica);
+void EscreveJogadorEstatistica(tJogador *jogador, tJogador *leitura);
 
 void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido);
 
@@ -64,5 +66,7 @@ void ImprimeTodasEstatisticas();
 void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia);
 
 void CriaArquivo();
+
+int SlotJogadorVazio(tJogador *jogador);
 
 #endif

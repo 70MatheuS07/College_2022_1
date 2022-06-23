@@ -2,7 +2,7 @@
 
 struct tJogador
 {
-    char *nome;
+    char nome[21];
     int qtdJogos;
     float porcentagemVitorias;
     int sequenciaVitorias;
@@ -14,7 +14,12 @@ struct tJogador
     int ganhouCincoTentativas;
     int ganhouSeisTentativas;
     int qtdDerrotas;
-    int temJogador;
+};
+
+struct tLeitura
+{
+    int quantidade;
+    tJogador **jogadores;
 };
 
 tJogador *CriaJogador()
@@ -24,8 +29,6 @@ tJogador *CriaJogador()
     tJogador *jogador;
 
     jogador = malloc(sizeof(tJogador));
-
-    jogador->nome = malloc(sizeof(char) * 21);
 
     for (i = 0; i < 21; i++)
     {
@@ -175,9 +178,6 @@ int EscolhaDeModo(tJogador *jogador)
 
 void LiberaJogador(tJogador *player)
 {
-    free(player->nome);
-    player->nome = NULL;
-
     free(player);
     player = NULL;
 }
@@ -320,54 +320,65 @@ void RegistraQtdDerrotas(tJogador *jogador)
 void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
 {
     int cont = 0, i = 0;
-    tJogador *lido;
-    lido = CriaJogador();
+
+    tLeitura *leitura;
+
+    leitura = malloc(sizeof(tLeitura));
+
+    leitura->jogadores = malloc(sizeof(tJogador *) * 20);
+
+    for (i = 0; i < 20; i++)
+    {
+        leitura->jogadores[i] = CriaJogador();
+    }
 
     CriaArquivo();
 
-    FILE *estatistica = fopen("jogadores.bin", "ab");
+    FILE *arquivo = fopen("jogadores.bin", "rb");
 
-    while (!feof(estatistica))
+    fread(leitura, sizeof(tLeitura), 1, arquivo);
+
+    for (i = 0; i < 20; i++)
     {
-        fread(lido, sizeof(tJogador), 1, estatistica);
+        ImprimeEstatisticaJogador(leitura->jogadores[i]);
+    }
 
-        if (ConfereNomeJogadorEstatistica(jogador, lido) == 0)
+    for (i = 0; i < 20; i++)
+    {
+        if (ConfereNomeJogadorEstatistica(jogador, leitura->jogadores[i]) == 0)
         {
-            ModificaJogadorEstatistica(jogador, lido);
-            ClonaJogador(lido, jogadorLidoCopia);
-            cont++;
+            ModificaJogadorEstatistica(jogador, leitura->jogadores[i]);
+            ImprimeEstatisticaJogador(leitura->jogadores[i]);
             break;
-        }
-
-        i++;
-    }
-
-    fclose(estatistica);
-
-    estatistica = fopen("jogadores.bin", "rb+");
-
-    if (cont == 0)
-    {
-        EscreveJogadorEstatistica(jogador, estatistica);
-        ClonaJogador(jogador, jogadorLidoCopia);
-    }
-
-    else
-    {
-        if (fseek(estatistica, i * sizeof(tJogador), SEEK_SET) == 0)
-        {
-            fwrite(lido, sizeof(tJogador), 1, estatistica);
         }
 
         else
         {
-            printf("\n\nErro ao registrar jogador\n\n");
+            if (SlotJogadorVazio(leitura->jogadores[i]) == 1)
+            {
+                EscreveJogadorEstatistica(jogador, leitura->jogadores[i]);
+                ImprimeEstatisticaJogador(leitura->jogadores[i]);
+                break;
+            }
         }
     }
+    fclose(arquivo);
 
-    fclose(estatistica);
+    arquivo = fopen("jogadores.bin", "wb");
 
-    LiberaJogador(lido);
+    fwrite(leitura, sizeof(tLeitura), 1, arquivo);
+
+    fclose(arquivo);
+}
+
+int SlotJogadorVazio(tJogador *jogador)
+{
+    if (jogador->nome[0] == '\0')
+    {
+        return 1;
+    }
+
+    return 0;
 }
 
 void CriaArquivo()
@@ -426,9 +437,9 @@ void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia)
     jogadorLidoCopia->qtdDerrotas = qtdDerrotas;
 }
 
-int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *lido)
+int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *jogadores)
 {
-    if (strcmp(jogador->nome, lido->nome) == 0)
+    if (strcmp(jogador->nome, jogadores->nome) == 0)
     {
         return 0;
     }
@@ -436,7 +447,7 @@ int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *lido)
     return 1;
 }
 
-void EscreveJogadorEstatistica(tJogador *jogador, FILE *estatistica)
+void EscreveJogadorEstatistica(tJogador *jogador, tJogador *leitura)
 {
     float porcentagemVitorias = 0;
     int sequenciaVitorias = 0;
@@ -455,7 +466,18 @@ void EscreveJogadorEstatistica(tJogador *jogador, FILE *estatistica)
         jogador->porcentagemVitorias = porcentagemVitorias;
     }
 
-    fwrite(jogador, sizeof(tJogador), 1, estatistica);
+    strcpy(leitura->nome, jogador->nome);
+    leitura->qtdJogos = jogador->qtdJogos;
+    leitura->porcentagemVitorias = jogador->porcentagemVitorias;
+    leitura->sequenciaVitorias = jogador->sequenciaVitorias;
+    leitura->maiorSequenciaVitorias = jogador->maiorSequenciaVitorias;
+    leitura->ganhouUmaTentativa = jogador->ganhouUmaTentativa;
+    leitura->ganhouDuasTentativas = jogador->ganhouDuasTentativas;
+    leitura->ganhouTresTentativas = jogador->ganhouTresTentativas;
+    leitura->ganhouQuatroTentativas = jogador->ganhouQuatroTentativas;
+    leitura->ganhouCincoTentativas = jogador->ganhouCincoTentativas;
+    leitura->ganhouSeisTentativas = jogador->ganhouSeisTentativas;
+    leitura->qtdDerrotas = jogador->qtdDerrotas;
 }
 
 void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
