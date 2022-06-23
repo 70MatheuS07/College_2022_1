@@ -47,7 +47,7 @@ void RegistraGanhouSeisTentativas(tJogador *jogador);
 
 void RegistraQtdDerrotas(tJogador *jogador);
 
-void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia);
+void EscreveLehEstatistica(tJogador *jogador);
 
 int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *jogadores);
 
@@ -68,5 +68,9 @@ void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia);
 void CriaArquivo();
 
 int SlotJogadorVazio(tJogador *jogador);
+
+void ClassificacaoParcial(tJogador *jogador);
+
+void EscreveJogadorEstatisticaTXT(tJogador *jogador);
 
 #endif

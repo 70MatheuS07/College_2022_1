@@ -18,7 +18,6 @@ struct tJogador
 
 struct tLeitura
 {
-    int quantidade;
     tJogador **jogadores;
 };
 
@@ -317,7 +316,7 @@ void RegistraQtdDerrotas(tJogador *jogador)
     jogador->qtdDerrotas = num;
 }
 
-void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
+/*void EscreveLehEstatistica(tJogador *jogador)
 {
     int cont = 0, i = 0;
 
@@ -332,23 +331,16 @@ void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
         leitura->jogadores[i] = CriaJogador();
     }
 
-    FILE *arquivo = fopen("jogadores.bin", "rb");
+    CriaArquivo();
 
-    if (arquivo == NULL)
-    {
-        CriaArquivo();
-    }
-
-    arquivo = fopen("jogadores.bin", "rb");
-
-    fseek(arquivo, 0, SEEK_SET);
+    FILE *arquivo = fopen("jogadores.dat", "rb+");
 
     fread(leitura, sizeof(tLeitura), 1, arquivo);
 
-    /*for (i = 0; i < 20; i++)
+    for (i = 0; i < 20; i++)
     {
         ImprimeEstatisticaJogador(leitura->jogadores[i]);
-    }*/
+    }
 
     for (i = 0; i < 20; i++)
     {
@@ -369,14 +361,17 @@ void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
             }
         }
     }
+
     fclose(arquivo);
 
-    arquivo = fopen("jogadores.bin", "wb");
+    arquivo = fopen("jogadores.dat", "wb");
+
+    rewind(arquivo);
 
     fwrite(leitura, sizeof(tLeitura), 1, arquivo);
 
     fclose(arquivo);
-}
+} */
 
 int SlotJogadorVazio(tJogador *jogador)
 {
@@ -392,7 +387,7 @@ void CriaArquivo()
 {
     FILE *arquivo;
 
-    arquivo = fopen("jogadores.bin", "ab");
+    arquivo = fopen("jogadores.dat", "ab");
 
     if (!arquivo)
     {
@@ -558,6 +553,27 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido)
     lido->qtdDerrotas = qtdDerrotas;
 }
 
+void ClassificacaoParcial(tJogador *jogador)
+{
+    float porcentagemVitorias = 0;
+    int sequenciaVitorias = 0;
+    int maiorSequenciaVitorias = 0;
+
+    if (jogador->qtdDerrotas == 1)
+    {
+        jogador->porcentagemVitorias = 0;
+        jogador->sequenciaVitorias = 0;
+        jogador->maiorSequenciaVitorias = 0;
+    }
+
+    else
+    {
+        jogador->porcentagemVitorias = 100;
+        jogador->sequenciaVitorias = 1;
+        jogador->maiorSequenciaVitorias = 1;
+    }
+}
+
 void ImprimeEstatisticaJogador(tJogador *jogador)
 {
     printf("%s, ", jogador->nome);
@@ -614,6 +630,8 @@ void InicializaJogador(tJogador *jogador)
     jogador->qtdDerrotas = qtdDerrotas;
 }
 
+/* Esboco de Imprimir o Ranking
+
 void ImprimeRanking()
 {
     int num = 0;
@@ -646,4 +664,24 @@ void ImprimeRanking()
     {
         matriz[i] = CriaJogador();
     }
+} */
+
+void EscreveJogadorEstatisticaTXT(tJogador *jogador)
+{
+    FILE *arquivo = fopen("jogadores.txt", "a");
+
+    fprintf(arquivo, "%s, ", jogador->nome);
+    fprintf(arquivo, "%d, ", jogador->qtdJogos);
+    fprintf(arquivo, "%f, ", jogador->porcentagemVitorias);
+    fprintf(arquivo, "%d, ", jogador->sequenciaVitorias);
+    fprintf(arquivo, "%d, ", jogador->maiorSequenciaVitorias);
+    fprintf(arquivo, "%d, ", jogador->ganhouUmaTentativa);
+    fprintf(arquivo, "%d, ", jogador->ganhouDuasTentativas);
+    fprintf(arquivo, "%d, ", jogador->ganhouTresTentativas);
+    fprintf(arquivo, "%d, ", jogador->ganhouQuatroTentativas);
+    fprintf(arquivo, "%d, ", jogador->ganhouCincoTentativas);
+    fprintf(arquivo, "%d, ", jogador->ganhouSeisTentativas);
+    fprintf(arquivo, "%d, ", jogador->qtdDerrotas);
+
+    fclose(arquivo);
 }

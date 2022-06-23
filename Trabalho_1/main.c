@@ -34,12 +34,19 @@ int main()
 
         while (1)
         {
+            /* Se o jogador entrar com o nome, mas não for jogar
+               aqui garante que nao sera sorteada outra palavra. */
+            if (num > 0)
+            {
+                num = 0;
+                break;
+            }
+
             SorteiaPalavra(palavra, i);
             ColetaPalavraDoArquivo(palavra, arquivo);
 
             if (NaoFoiSorteadoEssaPalavra(palavra) == 1)
             {
-                RegistraPalavraNoArquivo(palavra);
                 break;
             }
 
@@ -48,9 +55,13 @@ int main()
                 i++;
             }
 
+            /* Garante que quando todas as palavras forem lidas
+               exclui o arquivo palavrasUsadas e pode reutilizar
+               as palavras novamente. */
+
             if (i == QTD_PALAVRAS - 1)
             {
-                remove("palavrasUsadas.bin");
+                remove("palavrasUsadas.txt");
                 i = 0;
             }
         }
@@ -67,12 +78,14 @@ int main()
         if (modoJogo == 1)
         {
             JogaJogoSolo(jogador_1, palavra, arquivo);
+            RegistraPalavraNoArquivo(palavra);
             jogou++;
         }
 
         else if (modoJogo == 2)
         {
             JogaJogoDupla(jogador_1, palavra, arquivo);
+            RegistraPalavraNoArquivo(palavra);
             jogou++;
         }
 
@@ -84,7 +97,7 @@ int main()
         else if (modoJogo == 9)
         {
             // Está dando segmentation fault. Quando faz na mão.
-            ImprimeEstatisticaJogador(jogador_1);
+            // ImprimeEstatisticaJogador(jogador_1);
         }
 
         else if (modoJogo == 0)
@@ -97,7 +110,8 @@ int main()
                 printf("1- Continuar\n");
                 printf("2- Sair do Jogo\n\n");
 
-                //Tenho que zerar o current_streak caso ele digite 1.
+                /* Aqui eu iria zerar a sequencia de vitorias,
+                   porém nao consegui fazer o arquivo binario. */
 
                 scanf("%d", &num);
 
@@ -118,9 +132,9 @@ int main()
         }
     }
 
+    LiberaPalavrasArquivo(arquivo);
     LiberaJogador(jogador_1);
     LiberaPalavra(palavra);
-    LiberaPalavrasArquivo(arquivo);
 
     return 0;
 }

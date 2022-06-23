@@ -8,9 +8,10 @@ struct tPalavra
     char *palavraCopia;
     char *palavraAtual;
     char **palavraClassificada;
-    int escolhida;
     char *palavraAtualCopia;
     int tentativa;
+    int escolhida;
+    int quantidadePalavras;
 };
 
 tPalavra *CriaPalavra()
@@ -380,38 +381,66 @@ char CharPalavraAtual(tPalavra *palavra, int j)
 
 int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
 {
-    tPalavra *palavraLida;
-
-    palavraLida = CriaPalavra();
+    int i, cont = 0;
+    char caracter;
+    char palavraLida[6];
 
     FILE *registrador;
 
-    registrador = fopen("palavrasUsadas.bin", "ab+");
+    registrador = fopen("palavrasUsadas.txt", "a+");
 
-    while (!feof(registrador))
+    while (1)
     {
-        fread(palavraLida->palavraColetada, sizeof(char) * 6, 1, registrador);
+        if (feof(registrador))
+        {
+            break;
+        }
 
-        if (strcmp(palavraLida->palavraColetada, palavra->palavraColetada) == 0)
+        for (i = 0; i < 5; i++)
+        {
+            fscanf(registrador, "%c", &caracter);
+            palavraLida[i] = caracter;
+        }
+
+        palavraLida[5] = '\0';
+        // Leitura do espaço que separa as palavras
+        fscanf(registrador, "%c", &caracter);
+        // fread(palavraLida->palavraColetada, sizeof(char) * 6, 1, registrador);
+
+        if (strcmp(palavraLida, palavra->palavraColetada) == 0)
         {
             return 0;
         }
+
+        cont++;
     }
 
     fclose(registrador);
-
-    LiberaPalavra(palavraLida);
 
     return 1;
 }
 
 void RegistraPalavraNoArquivo(tPalavra *palavra)
 {
+    int i;
+    char caracter;
     FILE *registrador;
 
-    registrador = fopen("palavrasUsadas.bin", "ab+");
+    registrador = fopen("palavrasUsadas.txt", "a+");
 
-    fwrite(palavra->palavraColetada, sizeof(char) * 6, 1, registrador);
+    // Concerta a letra pra gravar igual a do arquivo "palavras.txt".
+    for (i = 0; i < 6; i++)
+    {
+        if (palavra->palavraColetada[i] >= 'A' && palavra->palavraColetada[i] <= 'Z')
+        {
+            caracter = palavra->palavraColetada[i];
+            caracter += 32;
+            palavra->palavraColetada[i] = caracter;
+        }
+    }
+
+    fprintf(registrador, "%s ", palavra->palavraColetada);
+    // fwrite(palavra->palavraColetada, sizeof(char) * 6, 1, registrador);
 
     fclose(registrador);
 }
