@@ -332,20 +332,27 @@ void EscreveLehEstatistica(tJogador *jogador, tJogador *jogadorLidoCopia)
         leitura->jogadores[i] = CriaJogador();
     }
 
-    CriaArquivo();
-
     FILE *arquivo = fopen("jogadores.bin", "rb");
+
+    if (arquivo == NULL)
+    {
+        CriaArquivo();
+    }
+
+    arquivo = fopen("jogadores.bin", "rb");
+
+    fseek(arquivo, 0, SEEK_SET);
 
     fread(leitura, sizeof(tLeitura), 1, arquivo);
 
-    for (i = 0; i < 20; i++)
+    /*for (i = 0; i < 20; i++)
     {
         ImprimeEstatisticaJogador(leitura->jogadores[i]);
-    }
+    }*/
 
     for (i = 0; i < 20; i++)
     {
-        if (ConfereNomeJogadorEstatistica(jogador, leitura->jogadores[i]) == 0)
+        if (strcmp(jogador->nome, leitura->jogadores[i]->nome) == 0)
         {
             ModificaJogadorEstatistica(jogador, leitura->jogadores[i]);
             ImprimeEstatisticaJogador(leitura->jogadores[i]);
