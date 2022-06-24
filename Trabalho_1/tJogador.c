@@ -1193,18 +1193,18 @@ void Ranking()
     {
         if (jogadores[i].nome[0] != '\0')
         {
-            printf("%s, ", jogadores[i].nome);
+            printf("%s: ", jogadores[i].nome);
             printf("%d, ", jogadores[i].qtdJogos);
-            printf("%f, ", jogadores[i].porcentagemVitorias);
+            printf("%.2f%%, ", jogadores[i].porcentagemVitorias);
             printf("%d, ", jogadores[i].sequenciaVitorias);
             printf("%d\n", jogadores[i].maiorSequenciaVitorias);
-            printf("%d\n", jogadores[i].ganhouUmaTentativa);
-            printf("%d\n", jogadores[i].ganhouDuasTentativas);
-            printf("%d\n", jogadores[i].ganhouTresTentativas);
-            printf("%d\n", jogadores[i].ganhouQuatroTentativas);
-            printf("%d\n", jogadores[i].ganhouCincoTentativas);
-            printf("%d\n", jogadores[i].ganhouSeisTentativas);
-            printf("%d\n\n", jogadores[i].qtdDerrotas);
+            printf("1: %d\n", jogadores[i].ganhouUmaTentativa);
+            printf("2: %d\n", jogadores[i].ganhouDuasTentativas);
+            printf("3: %d\n", jogadores[i].ganhouTresTentativas);
+            printf("4: %d\n", jogadores[i].ganhouQuatroTentativas);
+            printf("5: %d\n", jogadores[i].ganhouCincoTentativas);
+            printf("6: %d\n", jogadores[i].ganhouSeisTentativas);
+            printf("dd: %d\n\n", jogadores[i].qtdDerrotas);
         }
     }
 }
