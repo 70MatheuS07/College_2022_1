@@ -13,6 +13,8 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
 
+    ImprimePalavra(palavra);
+
     jogo = InicializaJogadas();
 
     InicializaPalavraAtual(palavra);
@@ -38,8 +40,9 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
             // Coloca porcentagem de vitorias, sequencia e maxima sequencia de vitorias.
             ClassificacaoParcial(jogador);
+            LehJogadoresEstatisticaTXT(jogador);
 
-            ImprimeEstatisticaJogador(jogador);
+            // ImprimeEstatisticaJogador(jogador);
 
             // EscreveLehEstatistica(jogador);
 
@@ -50,8 +53,12 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
         {
             RegistraEstatisticaSolo(jogador, jogo);
             CabecalhoJogoDerrotaSolo(jogador, palavra, jogo);
-            ImprimeEstatisticaJogador(jogador);
-            // EscreveLehEstatistica(jogador);
+
+            // Coloca porcentagem de vitorias, sequencia e maxima sequencia de vitorias.
+            ClassificacaoParcial(jogador);
+            LehJogadoresEstatisticaTXT(jogador);
+            // ImprimeEstatisticaJogador(jogador);
+            //  EscreveLehEstatistica(jogador);
 
             break;
         }
@@ -101,10 +108,19 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
         {
             RegistraEstatisticaDupla(jogador_1, jogador_2, jogo);
             CabecalhoJogoVitoriaDupla(jogador_1, jogador_2, palavra, jogo);
-            ImprimeEstatisticaJogador(jogador_1);
-            ImprimeEstatisticaJogador(jogador_2);
-            // EscreveLehEstatistica(jogador_1);
-            // EscreveLehEstatistica(jogador_2);
+
+            // Coloca porcentagem de vitorias, sequencia e maxima sequencia de vitorias.
+            ClassificacaoParcial(jogador_1);
+            LehJogadoresEstatisticaTXT(jogador_1);
+
+            // Coloca porcentagem de vitorias, sequencia e maxima sequencia de vitorias.
+            ClassificacaoParcial(jogador_2);
+            LehJogadoresEstatisticaTXT(jogador_2);
+
+            // ImprimeEstatisticaJogador(jogador_1);
+            // ImprimeEstatisticaJogador(jogador_2);
+            //  EscreveLehEstatistica(jogador_1);
+            //  EscreveLehEstatistica(jogador_2);
 
             break;
         }
@@ -113,8 +129,17 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
         {
             RegistraEstatisticaDupla(jogador_1, jogador_2, jogo);
             CabecalhoJogoDerrotaDupla(jogador_1, jogador_2, palavra, jogo);
-            ImprimeEstatisticaJogador(jogador_1);
-            ImprimeEstatisticaJogador(jogador_2);
+
+            // Coloca porcentagem de vitorias, sequencia e maxima sequencia de vitorias.
+            ClassificacaoParcial(jogador_1);
+            LehJogadoresEstatisticaTXT(jogador_1);
+
+            // Coloca porcentagem de vitorias, sequencia e maxima sequencia de vitorias.
+            ClassificacaoParcial(jogador_2);
+            LehJogadoresEstatisticaTXT(jogador_2);
+
+            // ImprimeEstatisticaJogador(jogador_1);
+            // ImprimeEstatisticaJogador(jogador_2);
             // EscreveLehEstatistica(jogador_1);
             // EscreveLehEstatistica(jogador_2);
 

@@ -91,13 +91,12 @@ int main()
 
         else if (modoJogo == 8)
         {
-            // Ranking.
+            Ranking();
         }
 
         else if (modoJogo == 9)
         {
-            // Está dando segmentation fault. Quando faz na mão.
-            // ImprimeEstatisticaJogador(jogador_1);
+            ImprimeEstatisticaPlayer(jogador_1);
         }
 
         else if (modoJogo == 0)
@@ -109,9 +108,6 @@ int main()
 
                 printf("1- Continuar\n");
                 printf("2- Sair do Jogo\n\n");
-
-                /* Aqui eu iria zerar a sequencia de vitorias,
-                   porém nao consegui fazer o arquivo binario. */
 
                 scanf("%d", &num);
 
@@ -127,6 +123,7 @@ int main()
 
             if (num == 2 || jogou > 0)
             {
+                ZeraSequenciaDeVitorias(jogador_1);
                 break;
             }
         }

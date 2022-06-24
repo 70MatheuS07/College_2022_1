@@ -50,13 +50,11 @@ void SorteiaPalavra(tPalavra *palavra, int i)
     escolhida = rand() % (QTD_PALAVRAS);
 
     palavra->escolhida = escolhida;
-
-    printf("\n%d\n", escolhida);
 }
 
 void ImprimePalavra(tPalavra *palavra)
 {
-    printf("%s\n", palavra->palavraColetada);
+    printf("\n\n%s\n\n", palavra->palavraColetada);
 }
 
 void LiberaPalavra(tPalavra *palavra)
@@ -286,8 +284,6 @@ void InicializaPalavraClassificada(tPalavra *palavra)
         palavra->palavraClassificada[i][19] = ' ';
         palavra->palavraClassificada[i][20] = '|';
         palavra->palavraClassificada[i][21] = '\0';
-
-        printf("\n%s\n", palavra->palavraClassificada[i]);
     }
 }
 
@@ -366,8 +362,6 @@ void CopiaStringParaPalavra(tPalavra *palavra, char string[6])
     {
         palavra->palavraColetada[i] = string[i];
     }
-
-    printf("\n%s\n", palavra->palavraColetada);
 }
 
 char CharPalavraAtual(tPalavra *palavra, int j)
@@ -409,6 +403,7 @@ int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
 
         if (strcmp(palavraLida, palavra->palavraColetada) == 0)
         {
+            fclose(registrador);
             return 0;
         }
 

@@ -53,7 +53,7 @@ int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *jogadores);
 
 void EscreveJogadorEstatistica(tJogador *jogador, tJogador *leitura);
 
-void ModificaJogadorEstatistica(tJogador *jogador, tJogador *lido);
+void ModificaJogadorEstatistica(tJogador *jogador, tJogador lido);
 
 void ImprimeEstatisticaJogador(tJogador *jogador);
 
@@ -72,5 +72,15 @@ int SlotJogadorVazio(tJogador *jogador);
 void ClassificacaoParcial(tJogador *jogador);
 
 void EscreveJogadorEstatisticaTXT(tJogador *jogador);
+
+void LehJogadoresEstatisticaTXT(tJogador *jogador);
+
+int QuantidadeJogadorEstatisticaTXT();
+
+void ImprimeEstatisticaPlayer(tJogador *jogador);
+
+void ZeraSequenciaDeVitorias(tJogador *jogador);
+
+void Ranking();
 
 #endif
