@@ -9,11 +9,19 @@ struct tJogo
     int quemJoga;
 };
 
+/**
+ * @brief Joga o modo termo listado no menu.
+ * 
+ * @param jogador 
+ * @param palavra 
+ * @param arquivo 
+ */
 void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
 
-    ImprimePalavra(palavra);
+    // So pra depurar manualmente.
+    // ImprimePalavra(palavra);
 
     jogo = InicializaJogadas();
 
@@ -67,6 +75,12 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
     LiberaJogo(jogo);
 }
 
+/**
+ * @brief Atualiza as tentativas do jogo.
+ * 
+ * @param palavra 
+ * @param jogo 
+ */
 void AtualizaTentativas(tPalavra *palavra, tJogo *jogo)
 {
     int aux = 0;
@@ -76,6 +90,13 @@ void AtualizaTentativas(tPalavra *palavra, tJogo *jogo)
     PassaTentativas(palavra, aux);
 }
 
+/**
+ * @brief Joga o modo dupla listado no menu.
+ * 
+ * @param jogador_1 
+ * @param palavra 
+ * @param arquivo 
+ */
 void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 {
     tJogo *jogo;
@@ -151,6 +172,11 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
     LiberaJogo(jogo);
 }
 
+/**
+ * @brief Aloca memoria e inicializa as tentativas.
+ * 
+ * @return tJogo* 
+ */
 tJogo *InicializaJogadas()
 {
     tJogo *jogo;
@@ -165,6 +191,14 @@ tJogo *InicializaJogadas()
     return jogo;
 }
 
+/**
+ * @brief Imprime na tela a pagina principal do jogo no modo termo com as informações das palavras, jogador e teclado.
+ * 
+ * @param jogador 
+ * @param palavra 
+ * @param jogo 
+ * @param arquivo 
+ */
 void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo)
 {
     printf("+-----------------------------------------------------------+\n");
@@ -209,6 +243,15 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *
     AlteraTeclado(jogo, palavra);
 }
 
+/**
+ * @brief Imprime na tela a pagina principal do jogo no modo dupla com as informações das palavras, jogadores e teclado.
+ * 
+ * @param jogador_1 
+ * @param jogador_2 
+ * @param palavra 
+ * @param jogo 
+ * @param arquivo 
+ */
 void CabecalhoJogoDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo)
 {
     printf("+-----------------------------------------------------------+\n");
@@ -266,6 +309,11 @@ void CabecalhoJogoDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *pala
     ProximoJogador(jogo);
 }
 
+/**
+ * @brief Passa pro proximo jogador.
+ * 
+ * @param jogo 
+ */
 void ProximoJogador(tJogo *jogo)
 {
     int um = 1, dois = 2;
@@ -281,6 +329,13 @@ void ProximoJogador(tJogo *jogo)
     }
 }
 
+/**
+ * @brief Confere se as palavras sao iguais.
+ * 
+ * @param palavra 
+ * @param arquivo 
+ * @return int 
+ */
 int PalavraExiste(tPalavra *palavra, tArquivo *arquivo)
 {
     int i, j, cont = 0;
@@ -308,11 +363,21 @@ int PalavraExiste(tPalavra *palavra, tArquivo *arquivo)
     return 0;
 }
 
+/**
+ * @brief Imprime as tentativas restantes.
+ * 
+ * @param jogo 
+ */
 void ImprimeTentativasRestantes(tJogo *jogo)
 {
     printf("| Tentativas restantes: %d                                   |\n", jogo->tentativas);
 }
 
+/**
+ * @brief Diminui as tentativas.
+ * 
+ * @param jogo 
+ */
 void ReduzTentativasRestantes(tJogo *jogo)
 {
     int result = 0;
@@ -322,6 +387,12 @@ void ReduzTentativasRestantes(tJogo *jogo)
     jogo->tentativas = result;
 }
 
+/**
+ * @brief Confere se as tentativas estão zeradas.
+ * 
+ * @param jogo 
+ * @return int 
+ */
 int TentativasZeradas(tJogo *jogo)
 {
     if (jogo->tentativas == 0)
@@ -332,6 +403,13 @@ int TentativasZeradas(tJogo *jogo)
     return 0;
 }
 
+/**
+ * @brief Imprime um resultado de vitoria para o modo termo.
+ * 
+ * @param jogador 
+ * @param palavra 
+ * @param jogo 
+ */
 void CabecalhoJogoVitoriaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
@@ -356,6 +434,14 @@ void CabecalhoJogoVitoriaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
     printf(" venceu!\n\n");
 }
 
+/**
+ * @brief Imprime um resultado de vitoria para o modo dupla.
+ * 
+ * @param jogador_1 
+ * @param jogador_2 
+ * @param palavra 
+ * @param jogo 
+ */
 void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
@@ -389,6 +475,13 @@ void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavr
     }
 }
 
+/**
+ * @brief Imprime um resultado de derrota para o modo termo.
+ * 
+ * @param jogador 
+ * @param palavra 
+ * @param jogo 
+ */
 void CabecalhoJogoDerrotaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
@@ -413,6 +506,14 @@ void CabecalhoJogoDerrotaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
     printf(" perdeu!\n\n");
 }
 
+/**
+ * @brief Imprime um resultado de derrota para o modo dupla.
+ * 
+ * @param jogador_1 
+ * @param jogador_2 
+ * @param palavra 
+ * @param jogo 
+ */
 void CabecalhoJogoDerrotaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo)
 {
     printf("+-----------------------------------------------------------+\n");
@@ -442,6 +543,11 @@ void CabecalhoJogoDerrotaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavr
     printf(" perderam!\n\n");
 }
 
+/**
+ * @brief Imprime teclado na tela.
+ * 
+ * @param jogo 
+ */
 void ImprimeTecladoJogo(tJogo *jogo)
 {
     int i = 0;
@@ -477,6 +583,11 @@ void ImprimeTecladoJogo(tJogo *jogo)
     printf("                      |\n");
 }
 
+/**
+ * @brief Inicializa o teclado com suas letras correpondentes.
+ * 
+ * @param jogo 
+ */
 void InicializaTeclado(tJogo *jogo)
 {
     jogo->teclado[0] = 'Q';
@@ -508,6 +619,12 @@ void InicializaTeclado(tJogo *jogo)
     jogo->teclado[26] = '\0';
 }
 
+/**
+ * @brief Modifica o teclado de acordo com a palavra escolhida.
+ * 
+ * @param jogo 
+ * @param palavra 
+ */
 void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
 {
     int i = 0, j = 0;
@@ -534,6 +651,11 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
     }
 }
 
+/**
+ * @brief Desaloca memoria do jogo.
+ * 
+ * @param jogo 
+ */
 void LiberaJogo(tJogo *jogo)
 {
     free(jogo->teclado);
@@ -543,6 +665,11 @@ void LiberaJogo(tJogo *jogo)
     jogo = NULL;
 }
 
+/**
+ * @brief Randomiza quem começa a jogar no modo dupla.
+ * 
+ * @param jogo 
+ */
 void RandomizaQuemComeca(tJogo *jogo)
 {
     int num = 0;
@@ -556,6 +683,12 @@ void RandomizaQuemComeca(tJogo *jogo)
     printf("\n\nQuem comeca: %d\n\n", jogo->quemJoga);
 }
 
+/**
+ * @brief Registra se ganhou ou perdeu com base nas tentativas para o modo termo.
+ * 
+ * @param jogador 
+ * @param jogo 
+ */
 void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo)
 {
     RegistraQtdJogos(jogador);
@@ -596,6 +729,13 @@ void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo)
     }
 }
 
+/**
+ * @brief Registra se ganhou ou perdeu com base nas tentativas para o modo dupla.
+ * 
+ * @param jogador_1 
+ * @param jogador_2 
+ * @param jogo 
+ */
 void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *jogo)
 {
     RegistraQtdJogos(jogador_1);

@@ -7,6 +7,11 @@ struct tArquivo
 
 #define QTD_PALAVRAS 18289
 
+/**
+ * @brief Aloca memoria para amrmazenar as 18289 palavras.
+ *
+ * @return tArquivo*
+ */
 tArquivo *CriaArmazenaPalavrasArquivo()
 {
     tArquivo *arquivo;
@@ -55,6 +60,12 @@ tArquivo *CriaArmazenaPalavrasArquivo()
     return arquivo;
 }
 
+/**
+ * @brief Vai na linha da palavra escolhida e copia ela para a struct tPalavra *palavra.
+ *
+ * @param palavra
+ * @param arquivo
+ */
 void ColetaPalavraDoArquivo(tPalavra *palavra, tArquivo *arquivo)
 {
     int i = 0, j = 0;
@@ -73,6 +84,11 @@ void ColetaPalavraDoArquivo(tPalavra *palavra, tArquivo *arquivo)
     }
 }
 
+/**
+ * @brief Desaloca a memoria armazenada para guardar as 18289 palavras de sorteio.
+ *
+ * @param arquivo
+ */
 void LiberaPalavrasArquivo(tArquivo *arquivo)
 {
     int i = 0;
@@ -90,6 +106,14 @@ void LiberaPalavrasArquivo(tArquivo *arquivo)
     arquivo = NULL;
 }
 
+/**
+ * @brief Coleta um char do struct arquivo->palavra[i][j].
+ *
+ * @param arquivo
+ * @param i
+ * @param j
+ * @return char
+ */
 char CharPalavraArquivo(tArquivo *arquivo, int i, int j)
 {
     char caracter;

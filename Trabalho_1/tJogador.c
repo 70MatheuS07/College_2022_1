@@ -21,6 +21,11 @@ struct tLeitura
     tJogador **jogadores;
 };
 
+/**
+ * @brief Alloca memoria jogador
+ *
+ * @return tJogador*
+ */
 tJogador *CriaJogador()
 {
     int i;
@@ -37,6 +42,11 @@ tJogador *CriaJogador()
     return jogador;
 }
 
+/**
+ * @brief Leh jogador_1 e garante que seje de tamanho 20 ou menor.
+ *
+ * @param jogador_1
+ */
 void LehJogador_1(tJogador *jogador_1)
 {
     int i = 0, cont = 0;
@@ -78,6 +88,12 @@ void LehJogador_1(tJogador *jogador_1)
     jogador_1->qtdDerrotas = 0;
 }
 
+/**
+ * @brief Leh jogador_2, garante que seje de tamanho 20 ou menor e diferente de jogador_1.
+ *
+ * @param jogador_1
+ * @param jogador_2
+ */
 void LehJogador_2(tJogador *jogador_1, tJogador *jogador_2)
 {
     int i = 0, cont = 0;
@@ -134,6 +150,13 @@ void LehJogador_2(tJogador *jogador_1, tJogador *jogador_2)
     jogador_2->qtdDerrotas = 0;
 }
 
+/**
+ * @brief Compara dois nomes e vê se são iguais
+ *
+ * @param jogador_1
+ * @param nomeVerifica
+ * @return int
+ */
 int NomesIguais(tJogador *jogador_1, char nomeVerifica[10000])
 {
     if (strcmp(jogador_1->nome, nomeVerifica) == 0)
@@ -144,6 +167,12 @@ int NomesIguais(tJogador *jogador_1, char nomeVerifica[10000])
     return 1;
 }
 
+/**
+ * @brief Escolhe o modo de jogo.
+ *
+ * @param jogador
+ * @return int
+ */
 int EscolhaDeModo(tJogador *jogador)
 {
     int num = 0;
@@ -171,17 +200,33 @@ int EscolhaDeModo(tJogador *jogador)
     return num;
 }
 
+/**
+ * @brief Libera memoria armazenada.
+ *
+ * @param player
+ */
 void LiberaJogador(tJogador *player)
 {
     free(player);
     player = NULL;
 }
 
+/**
+ * @brief Imprime nome do Jogador para o cabeçalho.
+ *
+ * @param jogador
+ */
 void ImprimeNomeJogadorCabecalho(tJogador *jogador)
 {
     printf(" Jogador %s digite uma palavra a sua escolha: ", jogador->nome);
 }
 
+/**
+ * @brief Imprime jogadores para o cabeçalho.
+ *
+ * @param jogador_1
+ * @param jogador_2
+ */
 void ImprimeAmbosJogadores(tJogador *jogador_1, tJogador *jogador_2)
 {
     printf("|");
@@ -195,6 +240,11 @@ void ImprimeAmbosJogadores(tJogador *jogador_1, tJogador *jogador_2)
     printf("|\n");
 }
 
+/**
+ * @brief Imprime os espaços certinho para o cabeçalho.
+ *
+ * @param jogador_1
+ */
 void ImprimeEspacosJogador1(tJogador *jogador_1)
 {
     int num = 0, i = 0;
@@ -207,6 +257,11 @@ void ImprimeEspacosJogador1(tJogador *jogador_1)
     }
 }
 
+/**
+ * @brief Imprime os espaços certinho para o cabeçalho.
+ *
+ * @param jogador_2
+ */
 void ImprimeEspacosJogador2(tJogador *jogador_2)
 {
     int num = 0, i = 0;
@@ -219,11 +274,21 @@ void ImprimeEspacosJogador2(tJogador *jogador_2)
     }
 }
 
+/**
+ * @brief Imprime o nome do jogador.
+ *
+ * @param jogador
+ */
 void ImprimeNomeJogador(tJogador *jogador)
 {
     printf("%s", jogador->nome);
 }
 
+/**
+ * @brief Registra +1 na quantidade de jogos.
+ *
+ * @param jogador
+ */
 void RegistraQtdJogos(tJogador *jogador)
 {
     int num = 0;
@@ -235,6 +300,11 @@ void RegistraQtdJogos(tJogador *jogador)
     jogador->qtdJogos = num;
 }
 
+/**
+ * @brief Registra se ganhou em 1 tentativa.
+ *
+ * @param jogador
+ */
 void RegistraGanhouUmaTentativa(tJogador *jogador)
 {
     int num = 0;
@@ -246,6 +316,11 @@ void RegistraGanhouUmaTentativa(tJogador *jogador)
     jogador->ganhouUmaTentativa = num;
 }
 
+/**
+ * @brief Registra se ganhou em 2 tentativas.
+ *
+ * @param jogador
+ */
 void RegistraGanhouDuasTentativas(tJogador *jogador)
 {
     int num = 0;
@@ -257,6 +332,11 @@ void RegistraGanhouDuasTentativas(tJogador *jogador)
     jogador->ganhouDuasTentativas = num;
 }
 
+/**
+ * @brief Registra se ganhou em 3 tentativas.
+ *
+ * @param jogador
+ */
 void RegistraGanhouTresTentativas(tJogador *jogador)
 {
     int num = 0;
@@ -268,6 +348,11 @@ void RegistraGanhouTresTentativas(tJogador *jogador)
     jogador->ganhouTresTentativas = num;
 }
 
+/**
+ * @brief Registra se ganhou em 4 tentativas.
+ *
+ * @param jogador
+ */
 void RegistraGanhouQuatroTentativas(tJogador *jogador)
 {
     int num = 0;
@@ -279,6 +364,11 @@ void RegistraGanhouQuatroTentativas(tJogador *jogador)
     jogador->ganhouQuatroTentativas = num;
 }
 
+/**
+ * @brief Registra se ganhou em 5 tentativas.
+ *
+ * @param jogador
+ */
 void RegistraGanhouCincoTentativas(tJogador *jogador)
 {
     int num = 0;
@@ -290,6 +380,11 @@ void RegistraGanhouCincoTentativas(tJogador *jogador)
     jogador->ganhouCincoTentativas = num;
 }
 
+/**
+ * @brief Registra se ganhou em 6 tentativas.
+ *
+ * @param jogador
+ */
 void RegistraGanhouSeisTentativas(tJogador *jogador)
 {
     int num = 0;
@@ -301,6 +396,11 @@ void RegistraGanhouSeisTentativas(tJogador *jogador)
     jogador->ganhouSeisTentativas = num;
 }
 
+/**
+ * @brief Registra quantidade de derrotas.
+ *
+ * @param jogador
+ */
 void RegistraQtdDerrotas(tJogador *jogador)
 {
     int num = 0;
@@ -312,7 +412,10 @@ void RegistraQtdDerrotas(tJogador *jogador)
     jogador->qtdDerrotas = num;
 }
 
-/*void EscreveLehEstatistica(tJogador *jogador)
+/* Tentei fazer o arquivo binario mas estava tendo bugs
+   que nem tirando dúvidas com os monitores nós não conseguimos resolver.
+
+void EscreveLehEstatistica(tJogador *jogador)
 {
     int cont = 0, i = 0;
 
@@ -369,6 +472,12 @@ void RegistraQtdDerrotas(tJogador *jogador)
     fclose(arquivo);
 } */
 
+/**
+ * @brief Verifica se não tem nome no jogador.
+ *
+ * @param jogador
+ * @return int
+ */
 int SlotJogadorVazio(tJogador *jogador)
 {
     if (jogador->nome[0] == '\0')
@@ -379,6 +488,11 @@ int SlotJogadorVazio(tJogador *jogador)
     return 0;
 }
 
+/**
+ * @brief Só cria arquivo binario.
+ *
+ */
+/*
 void CriaArquivo()
 {
     FILE *arquivo;
@@ -392,7 +506,15 @@ void CriaArquivo()
 
     fclose(arquivo);
 }
+*/
 
+/**
+ * @brief Copia o jogador lido para o jogadorLidoCopia.
+ *
+ * @param lido
+ * @param jogadorLidoCopia
+ */
+/*
 void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia)
 {
     char nome[21];
@@ -434,7 +556,16 @@ void ClonaJogador(tJogador *lido, tJogador *jogadorLidoCopia)
     jogadorLidoCopia->ganhouSeisTentativas = ganhouSeisTentativas;
     jogadorLidoCopia->qtdDerrotas = qtdDerrotas;
 }
+*/
 
+/**
+ * @brief Compara nome de dois jogadores.
+ * 
+ * @param jogador 
+ * @param jogadores 
+ * @return int 
+ */
+/*
 int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *jogadores)
 {
     if (strcmp(jogador->nome, jogadores->nome) == 0)
@@ -444,7 +575,15 @@ int ConfereNomeJogadorEstatistica(tJogador *jogador, tJogador *jogadores)
 
     return 1;
 }
+*/
 
+/**
+ * @brief Escreve no jogador leitura as informações do jogador.
+ * 
+ * @param jogador 
+ * @param leitura 
+ */
+/*
 void EscreveJogadorEstatistica(tJogador *jogador, tJogador *leitura)
 {
     float porcentagemVitorias = 0;
@@ -477,7 +616,14 @@ void EscreveJogadorEstatistica(tJogador *jogador, tJogador *leitura)
     leitura->ganhouSeisTentativas = jogador->ganhouSeisTentativas;
     leitura->qtdDerrotas = jogador->qtdDerrotas;
 }
+*/
 
+/**
+ * @brief Altera os valores de tJogador lido adicionando as informações coletadas do tJogador jogador.
+ * 
+ * @param jogador 
+ * @param lido 
+ */
 void ModificaJogadorEstatistica(tJogador *jogador, tJogador lido)
 {
     int qtdJogos = 0;
@@ -549,6 +695,11 @@ void ModificaJogadorEstatistica(tJogador *jogador, tJogador lido)
     lido.qtdDerrotas = qtdDerrotas;
 }
 
+/**
+ * @brief Classifica o player.
+ * 
+ * @param jogador 
+ */
 void ClassificacaoParcial(tJogador *jogador)
 {
     float porcentagemVitorias = 0;
@@ -570,6 +721,11 @@ void ClassificacaoParcial(tJogador *jogador)
     }
 }
 
+/**
+ * @brief Imprime o jogador da maneira especificada.
+ * 
+ * @param jogador 
+ */
 void ImprimeEstatisticaJogador(tJogador *jogador)
 {
     printf("%s: ", jogador->nome);
@@ -586,6 +742,13 @@ void ImprimeEstatisticaJogador(tJogador *jogador)
     printf("dd: %d\n\n", jogador->qtdDerrotas);
 }
 
+/**
+ * @brief Salva o nome do jogador.
+ * 
+ * @param jogador 
+ * @param nomeSalvo 
+ * @param jogou 
+ */
 void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou)
 {
     if (jogou == 0)
@@ -599,6 +762,11 @@ void SalvaNome(tJogador *jogador, char nomeSalvo[21], int jogou)
     }
 }
 
+/**
+ * @brief Inicializa tJogador jogador com \0's nos nomes e 0 nos numeros do tipo int e float.
+ * 
+ * @param jogador 
+ */
 void InicializaJogador(tJogador *jogador)
 {
     int qtdJogos = 0;
@@ -626,8 +794,7 @@ void InicializaJogador(tJogador *jogador)
     jogador->qtdDerrotas = qtdDerrotas;
 }
 
-/* Esboco de Imprimir o Ranking
-
+/* Esboco de Imprimir o Ranking com binario
 void ImprimeRanking()
 {
     int num = 0;
@@ -662,6 +829,11 @@ void ImprimeRanking()
     }
 } */
 
+/**
+ * @brief Escreve o jogador no arquivo.
+ * 
+ * @param jogador 
+ */
 void EscreveJogadorEstatisticaTXT(tJogador *jogador)
 {
     FILE *arquivo = fopen("jogadores.txt", "a+");
@@ -682,6 +854,11 @@ void EscreveJogadorEstatisticaTXT(tJogador *jogador)
     fclose(arquivo);
 }
 
+/**
+ * @brief Leh, analisa o tJogador jogador comparado aos demais e devolve os jogadores do arquivo jogadores.txt com o tJogador jogador.
+ * 
+ * @param jogador 
+ */
 void LehJogadoresEstatisticaTXT(tJogador *jogador)
 {
     int num = 0, i, cont = 0;
@@ -854,6 +1031,11 @@ void LehJogadoresEstatisticaTXT(tJogador *jogador)
     fclose(arquivo);
 }
 
+/**
+ * @brief Conta quantos jogadores tem dentro do arquivo.
+ * 
+ * @return int 
+ */
 int QuantidadeJogadorEstatisticaTXT()
 {
     int num = 0;
@@ -889,6 +1071,11 @@ int QuantidadeJogadorEstatisticaTXT()
     return num;
 }
 
+/**
+ * @brief Imprime no arquivo e na tela, o jogador e suas estatisticas.
+ * 
+ * @param jogador 
+ */
 void ImprimeEstatisticaPlayer(tJogador *jogador)
 {
     int num = 0, i, cont = 0;
@@ -964,6 +1151,11 @@ void ImprimeEstatisticaPlayer(tJogador *jogador)
     }
 }
 
+/**
+ * @brief Zera a sequencia de vitorias do tJogador jogador.
+ * 
+ * @param jogador 
+ */
 void ZeraSequenciaDeVitorias(tJogador *jogador)
 {
     int num = 0, i, cont = 0;
@@ -1047,6 +1239,10 @@ void ZeraSequenciaDeVitorias(tJogador *jogador)
     fclose(arquivo);
 }
 
+/**
+ * @brief Desenvolve a organização do arquivo para imprimir na tela os jogadores na ordem especificada no trabalho.
+ * 
+ */
 void Ranking()
 {
     int num = 0, i, j, cont = 0;

@@ -42,7 +42,9 @@ int main()
                 break;
             }
 
+            //Sorteia o numero da palavra.
             SorteiaPalavra(palavra, i);
+
             ColetaPalavraDoArquivo(palavra, arquivo);
 
             if (NaoFoiSorteadoEssaPalavra(palavra) == 1)
