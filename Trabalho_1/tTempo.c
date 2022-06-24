@@ -1,10 +1,14 @@
 #include "tTempo.h"
 
-// Pega os segundos dado pela maquina, para sortear uma palavra.
+/**
+ * @brief Coleta os segundos que representa o dia.
+ *
+ * @return unsigned int
+ */
 unsigned int PegaTempo()
 {
     long int mytime = 0;
-    unsigned int tempo=0;
+    unsigned int tempo = 0;
 
     mytime = time(NULL);
 

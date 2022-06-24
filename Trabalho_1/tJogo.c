@@ -11,10 +11,10 @@ struct tJogo
 
 /**
  * @brief Joga o modo termo listado no menu.
- * 
- * @param jogador 
- * @param palavra 
- * @param arquivo 
+ *
+ * @param jogador
+ * @param palavra
+ * @param arquivo
  */
 void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 {
@@ -77,9 +77,9 @@ void JogaJogoSolo(tJogador *jogador, tPalavra *palavra, tArquivo *arquivo)
 
 /**
  * @brief Atualiza as tentativas do jogo.
- * 
- * @param palavra 
- * @param jogo 
+ *
+ * @param palavra
+ * @param jogo
  */
 void AtualizaTentativas(tPalavra *palavra, tJogo *jogo)
 {
@@ -92,10 +92,10 @@ void AtualizaTentativas(tPalavra *palavra, tJogo *jogo)
 
 /**
  * @brief Joga o modo dupla listado no menu.
- * 
- * @param jogador_1 
- * @param palavra 
- * @param arquivo 
+ *
+ * @param jogador_1
+ * @param palavra
+ * @param arquivo
  */
 void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 {
@@ -104,6 +104,9 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 
     jogador_2 = CriaJogador();
     LehJogador_2(jogador_1, jogador_2);
+
+    // So pra depurar manualmente.
+    ImprimePalavra(palavra);
 
     jogo = InicializaJogadas();
 
@@ -174,8 +177,8 @@ void JogaJogoDupla(tJogador *jogador_1, tPalavra *palavra, tArquivo *arquivo)
 
 /**
  * @brief Aloca memoria e inicializa as tentativas.
- * 
- * @return tJogo* 
+ *
+ * @return tJogo*
  */
 tJogo *InicializaJogadas()
 {
@@ -193,11 +196,11 @@ tJogo *InicializaJogadas()
 
 /**
  * @brief Imprime na tela a pagina principal do jogo no modo termo com as informações das palavras, jogador e teclado.
- * 
- * @param jogador 
- * @param palavra 
- * @param jogo 
- * @param arquivo 
+ *
+ * @param jogador
+ * @param palavra
+ * @param jogo
+ * @param arquivo
  */
 void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo)
 {
@@ -245,12 +248,12 @@ void CabecalhoJogo(tJogador *jogador, tPalavra *palavra, tJogo *jogo, tArquivo *
 
 /**
  * @brief Imprime na tela a pagina principal do jogo no modo dupla com as informações das palavras, jogadores e teclado.
- * 
- * @param jogador_1 
- * @param jogador_2 
- * @param palavra 
- * @param jogo 
- * @param arquivo 
+ *
+ * @param jogador_1
+ * @param jogador_2
+ * @param palavra
+ * @param jogo
+ * @param arquivo
  */
 void CabecalhoJogoDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo, tArquivo *arquivo)
 {
@@ -311,8 +314,8 @@ void CabecalhoJogoDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *pala
 
 /**
  * @brief Passa pro proximo jogador.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void ProximoJogador(tJogo *jogo)
 {
@@ -331,10 +334,10 @@ void ProximoJogador(tJogo *jogo)
 
 /**
  * @brief Confere se as palavras sao iguais.
- * 
- * @param palavra 
- * @param arquivo 
- * @return int 
+ *
+ * @param palavra
+ * @param arquivo
+ * @return int
  */
 int PalavraExiste(tPalavra *palavra, tArquivo *arquivo)
 {
@@ -365,8 +368,8 @@ int PalavraExiste(tPalavra *palavra, tArquivo *arquivo)
 
 /**
  * @brief Imprime as tentativas restantes.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void ImprimeTentativasRestantes(tJogo *jogo)
 {
@@ -375,8 +378,8 @@ void ImprimeTentativasRestantes(tJogo *jogo)
 
 /**
  * @brief Diminui as tentativas.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void ReduzTentativasRestantes(tJogo *jogo)
 {
@@ -389,9 +392,9 @@ void ReduzTentativasRestantes(tJogo *jogo)
 
 /**
  * @brief Confere se as tentativas estão zeradas.
- * 
- * @param jogo 
- * @return int 
+ *
+ * @param jogo
+ * @return int
  */
 int TentativasZeradas(tJogo *jogo)
 {
@@ -405,10 +408,10 @@ int TentativasZeradas(tJogo *jogo)
 
 /**
  * @brief Imprime um resultado de vitoria para o modo termo.
- * 
- * @param jogador 
- * @param palavra 
- * @param jogo 
+ *
+ * @param jogador
+ * @param palavra
+ * @param jogo
  */
 void CabecalhoJogoVitoriaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 {
@@ -436,11 +439,11 @@ void CabecalhoJogoVitoriaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 
 /**
  * @brief Imprime um resultado de vitoria para o modo dupla.
- * 
- * @param jogador_1 
- * @param jogador_2 
- * @param palavra 
- * @param jogo 
+ *
+ * @param jogador_1
+ * @param jogador_2
+ * @param palavra
+ * @param jogo
  */
 void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo)
 {
@@ -477,10 +480,10 @@ void CabecalhoJogoVitoriaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavr
 
 /**
  * @brief Imprime um resultado de derrota para o modo termo.
- * 
- * @param jogador 
- * @param palavra 
- * @param jogo 
+ *
+ * @param jogador
+ * @param palavra
+ * @param jogo
  */
 void CabecalhoJogoDerrotaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 {
@@ -508,11 +511,11 @@ void CabecalhoJogoDerrotaSolo(tJogador *jogador, tPalavra *palavra, tJogo *jogo)
 
 /**
  * @brief Imprime um resultado de derrota para o modo dupla.
- * 
- * @param jogador_1 
- * @param jogador_2 
- * @param palavra 
- * @param jogo 
+ *
+ * @param jogador_1
+ * @param jogador_2
+ * @param palavra
+ * @param jogo
  */
 void CabecalhoJogoDerrotaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavra *palavra, tJogo *jogo)
 {
@@ -545,8 +548,8 @@ void CabecalhoJogoDerrotaDupla(tJogador *jogador_1, tJogador *jogador_2, tPalavr
 
 /**
  * @brief Imprime teclado na tela.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void ImprimeTecladoJogo(tJogo *jogo)
 {
@@ -585,8 +588,8 @@ void ImprimeTecladoJogo(tJogo *jogo)
 
 /**
  * @brief Inicializa o teclado com suas letras correpondentes.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void InicializaTeclado(tJogo *jogo)
 {
@@ -621,9 +624,9 @@ void InicializaTeclado(tJogo *jogo)
 
 /**
  * @brief Modifica o teclado de acordo com a palavra escolhida.
- * 
- * @param jogo 
- * @param palavra 
+ *
+ * @param jogo
+ * @param palavra
  */
 void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
 {
@@ -653,8 +656,8 @@ void AlteraTeclado(tJogo *jogo, tPalavra *palavra)
 
 /**
  * @brief Desaloca memoria do jogo.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void LiberaJogo(tJogo *jogo)
 {
@@ -667,8 +670,8 @@ void LiberaJogo(tJogo *jogo)
 
 /**
  * @brief Randomiza quem começa a jogar no modo dupla.
- * 
- * @param jogo 
+ *
+ * @param jogo
  */
 void RandomizaQuemComeca(tJogo *jogo)
 {
@@ -679,15 +682,13 @@ void RandomizaQuemComeca(tJogo *jogo)
     num = 1 + (rand() % 2);
 
     jogo->quemJoga = num;
-
-    printf("\n\nQuem comeca: %d\n\n", jogo->quemJoga);
 }
 
 /**
  * @brief Registra se ganhou ou perdeu com base nas tentativas para o modo termo.
- * 
- * @param jogador 
- * @param jogo 
+ *
+ * @param jogador
+ * @param jogo
  */
 void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo)
 {
@@ -731,10 +732,10 @@ void RegistraEstatisticaSolo(tJogador *jogador, tJogo *jogo)
 
 /**
  * @brief Registra se ganhou ou perdeu com base nas tentativas para o modo dupla.
- * 
- * @param jogador_1 
- * @param jogador_2 
- * @param jogo 
+ *
+ * @param jogador_1
+ * @param jogador_2
+ * @param jogo
  */
 void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *jogo)
 {
@@ -746,31 +747,37 @@ void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *j
         if (6 - jogo->tentativas == 1)
         {
             RegistraGanhouUmaTentativa(jogador_2);
+            RegistraQtdDerrotas(jogador_1);
         }
 
         else if (6 - jogo->tentativas == 2)
         {
             RegistraGanhouDuasTentativas(jogador_2);
+            RegistraQtdDerrotas(jogador_1);
         }
 
         else if (6 - jogo->tentativas == 3)
         {
             RegistraGanhouTresTentativas(jogador_2);
+            RegistraQtdDerrotas(jogador_1);
         }
 
         else if (6 - jogo->tentativas == 3)
         {
             RegistraGanhouQuatroTentativas(jogador_2);
+            RegistraQtdDerrotas(jogador_1);
         }
 
         else if (6 - jogo->tentativas == 4)
         {
             RegistraGanhouCincoTentativas(jogador_2);
+            RegistraQtdDerrotas(jogador_1);
         }
 
         else if (6 - jogo->tentativas == 5)
         {
             RegistraGanhouSeisTentativas(jogador_2);
+            RegistraQtdDerrotas(jogador_1);
         }
 
         else
@@ -785,31 +792,37 @@ void RegistraEstatisticaDupla(tJogador *jogador_1, tJogador *jogador_2, tJogo *j
         if (6 - jogo->tentativas == 1)
         {
             RegistraGanhouUmaTentativa(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
         }
 
         else if (6 - jogo->tentativas == 2)
         {
             RegistraGanhouDuasTentativas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
         }
 
         else if (6 - jogo->tentativas == 3)
         {
             RegistraGanhouTresTentativas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
         }
 
         else if (6 - jogo->tentativas == 3)
         {
             RegistraGanhouQuatroTentativas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
         }
 
         else if (6 - jogo->tentativas == 4)
         {
             RegistraGanhouCincoTentativas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
         }
 
         else if (6 - jogo->tentativas == 5)
         {
             RegistraGanhouSeisTentativas(jogador_1);
+            RegistraQtdDerrotas(jogador_2);
         }
 
         else

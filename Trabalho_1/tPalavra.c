@@ -14,6 +14,11 @@ struct tPalavra
     int quantidadePalavras;
 };
 
+/**
+ * @brief Aloca memoria para tPalavra *palavra.
+ *
+ * @return tPalavra*
+ */
 tPalavra *CriaPalavra()
 {
     int i;
@@ -36,6 +41,12 @@ tPalavra *CriaPalavra()
     return palavra;
 }
 
+/**
+ * @brief Realiza o sorteio do numero que vai selecionar a palavra.
+ *
+ * @param palavra
+ * @param i
+ */
 void SorteiaPalavra(tPalavra *palavra, int i)
 {
     unsigned int tempo = 0;
@@ -52,11 +63,21 @@ void SorteiaPalavra(tPalavra *palavra, int i)
     palavra->escolhida = escolhida;
 }
 
+/**
+ * @brief Imprime a palavra coletada do palavras.txt.
+ *
+ * @param palavra
+ */
 void ImprimePalavra(tPalavra *palavra)
 {
     printf("\n\n%s\n\n", palavra->palavraColetada);
 }
 
+/**
+ * @brief Libera memória de uma struct tPalavra* que é passada por parametro.
+ *
+ * @param palavra
+ */
 void LiberaPalavra(tPalavra *palavra)
 {
     int i;
@@ -86,6 +107,11 @@ void LiberaPalavra(tPalavra *palavra)
     palavra = NULL;
 }
 
+/**
+ * @brief Inicializa a palavraAtual com '\0'.
+ *
+ * @param palavra
+ */
 void InicializaPalavraAtual(tPalavra *palavra)
 {
     int i = 0;
@@ -96,6 +122,11 @@ void InicializaPalavraAtual(tPalavra *palavra)
     }
 }
 
+/**
+ * @brief Verifica se a palavra inserida pelo jogador existe nas palavras.txt e se tem tamanho 5 (nem maior e nem menor).
+ *
+ * @param palavra
+ */
 void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
 {
     int i = 0;
@@ -120,6 +151,11 @@ void LehPalavraEscolhidaPeloJogador(tPalavra *palavra)
     strcpy(palavra->palavraAtual, string);
 }
 
+/**
+ * @brief Classifica a palavra de acordo com as respectivas regras do trabalho.
+ *
+ * @param palavra
+ */
 void ClassificaPalavra(tPalavra *palavra)
 {
     int i = 0, j = 0, cont = 0, aux = 6;
@@ -189,11 +225,22 @@ void ClassificaPalavra(tPalavra *palavra)
     palavra->palavraClassificada[aux][21] = '\0';
 }
 
+/**
+ * @brief Pega as tentativas e armazena em um inteiro dentro da struct tPalavra *palavra.
+ *
+ * @param palavra
+ * @param tentativas
+ */
 void PassaTentativas(tPalavra *palavra, int tentativas)
 {
     palavra->tentativa = tentativas;
 }
 
+/**
+ * @brief Atualiza as palavras para caixa alta, para padronizar elas.
+ *
+ * @param palavra
+ */
 void PadronizaPalavra(tPalavra *palavra)
 {
     int i = 0;
@@ -222,6 +269,13 @@ void PadronizaPalavra(tPalavra *palavra)
     }
 }
 
+/**
+ * @brief Confere se a letra existe na palavra.
+ * 
+ * @param palavra 
+ * @param i 
+ * @return int 
+ */
 int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
 {
     int j = 0, cont = 0;
@@ -242,6 +296,11 @@ int NaoTemEssaLetraNaPalavra(tPalavra *palavra, int i)
     return 1;
 }
 
+/**
+ * @brief Imprime a palavra classificada.
+ * 
+ * @param palavra 
+ */
 void ImprimePalavraClassificada(tPalavra *palavra)
 {
     int i;
@@ -256,6 +315,11 @@ void ImprimePalavraClassificada(tPalavra *palavra)
     }
 }
 
+/**
+ * @brief Inicializa palavra classificada.
+ * 
+ * @param palavra 
+ */
 void InicializaPalavraClassificada(tPalavra *palavra)
 {
     int i;
@@ -287,6 +351,12 @@ void InicializaPalavraClassificada(tPalavra *palavra)
     }
 }
 
+/**
+ * @brief Confere se aspalavras são iguais ou tem alguma diferença.
+ * 
+ * @param palavra 
+ * @return int 
+ */
 int AcertouPalavra(tPalavra *palavra)
 {
     int i = 0;
@@ -302,6 +372,13 @@ int AcertouPalavra(tPalavra *palavra)
     return 1;
 }
 
+/**
+ * @brief Pega uma letra especifica.
+ * 
+ * @param palavra 
+ * @param i 
+ * @return char 
+ */
 char ColetaLetraPalavra(tPalavra *palavra, int i)
 {
     char caracter;
@@ -316,6 +393,11 @@ char ColetaLetraPalavra(tPalavra *palavra, int i)
     return caracter;
 }
 
+/**
+ * @brief Copia a palavra e padroniza ela em maiusculo.
+ * 
+ * @param palavra 
+ */
 void CopiaPalavra(tPalavra *palavra)
 {
     int i;
@@ -335,6 +417,13 @@ void CopiaPalavra(tPalavra *palavra)
     }
 }
 
+/**
+ * @brief Confere se as letras não são iguais.
+ * 
+ * @param palavra 
+ * @param i 
+ * @return int 
+ */
 int NaoSaoLetrasIguais(tPalavra *palavra, int i)
 {
     if (palavra->palavraAtual[i] == palavra->palavraColetada[i])
@@ -345,6 +434,12 @@ int NaoSaoLetrasIguais(tPalavra *palavra, int i)
     return 1;
 }
 
+/**
+ * @brief Coleta valor da palavra escolhida.
+ * 
+ * @param palavra 
+ * @return int 
+ */
 int ColetaPalavraEscolhida(tPalavra *palavra)
 {
     int result;
@@ -354,6 +449,12 @@ int ColetaPalavraEscolhida(tPalavra *palavra)
     return result;
 }
 
+/**
+ * @brief Copia uma string.
+ * 
+ * @param palavra 
+ * @param string 
+ */
 void CopiaStringParaPalavra(tPalavra *palavra, char string[6])
 {
     int i;
@@ -364,6 +465,13 @@ void CopiaStringParaPalavra(tPalavra *palavra, char string[6])
     }
 }
 
+/**
+ * @brief Coleta um char uma palavra.
+ * 
+ * @param palavra 
+ * @param j 
+ * @return char 
+ */
 char CharPalavraAtual(tPalavra *palavra, int j)
 {
     char caracter;
@@ -373,6 +481,12 @@ char CharPalavraAtual(tPalavra *palavra, int j)
     return caracter;
 }
 
+/**
+ * @brief Confere se a palavra já foi sorteada.
+ * 
+ * @param palavra 
+ * @return int 
+ */
 int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
 {
     int i, cont = 0;
@@ -415,6 +529,11 @@ int NaoFoiSorteadoEssaPalavra(tPalavra *palavra)
     return 1;
 }
 
+/**
+ * @brief Registra a palavra do jogo, paar ela não se repetir.
+ * 
+ * @param palavra 
+ */
 void RegistraPalavraNoArquivo(tPalavra *palavra)
 {
     int i;
