@@ -46,9 +46,14 @@ int main()
             CadastraContas(arquivo, conta, num);
         }
 
-        else if (comando == 5)// Imprime relatório.
+        else if (comando == 5) // Imprime relatório.
         {
             ImprimeRelatorio(conta, num);
+        }
+
+        else if (comando == 6) // Imprime extrato.
+        {
+            //ImprimeExtrato(arquivo, conta, num);
         }
     }
 

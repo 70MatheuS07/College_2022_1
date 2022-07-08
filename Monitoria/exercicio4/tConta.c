@@ -1,5 +1,7 @@
 #include "tConta.h"
 
+#define TAM_INICIAL 10
+
 struct tConta
 {
     tUsuario *usuario;
@@ -13,11 +15,12 @@ tConta **CriaContas()
 {
     tConta **conta = NULL;
 
-    conta = malloc(sizeof(tConta *) * 10);
+    conta = malloc(sizeof(tConta *) * TAM_INICIAL);
 
     for (int i = 0; i < 10; i++)
     {
         conta[i] = malloc(sizeof(tConta));
+        conta[i]->extrato = malloc(sizeof(float) * TAM_INICIAL);
     }
 
     return conta;
@@ -70,6 +73,8 @@ void RegistraSaque(FILE *arquivo, tConta **conta, int num)
                 // printf("Saque realizado no valor de %.2f\n\n", saque);
             }
 
+            RegistraMovimentacoesSaque(conta, num, i, saque);
+
             break;
         }
     }
@@ -91,6 +96,8 @@ void RegistraDeposito(FILE *arquivo, tConta **conta, int num)
             conta[i]->dinheiro += deposito;
 
             // printf("Deposito realizado no valor de %.2f\n\n", deposito);
+
+            RegistraMovimentacoesDeposito(conta, num, i, deposito);
 
             break;
         }
@@ -126,6 +133,8 @@ void RegistraTransferencia(FILE *arquivo, tConta **conta, int num)
                         conta[j]->dinheiro += transferencia;
 
                         // printf("Transferencia realizado no valor de %.2f\n\n", transferencia);
+
+                        RegistraMovimentacoesTransferencia(conta, num, i, j, transferencia);
                     }
 
                     break;
@@ -139,7 +148,7 @@ void ImprimeRelatorio(tConta **conta, int num)
 {
     FILE *saida = NULL;
 
-    saida = fopen("relatorio.txt", "a+");
+    saida = fopen("relatorio.txt", "w");
 
     fprintf(saida, "===| Imprimindo Relatorio |===\n");
 
@@ -150,6 +159,8 @@ void ImprimeRelatorio(tConta **conta, int num)
 
         ImprimeNomeCPF(saida, conta[i]->usuario);
     }
+
+    fclose(saida);
 }
 
 void LiberaContas(tConta **conta, int num)
@@ -177,18 +188,80 @@ void LiberaContas(tConta **conta, int num)
     conta = NULL;
 }
 
-void RegistraMovimentacoes(tConta **conta, float valor, int num, int comando)
+void RegistraMovimentacoesSaque(tConta **conta, int num, int i, float valor)
 {
-    conta[num - 1]->movimentacoes += 1;
+    conta[i]->movimentacoes += 1;
 
-    if (conta[num - 1]->movimentacoes > 10)
+    if (conta[i]->movimentacoes > 10)
     {
-        conta[num - 1]->extrato = realloc(conta[num - 1]->extrato, sizeof(float) * num);
+        conta[i]->extrato = realloc(conta[i]->extrato, sizeof(float) * num);
     }
 
-    if (comando == 1)
-    {
-        valor *= -1;
-        conta[num - 1]->extrato
-    }
+    valor *= -1;
+    conta[i]->extrato[conta[i]->movimentacoes - 1] = valor;
 }
+
+void RegistraMovimentacoesDeposito(tConta **conta, int num, int i, float valor)
+{
+    conta[i]->movimentacoes += 1;
+
+    if (conta[i]->movimentacoes > 10)
+    {
+        conta[i]->extrato = realloc(conta[i]->extrato, sizeof(float) * num);
+    }
+
+    conta[i]->extrato[conta[i]->movimentacoes - 1] = valor;
+}
+
+void RegistraMovimentacoesTransferencia(tConta **conta, int num, int i, int j, float valor)
+{
+    conta[i]->movimentacoes += 1;
+    conta[j]->movimentacoes += 1;
+
+    if (conta[i]->movimentacoes > 10)
+    {
+        conta[i]->extrato = realloc(conta[i]->extrato, sizeof(float) * num);
+    }
+
+    if (conta[j]->movimentacoes > 10)
+    {
+        conta[j]->extrato = realloc(conta[j]->extrato, sizeof(float) * num);
+    }
+
+    conta[j]->extrato[conta[j]->movimentacoes - 1] = valor;
+
+    valor *= -1;
+
+    conta[i]->extrato[conta[i]->movimentacoes - 1] = valor;
+}
+
+/*void ImprimeExtrato(FILE *arquivo, tConta **conta, int num)
+{
+    int numConta, qtdImpressoes;
+
+    FILE *saida = NULL;
+
+    saida = fopen("%d.txt", numConta, "w");
+
+    fscanf(arquivo, "%d %d\n", &numConta, &qtdImpressoes);
+
+    for (int i = 0; i < num; i++)
+    {
+        if (conta[i]->conta == numConta)
+        {
+            fprintf(saida, "===| Imprimindo Extrato |===\n");
+
+            for (int i = 0; i < num; i++)
+            {
+                fprintf(saida, "Conta: %d\n", conta[i]->conta);
+                fprintf(saida, "Saldo: R$ %.2f\n", conta[i]->dinheiro);
+
+                ImprimeNomeCPF(saida, conta[i]->usuario);
+
+                fprintf(saida, "Ultimas %d transacoes\n", qtdImpressoes);
+            }
+        }
+    }
+
+    fclose(saida);
+}*/
