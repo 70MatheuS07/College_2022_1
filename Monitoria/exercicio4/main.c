@@ -14,7 +14,7 @@ int main()
 
     FILE *arquivo = NULL;
 
-    arquivo = fopen("entrada.txt", "r");
+    arquivo = fopen("entrada/entrada.txt", "r");
 
     while (1)
     {
@@ -53,11 +53,13 @@ int main()
 
         else if (comando == 6) // Imprime extrato.
         {
-            //ImprimeExtrato(arquivo, conta, num);
+            ImprimeExtrato(arquivo, conta, num);
         }
     }
 
     LiberaContas(conta, num);
+
+    fclose(arquivo);
 
     return 0;
 }

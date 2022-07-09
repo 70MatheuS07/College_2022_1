@@ -11,6 +11,33 @@ struct tConta
     int movimentacoes;
 };
 
+void LiberaContas(tConta **conta, int num)
+{
+    if (num > 10)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            free(conta[i]->usuario);
+            free(conta[i]->extrato);
+            free(conta[i]);
+        }
+    }
+
+    else
+    {
+
+        for (int i = 0; i < 10; i++)
+        {
+            free(conta[i]->usuario);
+            free(conta[i]->extrato);
+            free(conta[i]);
+        }
+    }
+
+    free(conta);
+    conta = NULL;
+}
+
 tConta **CriaContas()
 {
     tConta **conta = NULL;
@@ -148,7 +175,7 @@ void ImprimeRelatorio(tConta **conta, int num)
 {
     FILE *saida = NULL;
 
-    saida = fopen("relatorio.txt", "w");
+    saida = fopen("saida/relatorio.txt", "w");
 
     fprintf(saida, "===| Imprimindo Relatorio |===\n");
 
@@ -161,31 +188,6 @@ void ImprimeRelatorio(tConta **conta, int num)
     }
 
     fclose(saida);
-}
-
-void LiberaContas(tConta **conta, int num)
-{
-    if (num > 10)
-    {
-        for (int i = 0; i < num; i++)
-        {
-            free(conta[i]->usuario);
-            free(conta[i]);
-        }
-    }
-
-    else
-    {
-
-        for (int i = 0; i < 10; i++)
-        {
-            free(conta[i]->usuario);
-            free(conta[i]);
-        }
-    }
-
-    free(conta);
-    conta = NULL;
 }
 
 void RegistraMovimentacoesSaque(tConta **conta, int num, int i, float valor)
@@ -235,15 +237,61 @@ void RegistraMovimentacoesTransferencia(tConta **conta, int num, int i, int j, f
     conta[i]->extrato[conta[i]->movimentacoes - 1] = valor;
 }
 
-/*void ImprimeExtrato(FILE *arquivo, tConta **conta, int num)
+void ImprimeExtrato(FILE *arquivo, tConta **conta, int num)
 {
-    int numConta, qtdImpressoes;
+    int numConta, qtdImpressoes, numContaCopia = 0;
+    char numeroConta[TAM_INICIAL * TAM_INICIAL], numeroContaCopia[TAM_INICIAL * TAM_INICIAL];
+    int k = 0, resto = 0, j = 0, l = 0;
+    int numeroMovimentacoes;
+    char arquivoString[TAM_INICIAL * TAM_INICIAL] = "saida/";
 
     FILE *saida = NULL;
 
-    saida = fopen("%d.txt", numConta, "w");
-
     fscanf(arquivo, "%d %d\n", &numConta, &qtdImpressoes);
+
+    numContaCopia = numConta;
+
+    while (1)
+    {
+        if (numConta > 9)
+        {
+            resto = numContaCopia % 10;
+            numContaCopia /= 10;
+            numeroContaCopia[k] = resto + '0';
+            k++;
+        }
+
+        else
+        {
+            numeroContaCopia[k] = numContaCopia + '0';
+            k++;
+            numeroContaCopia[k] = '\0';
+            break;
+        }
+    }
+
+    while (1)
+    {
+        if (numeroContaCopia[k] != '\0')
+        {
+            numeroConta[j] = numeroContaCopia[k];
+            j++;
+        }
+
+        if (k == 0)
+        {
+            numeroConta[j] = '\0';
+            break;
+        }
+
+        k--;
+    }
+
+    strcat(numeroConta, ".txt");
+
+    strcat(arquivoString, numeroConta);
+
+    saida = fopen(arquivoString, "w");
 
     for (int i = 0; i < num; i++)
     {
@@ -251,17 +299,29 @@ void RegistraMovimentacoesTransferencia(tConta **conta, int num, int i, int j, f
         {
             fprintf(saida, "===| Imprimindo Extrato |===\n");
 
-            for (int i = 0; i < num; i++)
+            fprintf(saida, "Conta: %d\n", conta[i]->conta);
+            fprintf(saida, "Saldo: R$ %.2f\n", conta[i]->dinheiro);
+
+            ImprimeNomeCPF(saida, conta[i]->usuario);
+
+            fprintf(saida, "Ultimas %d transacoes\n", qtdImpressoes);
+
+            numeroMovimentacoes = conta[i]->movimentacoes;
+
+            while (1)
             {
-                fprintf(saida, "Conta: %d\n", conta[i]->conta);
-                fprintf(saida, "Saldo: R$ %.2f\n", conta[i]->dinheiro);
+                if (qtdImpressoes == 0)
+                {
+                    break;
+                }
 
-                ImprimeNomeCPF(saida, conta[i]->usuario);
+                fprintf(saida, "%.2f\n", conta[i]->extrato[numeroMovimentacoes - 1]);
 
-                fprintf(saida, "Ultimas %d transacoes\n", qtdImpressoes);
+                qtdImpressoes--;
+                numeroMovimentacoes--;
             }
         }
     }
 
     fclose(saida);
-}*/
+}

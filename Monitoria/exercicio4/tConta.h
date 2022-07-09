@@ -30,4 +30,6 @@ void RegistraMovimentacoesDeposito(tConta **conta, int num, int i, float valor);
 
 void RegistraMovimentacoesTransferencia(tConta **conta, int num, int i, int j, float valor);
 
+void ImprimeExtrato(FILE *arquivo, tConta **conta, int num);
+
 #endif

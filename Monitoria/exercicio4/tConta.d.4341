@@ -1,0 +1,1 @@
+tConta.o: tConta.c tConta.h tUsuario.h
