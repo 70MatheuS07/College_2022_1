@@ -8,7 +8,7 @@
 
 #define DIRETORIO 4
 
-typedef int (*FunctionPointerDot)(const struct dirent *line);
+typedef int (*FunctionPointerDot)(const struct dirent *);
 
 int Sort(const struct dirent **a, const struct dirent **b) {
 
@@ -90,7 +90,7 @@ void ufenix_ls(const char *dir, bool show_all, bool sort_by_type) {
   }
 }
 
-int main(int argc, char *argv[]) {
+int mainUfenix_ls(int argc, char *argv[]) {
   bool mostrar_tudo = false;
   bool dirs_primeiro = false;
 

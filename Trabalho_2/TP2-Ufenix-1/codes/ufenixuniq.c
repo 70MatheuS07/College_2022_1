@@ -32,37 +32,38 @@ void ufenix_uniq(FILE *fp)
     {
         string = ler_linha(fp);
 
-        if (string == NULL) break;
+        if (string == NULL)
+            break;
 
         if (k == TAM_INICIAL * multiplicador)
         {
             multiplicador += 1;
             texto = realloc(texto, sizeof(char *) * (TAM_INICIAL * multiplicador));
-            quantidade = realloc(quantidade, sizeof(int)*(TAM_INICIAL * multiplicador));
+            quantidade = realloc(quantidade, sizeof(int) * (TAM_INICIAL * multiplicador));
         }
 
         texto[k] = string;
         k++;
-      }
-
-    
+    }
 
     for (int i = 0; i < (TAM_INICIAL * multiplicador) - 1; i++)
     {
-      if(texto[i] == NULL) break;
-      
+        if (texto[i] == NULL)
+            break;
+
         if (texto[i][0] != '\0')
         {
             for (int j = i + 1; j < (TAM_INICIAL * multiplicador); j++)
             {
-              if(texto[j] == NULL) break;
-              
+                if (texto[j] == NULL)
+                    break;
+
                 if (texto[j][0] != '\0')
                 {
                     if (strcmp(texto[i], texto[j]) == 0)
                     {
                         texto[j][0] = '\0';
-      
+
                         quantidade[i] += 1;
                         quantidade[j] = -1;
                     }
@@ -73,8 +74,9 @@ void ufenix_uniq(FILE *fp)
 
     for (int i = 0; i < TAM_INICIAL * multiplicador; i++)
     {
-      if(texto[i] == NULL) break;
-      
+        if (texto[i] == NULL)
+            break;
+
         if (texto[i][0] != '\0')
         {
             printf("%7d %s\n", (QUANTIDADE_INICIAL + quantidade[i]), texto[i]);
@@ -82,7 +84,7 @@ void ufenix_uniq(FILE *fp)
     }
 
     LiberaTextoUniq(texto, multiplicador);
-  
+
     free(string);
     string = NULL;
 
@@ -90,7 +92,7 @@ void ufenix_uniq(FILE *fp)
     quantidade = NULL;
 }
 
-int main(int argc, char *argv[])
+int mainUfenix_uniq(int argc, char *argv[])
 {
     FILE *fp;
 
