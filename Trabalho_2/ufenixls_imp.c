@@ -101,6 +101,7 @@ void ufenix_ls(const char *dir, bool show_all, bool sort_by_type)
 
 int mainUfenix_ls(int argc, char *argv[])
 {
+  optind = 0;
   bool mostrar_tudo = false;
   bool dirs_primeiro = false;
 

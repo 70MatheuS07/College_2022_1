@@ -151,6 +151,7 @@ void ufenix_sort(FILE *fp, cmp_fn_t cmp, bool uniq, bool reverse)
 
 int mainUfenix_sort(int argc, char *argv[])
 {
+  optind = 0;
   cmp_fn_t cmp = cmp_pstr;
   bool uniq = false, reverse = false;
 
